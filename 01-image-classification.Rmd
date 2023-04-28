@@ -1,0 +1,135 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["lab1shortname"]][["author"]]
+```
+# Lab Title {#lab-short-name}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
+## Lab Overview {-}
+
+Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Learning Objectives {-}
+
+-   Lorem ipsum
+
+-   Lorem ipsum 
+
+-   Lorem ipsum 
+
+------------------------------------------------------------------------
+
+## Competencies in This Lab {-}
+
+-   Lorem ipsum
+
+-   Lorem ipsum
+
+-   Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Deliverables {-}
+
+-   Lorem ipsum
+
+-   Lorem ipsum
+
+-   Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Data {-}
+
+Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Task 4: Calculating NDVI and Built Up Index  {.unnumbered}
+
+Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties including burned Areas (Normalized Burn Ratio), urban/ built up areas (Normalized Difference Built-Up Index), and water (Normalized Difference Water Index) to name a few. The Normalized Difference Vegetation Index (NDVI) is a frequently used spectral index that takes advantage of the high near-infrared reflectance and high red absorption properties of healthy vegetation and is therefore often used to quantify vegetation in a remotely sensed multispectral image. 
+
+NDVI is calculated with the below formula: 
+
+$\ NDVI = \frac{(NIR - RED)}{(NIR+RED)}$
+
+Where NIR is the near-infrared band (Landsat 7 Band 4) and Red is the red band (Landsat 7 Band 4). The results of this equation should be between -1 and 1 with values less than 0 representing water and values between 0-1 representing different levels of green vegetation. 
+
+While ArcGIS Pro contains a built-in tool to calculate NDVI and a series of other spectral indices, in this lab we will be using the “band arithmetic” function and the above equation to create our own NDVI tool. 
+
+Navigate to the Imagery ribbon at the top of your ArcPro window and click the **Raster Function** button.
+
+```{r 05-raster, out.width= "40%", echo = FALSE}
+    knitr::include_graphics("images/05/05-raster.png")
+```
+
+The Raster Functions pane should appear, you can either navigate the drop down menus to **Math-> Band Arithmetic** or use the search function to find the **Band Arithmetic Tool** and click to open. 
+
+```{r 05-raster-func, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/05/05-raster-func.png")
+```
+
+The “Band Arithmetic Properties” dialogue should appear. Under “Raster” use the drop down menu and select the **L5057026subset_19990922_7B.dat**  layer. If it is not currently in your map view and can use the folder button and navigate to  your lab data folder and select the file. Under “Method” select **User Defined**. It should look like the screen shot below. 
+
+```{r 05-band-math, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/05/05-band-math.png")
+```
+
+Use your knowledge of spectral indices, the NDVI formula given above and the table below fill in the NDVI calculation for your data. 
+
+##### Q15. Take a screenshot of your band arithmetic equation for ndvi.{.unnumbered}
+
+##### Q16. What are the minimum and maximum values of your new ndvi layer? {.unnumbered}
+
+##### Q17. What do the dark areas in the image represent? The gray areas? The white? {.unnumbered}
+
+##### Q18. What information does this type of analysis give us? When and why might this tpye of analysis be used?{.unnumbered}
+
+We will now use the “Band Arithmetic” window to calculate the Normalized Difference Built-Up Index (NDBI). The NDBI highlights urban areas where there is typically a higher reflectance in the shortwave-infrared region compared to the near-infrared region. The equation is as follows: 
+
+$\ NDBI = \frac{(SWIR-NIR)}{(SWIR+NIR)}$
+
+Open the “Band Arithmetic” function and select the Landsat scene as your input raster. Under “Method” use the drop-down menu and navigate to NDBI. Using what you know about Landsat imagery select the proper bands for calculating NDBI under the “Band Indexes” box and then select “Create New Layer”. 
+
+------------------------------------------------------------------------
+
+## Task 5: Reclassifying Spectral Indices and Map Making  {.unnumbered}
+
+In the section you will use a technique called Thresholding and the reclassify tool to extract highly vegetated areas (High NDVI) and urban areas (High NDBI) and then create a map with these layers overlaid with the provided satellite imagery. 
+
+Under the **Analysis** ribbon select the **Tools** option. The geoprocessing window should appear in the search box type “Reclassify” and select the option with (Spatial Analyst Tools) beside it. 
+
+```{r 05-reclass, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/05/05-reclass.png")
+```
+
+Under “Input Raster” select the NDVI layer you created earlier. The “Reclass field” should automatically become completed and a “Reclassification” table should appear below. 
+
+```{r 05-class-tab, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/05/05-class-tab.png")
+```
+
+Select the Classify button at the bottom of the table and enter “2” for number of classes. For the first row leave “Start” as is and enter 0.49999 under “End”, change “New” to “NODATA”. For the second row change “Start” to “0.5” and leave “End” as 1 and change “New” to “1”.  The Reclassify tool takes the old values from a raster and creates a new raster layer with updated values based on the Reclassification table. In this case we as saying take all pixels with values less than 0.5 and make them NODATA or blank and take all pixels with values greater than 0.5 and make their value 1. Under “Output Raster” save the file as “High_Vegetation_Areas” and press  **Run** at the bottom of the window. 
+
+Now use the Reclassify tool to create a new layer from the NDBI where all you keep only pixels with values above 0 and change there value to 1. Save this layer as “Urban Areas”. 
+
+**Making your map**
+
+Now is the time for your cartographic skills to shine. To design a map of the highest quality you will need to draw on all of you GIS skills. Ensure you include all the standard components of a map along with your artistic flair.
+
+If you need some inspiration a quick google search for “Design principles for cartography” or browsing through some of the maps featured here should do the trick: https://www.esri.com/en-us/maps-we-love/gallery   
+
+You should design a map that shows your High_Vegetation_Areas and Urban_area layers overtop of the provided Landsat Imagery. Pick appropriate colours and transparency for each layer. 
+
+Also, be sure to include important data, but also make sure the map is not too cluttered. 
+The physical requirements are as follows: 
+
+- Map should be 11”x17” either as a landscape or portrait layout 
+- You should export the map as a pdf 
+- Your map should incorporate the suite of standard map elements: Title, scale bar, compass, legend. 
