@@ -1,0 +1,175 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["lab1shortname"]][["author"]]
+```
+# Lab Title {#image-classification}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
+## Lab Overview {-}
+
+Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Learning Objectives {-}
+
+-  Understand applications of land cover mapping
+-  Learn how to calcualte simple spectral indices
+-  Use a supervised classification to create a land cover map 
+
+------------------------------------------------------------------------
+
+## Deliverables {-}
+
+-   Answers to 13 questions posed in the handout
+-   A final land cover classification map
+
+------------------------------------------------------------------------
+
+## Data {-}
+
+Surface reflectance from Landsat 5 
+
+------------------------------------------------------------------------
+
+## Task 1: Understanding Land cover Mapping and Landsat Imagery {.unnumbered}
+
+Land cover is ... it is important because ....
+
+Examine this online global land cover map created using imagery from Sentinel-2. In the search bar navigate to the town of Lytton, BC and compare land cover between 2018 and 2022. https://livingatlas.arcgis.com/landcoverexplorer/
+
+##### Q1: Describe the major change in annual land cover shown in these maps. What year did the most significant changes occur? Do some research to determine the cause of this shift in land cover. {.unnumbered}
+
+##### Q2: Describe how you might expect spectral reflectance in the NIR, Red and SWIR wavelegthns to change for a pixel undergoing a transition from forest to range land (bare) vegetation. {.unnumbered} 
+
+##### Q3: In 150 words or less, describe another application for annual land cover data generated from satellite imagery. Include a reference to one peer-reviewed academic article. {.unnumbered}
+
+In this lab, we will use the following processing steps to create a land cover classification for the greater Vancouver area and assess its accuracy: 
+
+1. 
+2. 
+3. 
+4. 
+
+------------------------------------------------------------------------
+
+## Task 2: Calculating NDVI and Built Up Index  {.unnumbered}
+
+In this task, you will calculate two spectral indices relating to vegetation and urban land cover using Landsat surface reflectance imagery covering Greater Vancouver. In the next task, you will use these indices to perform a supervised classification and produce a map of land cover. 
+
+Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties including burned Areas (Normalized Burn Ratio), urban/ built up areas (Normalized Difference Built-Up Index), and water (Normalized Difference Water Index) to name a few. The Normalized Difference Vegetation Index (NDVI) is a frequently used spectral index that takes advantage of the high near-infrared reflectance and high red absorption properties of healthy vegetation and is therefore often used to quantify vegetation in a remotely sensed multispectral image. 
+
+NDVI is calculated with the below formula: 
+
+$\ NDVI = \frac{(NIR - RED)}{(NIR+RED)}$
+
+Where NIR is the near-infrared band (Landsat 7 Band 4) and Red is the red band (Landsat 7 Band 4). The results of this equation should be between -1 and 1 with values less than 0 representing water and values between 0-1 representing different levels of green vegetation. 
+
+While ArcGIS Pro contains a built-in tool to calculate NDVI and a series of other spectral indices, in this lab we will be using the “band arithmetic” function and the above equation to create our own NDVI tool. 
+
+Navigate to the Imagery ribbon at the top of your ArcPro window and click the **Raster Function** button.
+
+```{r 02-raster, out.width= "40%", echo = FALSE}
+    knitr::include_graphics("images/02/02-raster.png")
+```
+
+The Raster Functions pane should appear, you can either navigate the drop down menus to **Math-> Band Arithmetic** or use the search function to find the **Band Arithmetic Tool** and click to open. 
+
+```{r 02-raster-func, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/02/02-raster-func.png")
+```
+
+The “Band Arithmetic Properties” dialogue should appear. Under “Raster” use the drop down menu and select the **L5027026subset_19990922_7B.dat**  layer. If it is not currently in your map view and can use the folder button and navigate to  your lab data folder and select the file. Under “Method” select **User Defined**. It should look like the screen shot below. 
+
+```{r 02-band-math, out.width= "75%", echo = FALSE}
+    knitr::include_graphics("images/02/02-band-math.png")
+```
+
+Use your knowledge of spectral indices, the NDVI formula given above and the table below fill in the NDVI calculation for your data. 
+
+##### Q4. Take a screenshot of your band arithmetic equation for ndvi.{.unnumbered}
+
+##### Q5. What are the minimum and maximum values of your new ndvi layer? {.unnumbered}
+
+##### Q6. What do the dark areas in the image represent? The gray areas? The white? {.unnumbered}
+
+##### Q7. What information does this type of analysis give us? When and why might this type of analysis be used? {.unnumbered}
+
+We will now use the “Band Arithmetic” window to calculate the Normalized Difference Built-Up Index (NDBI). The NDBI highlights urban areas where there is typically a higher reflectance in the shortwave-infrared region compared to the near-infrared region. The equation is as follows: 
+
+$\ NDBI = \frac{(SWIR-NIR)}{(SWIR+NIR)}$
+
+Open the “Band Arithmetic” function and select the Landsat scene as your input raster. Under “Method” use the drop-down menu and navigate to NDBI. Using what you know about Landsat imagery select the proper bands for calculating NDBI under the “Band Indexes” box and then select “Create New Layer”. 
+
+------------------------------------------------------------------------
+
+## Task 3: Perform a Supervised Classification  {.unnumbered}
+
+In the section you will use a Supervised Classification to classify the following land cover types and assess the accuracy of the final classification: 
+
+- Urban
+- Water
+- Dense forest
+- Open/mixed forest
+- Desiccated vegetation
+- Bare ground
+
+**Step 1:** Create a composite image stack using the following indices and bands: NDVI, NDBI, Red, Green, Blue, SWIR. 
+
+**Step 2:** Use the **Training Samples Manager** to select Regions of Interest that represent each of the land cover classes. Use the Imagery basemap to guide your selection of ROIs. Try to select large, homogeneous areas for each class. Collect enough ROIs so that each class has approximately 50? pixels. 
+
+Make sure that the names of your classes exactly match the list above! If they do not match you will have difficulties joining your final classification to the reference dataset. 
+
+**Step 3:** Make box plots to show differences in the range of values in each land cover class. 
+
+**Step 4:** Look at the class separability of the ROIs. Are any classes very similar to each other? At this point, you can adjust the location of your ROIs to try and increase separation of the land cover classes. **Include the box plot of the final ROIs in the deliverables.** 
+
+##### Q8: Using the box plot, what classes appear the most distinct? What bands/indices could be used to separate these classes? {.unnumbered}
+
+##### Q9: Using the box plot, what classes appear the most similar? How might this impact the final land cover classification? {.unnumbered}
+
+##### Q10: Why is it important to try and select pixels with homogeneous land cover types? (i.e. How would selecting pixels with mixed land cover impact the classification?) {.unnumbered}
+
+**Step 5:** Train a Supervised Classification and create a new layer representing the land cover classes. 
+
+------------------------------------------------------------------------
+
+## Task 4: Accuracy Assessment {.unnumbered}
+
+In this task, you will assess the accuracy of your land cover map using a reference dataset provided to you. 
+
+**Step 1:** Import the **Reference_data.shp** into your map containing the classification layer. This dataset represents spatial points, labelled using the same schema as your raster classification. Run the **Accuracy Assessment** tool on your raster classification and the reference data. 
+
+This will generate a confusion matrix and allow you to compare how your raster classification aligns with the labelled reference points. 
+
+**Step 2:** View the confusion matrix and include a screenshot in the deliverables.
+
+##### Q11: What was the overall accuracy of your map? What class has the highest Users accuracy? Producers accuracy? In 3-5 sentences describe the difference between Users and Producers accuracy. {.unnumbered}
+
+##### Q12: If you wanted to know whether a randomly selected pixel on the land cover map was classified accurately, which metric (Users or Producer's accuracy) would be better and why? {.unnumbered}
+
+##### Q13: What classes had the lowest Users accuracy? Why do you think these classes were less accurate? Refer back to your box plots representing the range of spectral values in each class. {.unnumbered} 
+
+------------------------------------------------------------------------
+
+## Task 5: Creating a Map {.unnumbered}
+
+**Making your map**
+
+Now is the time for your cartographic skills to shine. To design a map of the highest quality you will need to draw on all of you GIS skills. Ensure you include all the standard components of a map along with your artistic flair.
+
+You should design a map that shows your land cover classification overtop of the provided Landsat Imagery. Pick appropriate colours and transparency for each layer.
+
+Use inset maps to show the location of the study area within western Canada and to show a zoomed in subset of your classification map in greater detail. 
+
+The physical requirements are as follows: 
+
+- Map should be 11”x17” either as a landscape or portrait layout 
+- You should export the map as a pdf 
+- Your map should incorporate the suite of standard map elements: Title, scale bar, compass, legend and appropriate inset maps. 
+
+For review on how to create a map layout with insets refer to **NRES 241 Lab 2**. 

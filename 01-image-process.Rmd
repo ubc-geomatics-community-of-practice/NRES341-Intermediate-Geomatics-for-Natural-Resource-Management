@@ -1,0 +1,113 @@
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["lab4shortname"]][["author"]]
+```
+# Lab Title {#image-process}
+
+Written by
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
+## Lab Overview {-}
+
+Lorem ipsum
+
+------------------------------------------------------------------------
+
+## Learning Objectives {-}
+
+-   Understand radiometric resolution and how it relates to Digital Numbers
+-   Learn how to resample rasters to common projections 
+-   Use the Landsat Quality Assurance Band to mask clouds and shadows
+-   Understand how image enhancements and focal filters work
+
+------------------------------------------------------------------------
+
+## Deliverables {-}
+
+-   Screenshots of historgrams and filtered images
+-   Answers to 9 questions posed in the handout
+
+------------------------------------------------------------------------
+
+## Data {-}
+
+- Two Landsat 8 Surface Reflectance images
+
+------------------------------------------------------------------------
+
+## Task 1: Data Types & Projections {.unnumbered}
+
+**Step 1:** Import the following rasters **XXXA.tif** and **XXXB.tif** into a new Map Project in ArcGIS Pro. Name the project Lab 1 and save it in the default documents folder on your computer, typically `C:\Users\YourUsername\Documents\ArcGIS\Projects\Lab2.` 
+
+These data represent Landsat 8 Collection 2 Surface Reflectance.
+
+##### Q1: Why is it best to use Surface Reflectance data over Top of Atmosphere data? {.unnumbered}
+
+Navigate to > Properties > General to answer the following questions about each raster.
+
+##### Q2: What are the projections of raster A and raster B? What are the data types (i.e. (integer, floating point etc)? {.unnumbered}
+
+##### Q3: Define **radiometric resolution** and describe how it relates to the range of Digital Numbers (DN) in the image. {.unnumbered}
+
+##### Q4: How many possible values would be present in an 8-bit, 16-bit and 32-bit image? What is the radiometric resolution of rasters A and B? {.unnumbered}
+
+**Step 2:** Convert both rasters into a common projection using the **Resampling tool**. 
+
+##### Q5: Which resampling method (Nearest Neighbour or Bilinear Interpolation) is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, cateogries)? {.unnumbered}
+
+------------------------------------------------------------------------
+
+## Task 2: Cloud and Shadow Masking {.unnumbered}
+
+Next, we will use the Quality Assurance band to mask out pixels covered by clouds and cloud shadows. 
+
+**Step 1:**
+
+##### Q6: If you didn't have the QA band, what Landsat bands/spectral properties could you use to idenify cloudy pixels? {.unnumbered}
+
+------------------------------------------------------------------------
+
+## Task 3: Image Enhancement and Focal Filters {.unnumbered}
+
+**Step 1:** View the NIR band of the cloud masked image in greyscale. Create a histogram of surface reflectance values and include in the deliverables. 
+
+##### Q6: What do the light and dark areas of the image represent in terms of surface reflectance? How could you use this image to identify vegetation and urban areas? {.unnumbered} 
+
+##### Q7: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent? {.unnumbered}
+
+**Step 2:** Create a histogram of NIR surface reflectance. Apply a **Minimum-Maximum Strech** and a **Standard Deviation Strech with n = 2.5**, and notice how the image appearance and the histogram change. 
+
+##### Q8: Describe how the distribution of values in the histogram changes with both image enhancements. What parts of the image have greater contrast? How could this help you interpret the image? {.unnumbered} 
+
+**Step 3:** Apply a **Sharpening** and **Smoothing** filter to the cloud masked image. Take a screenshot of the filtered images and present them side-by-side in your deliverables. 
+
+##### Q10: Define a **focal window** and describe how a filter changes the pixel values of an image usig the focal window. Use the following matrix to calculate the new pixel value labelled with a * using a **3x3 mean filter** {.unnumbered} 
+
+```{r echo = F, results = 'asis'}
+    
+values = c(1, 3, 9, 11, 5, 8, 6, "5*", 11, 5, 9, 10)
+    m = matrix(values, nrow = 3)
+    
+  # Utility function to print matrices in proper LaTeX format
+print_mat <- function(mat) {
+  n <- nrow(mat)
+  c('\\begin{bmatrix}',
+    paste0(sapply(seq_len(n - 1),
+                  function(i) paste0(mat[i, ], collapse = ' & ')),
+           ' \\\\'),
+    paste0(mat[n, ], collapse = ' & '),
+    '\\end{bmatrix}')
+} 
+
+writeLines(print_mat(m))
+
+```
+
+##### Q9: Define **spatial frequency** and describe how the sharpened and smoothed images differ in terms of their spatial frequencies. What are some advantages and disadvantages of these focal filters? {.unnumbered} 
+
+
+
+
+
