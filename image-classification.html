@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 1 Lab Title | 02-image-classification.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 1 Lab Title | 02-image-classification.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 1 Lab Title | 02-image-classification.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#image-classification"><i class="fa fa-check"></i><b>1</b> Lab Title</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-1-understanding-land-cover-mapping-and-landsat-imagery"><i class="fa fa-check"></i>Task 1: Understanding Land cover Mapping and Landsat Imagery</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-2-calculating-ndvi-and-built-up-index"><i class="fa fa-check"></i>Task 2: Calculating NDVI and Built Up Index</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-3-perform-a-supervised-classification"><i class="fa fa-check"></i>Task 3: Perform a Supervised Classification</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-4-accuracy-assessment"><i class="fa fa-check"></i>Task 4: Accuracy Assessment</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-5-creating-a-map"><i class="fa fa-check"></i>Task 5: Creating a Map</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="image-classification" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Lab 1</span> Lab Title<a href="#image-classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by
+Hana Travers-Smith</p>
+<div id="lab-overview" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorem ipsum</p>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2 unnumbered hasAnchor">
+<h2>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Understand applications of land cover mapping</li>
+<li>Learn how to calcualte simple spectral indices</li>
+<li>Use a supervised classification to create a land cover map</li>
+</ul>
+<hr />
+</div>
+<div id="deliverables" class="section level2 unnumbered hasAnchor">
+<h2>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Answers to 13 questions posed in the handout</li>
+<li>A final land cover classification map</li>
+</ul>
+<hr />
+</div>
+<div id="data" class="section level2 unnumbered hasAnchor">
+<h2>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Surface reflectance from Landsat 5</p>
+<hr />
+</div>
+<div id="task-1-understanding-land-cover-mapping-and-landsat-imagery" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Understanding Land cover Mapping and Landsat Imagery<a href="#task-1-understanding-land-cover-mapping-and-landsat-imagery" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Land cover is … it is important because ….</p>
+<p>Examine this online global land cover map created using imagery from Sentinel-2. In the search bar navigate to the town of Lytton, BC and compare land cover between 2018 and 2022. <a href="https://livingatlas.arcgis.com/landcoverexplorer/" class="uri">https://livingatlas.arcgis.com/landcoverexplorer/</a></p>
+<div id="q1-describe-the-major-change-in-annual-land-cover-shown-in-these-maps.-what-year-did-the-most-significant-changes-occur-do-some-research-to-determine-the-cause-of-this-shift-in-land-cover." class="section level5 unnumbered hasAnchor">
+<h5>Q1: Describe the major change in annual land cover shown in these maps. What year did the most significant changes occur? Do some research to determine the cause of this shift in land cover.<a href="#q1-describe-the-major-change-in-annual-land-cover-shown-in-these-maps.-what-year-did-the-most-significant-changes-occur-do-some-research-to-determine-the-cause-of-this-shift-in-land-cover." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2-describe-how-you-might-expect-spectral-reflectance-in-the-nir-red-and-swir-wavelegthns-to-change-for-a-pixel-undergoing-a-transition-from-forest-to-range-land-bare-vegetation." class="section level5 unnumbered hasAnchor">
+<h5>Q2: Describe how you might expect spectral reflectance in the NIR, Red and SWIR wavelegthns to change for a pixel undergoing a transition from forest to range land (bare) vegetation.<a href="#q2-describe-how-you-might-expect-spectral-reflectance-in-the-nir-red-and-swir-wavelegthns-to-change-for-a-pixel-undergoing-a-transition-from-forest-to-range-land-bare-vegetation." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q3-in-150-words-or-less-describe-another-application-for-annual-land-cover-data-generated-from-satellite-imagery.-include-a-reference-to-one-peer-reviewed-academic-article." class="section level5 unnumbered hasAnchor">
+<h5>Q3: In 150 words or less, describe another application for annual land cover data generated from satellite imagery. Include a reference to one peer-reviewed academic article.<a href="#q3-in-150-words-or-less-describe-another-application-for-annual-land-cover-data-generated-from-satellite-imagery.-include-a-reference-to-one-peer-reviewed-academic-article." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>In this lab, we will use the following processing steps to create a land cover classification for the greater Vancouver area and assess its accuracy:</p>
+<ol style="list-style-type: decimal">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="task-2-calculating-ndvi-and-built-up-index" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Calculating NDVI and Built Up Index<a href="#task-2-calculating-ndvi-and-built-up-index" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this task, you will calculate two spectral indices relating to vegetation and urban land cover using Landsat surface reflectance imagery covering Greater Vancouver. In the next task, you will use these indices to perform a supervised classification and produce a map of land cover.</p>
+<p>Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties including burned Areas (Normalized Burn Ratio), urban/ built up areas (Normalized Difference Built-Up Index), and water (Normalized Difference Water Index) to name a few. The Normalized Difference Vegetation Index (NDVI) is a frequently used spectral index that takes advantage of the high near-infrared reflectance and high red absorption properties of healthy vegetation and is therefore often used to quantify vegetation in a remotely sensed multispectral image.</p>
+<p>NDVI is calculated with the below formula:</p>
+<p><span class="math inline">\(\ NDVI = \frac{(NIR - RED)}{(NIR+RED)}\)</span></p>
+<p>Where NIR is the near-infrared band (Landsat 7 Band 4) and Red is the red band (Landsat 7 Band 4). The results of this equation should be between -1 and 1 with values less than 0 representing water and values between 0-1 representing different levels of green vegetation.</p>
+<p>While ArcGIS Pro contains a built-in tool to calculate NDVI and a series of other spectral indices, in this lab we will be using the “band arithmetic” function and the above equation to create our own NDVI tool.</p>
+<p>Navigate to the Imagery ribbon at the top of your ArcPro window and click the <strong>Raster Function</strong> button.</p>
+<p><img src="images/02/02-raster.png" width="40%" /></p>
+<p>The Raster Functions pane should appear, you can either navigate the drop down menus to <strong>Math-&gt; Band Arithmetic</strong> or use the search function to find the <strong>Band Arithmetic Tool</strong> and click to open.</p>
+<p><img src="images/02/02-raster-func.png" width="75%" /></p>
+<p>The “Band Arithmetic Properties” dialogue should appear. Under “Raster” use the drop down menu and select the <strong>L5027026subset_19990922_7B.dat</strong> layer. If it is not currently in your map view and can use the folder button and navigate to your lab data folder and select the file. Under “Method” select <strong>User Defined</strong>. It should look like the screen shot below.</p>
+<p><img src="images/02/02-band-math.png" width="75%" /></p>
+<p>Use your knowledge of spectral indices, the NDVI formula given above and the table below fill in the NDVI calculation for your data.</p>
+<div id="q4.-take-a-screenshot-of-your-band-arithmetic-equation-for-ndvi." class="section level5 unnumbered hasAnchor">
+<h5>Q4. Take a screenshot of your band arithmetic equation for ndvi.<a href="#q4.-take-a-screenshot-of-your-band-arithmetic-equation-for-ndvi." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q5.-what-are-the-minimum-and-maximum-values-of-your-new-ndvi-layer" class="section level5 unnumbered hasAnchor">
+<h5>Q5. What are the minimum and maximum values of your new ndvi layer?<a href="#q5.-what-are-the-minimum-and-maximum-values-of-your-new-ndvi-layer" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q6.-what-do-the-dark-areas-in-the-image-represent-the-gray-areas-the-white" class="section level5 unnumbered hasAnchor">
+<h5>Q6. What do the dark areas in the image represent? The gray areas? The white?<a href="#q6.-what-do-the-dark-areas-in-the-image-represent-the-gray-areas-the-white" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q7.-what-information-does-this-type-of-analysis-give-us-when-and-why-might-this-type-of-analysis-be-used" class="section level5 unnumbered hasAnchor">
+<h5>Q7. What information does this type of analysis give us? When and why might this type of analysis be used?<a href="#q7.-what-information-does-this-type-of-analysis-give-us-when-and-why-might-this-type-of-analysis-be-used" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>We will now use the “Band Arithmetic” window to calculate the Normalized Difference Built-Up Index (NDBI). The NDBI highlights urban areas where there is typically a higher reflectance in the shortwave-infrared region compared to the near-infrared region. The equation is as follows:</p>
+<p><span class="math inline">\(\ NDBI = \frac{(SWIR-NIR)}{(SWIR+NIR)}\)</span></p>
+<p>Open the “Band Arithmetic” function and select the Landsat scene as your input raster. Under “Method” use the drop-down menu and navigate to NDBI. Using what you know about Landsat imagery select the proper bands for calculating NDBI under the “Band Indexes” box and then select “Create New Layer”.</p>
+<hr />
+</div>
+</div>
+<div id="task-3-perform-a-supervised-classification" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Perform a Supervised Classification<a href="#task-3-perform-a-supervised-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the section you will use a Supervised Classification to classify the following land cover types and assess the accuracy of the final classification:</p>
+<ul>
+<li>Urban</li>
+<li>Water</li>
+<li>Dense forest</li>
+<li>Open/mixed forest</li>
+<li>Desiccated vegetation</li>
+<li>Bare ground</li>
+</ul>
+<p><strong>Step 1:</strong> Create a composite image stack using the following indices and bands: NDVI, NDBI, Red, Green, Blue, SWIR.</p>
+<p><strong>Step 2:</strong> Use the <strong>Training Samples Manager</strong> to select Regions of Interest that represent each of the land cover classes. Use the Imagery basemap to guide your selection of ROIs. Try to select large, homogeneous areas for each class. Collect enough ROIs so that each class has approximately 50? pixels.</p>
+<p>Make sure that the names of your classes exactly match the list above! If they do not match you will have difficulties joining your final classification to the reference dataset.</p>
+<p><strong>Step 3:</strong> Make box plots to show differences in the range of values in each land cover class.</p>
+<p><strong>Step 4:</strong> Look at the class separability of the ROIs. Are any classes very similar to each other? At this point, you can adjust the location of your ROIs to try and increase separation of the land cover classes. <strong>Include the box plot of the final ROIs in the deliverables.</strong></p>
+<div id="q8-using-the-box-plot-what-classes-appear-the-most-distinct-what-bandsindices-could-be-used-to-separate-these-classes" class="section level5 unnumbered hasAnchor">
+<h5>Q8: Using the box plot, what classes appear the most distinct? What bands/indices could be used to separate these classes?<a href="#q8-using-the-box-plot-what-classes-appear-the-most-distinct-what-bandsindices-could-be-used-to-separate-these-classes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q9-using-the-box-plot-what-classes-appear-the-most-similar-how-might-this-impact-the-final-land-cover-classification" class="section level5 unnumbered hasAnchor">
+<h5>Q9: Using the box plot, what classes appear the most similar? How might this impact the final land cover classification?<a href="#q9-using-the-box-plot-what-classes-appear-the-most-similar-how-might-this-impact-the-final-land-cover-classification" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q10-why-is-it-important-to-try-and-select-pixels-with-homogeneous-land-cover-types-i.e.-how-would-selecting-pixels-with-mixed-land-cover-impact-the-classification" class="section level5 unnumbered hasAnchor">
+<h5>Q10: Why is it important to try and select pixels with homogeneous land cover types? (i.e. How would selecting pixels with mixed land cover impact the classification?)<a href="#q10-why-is-it-important-to-try-and-select-pixels-with-homogeneous-land-cover-types-i.e.-how-would-selecting-pixels-with-mixed-land-cover-impact-the-classification" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 5:</strong> Train a Supervised Classification and create a new layer representing the land cover classes.</p>
+<hr />
+</div>
+</div>
+<div id="task-4-accuracy-assessment" class="section level2 unnumbered hasAnchor">
+<h2>Task 4: Accuracy Assessment<a href="#task-4-accuracy-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this task, you will assess the accuracy of your land cover map using a reference dataset provided to you.</p>
+<p><strong>Step 1:</strong> Import the <strong>Reference_data.shp</strong> into your map containing the classification layer. This dataset represents spatial points, labelled using the same schema as your raster classification. Run the <strong>Accuracy Assessment</strong> tool on your raster classification and the reference data.</p>
+<p>This will generate a confusion matrix and allow you to compare how your raster classification aligns with the labelled reference points.</p>
+<p><strong>Step 2:</strong> View the confusion matrix and include a screenshot in the deliverables.</p>
+<div id="q11-what-was-the-overall-accuracy-of-your-map-what-class-has-the-highest-users-accuracy-producers-accuracy-in-3-5-sentences-describe-the-difference-between-users-and-producers-accuracy." class="section level5 unnumbered hasAnchor">
+<h5>Q11: What was the overall accuracy of your map? What class has the highest Users accuracy? Producers accuracy? In 3-5 sentences describe the difference between Users and Producers accuracy.<a href="#q11-what-was-the-overall-accuracy-of-your-map-what-class-has-the-highest-users-accuracy-producers-accuracy-in-3-5-sentences-describe-the-difference-between-users-and-producers-accuracy." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q12-if-you-wanted-to-know-whether-a-randomly-selected-pixel-on-the-land-cover-map-was-classified-accurately-which-metric-users-or-producers-accuracy-would-be-better-and-why" class="section level5 unnumbered hasAnchor">
+<h5>Q12: If you wanted to know whether a randomly selected pixel on the land cover map was classified accurately, which metric (Users or Producer’s accuracy) would be better and why?<a href="#q12-if-you-wanted-to-know-whether-a-randomly-selected-pixel-on-the-land-cover-map-was-classified-accurately-which-metric-users-or-producers-accuracy-would-be-better-and-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q13-what-classes-had-the-lowest-users-accuracy-why-do-you-think-these-classes-were-less-accurate-refer-back-to-your-box-plots-representing-the-range-of-spectral-values-in-each-class." class="section level5 unnumbered hasAnchor">
+<h5>Q13: What classes had the lowest Users accuracy? Why do you think these classes were less accurate? Refer back to your box plots representing the range of spectral values in each class.<a href="#q13-what-classes-had-the-lowest-users-accuracy-why-do-you-think-these-classes-were-less-accurate-refer-back-to-your-box-plots-representing-the-range-of-spectral-values-in-each-class." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-5-creating-a-map" class="section level2 unnumbered hasAnchor">
+<h2>Task 5: Creating a Map<a href="#task-5-creating-a-map" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Making your map</strong></p>
+<p>Now is the time for your cartographic skills to shine. To design a map of the highest quality you will need to draw on all of you GIS skills. Ensure you include all the standard components of a map along with your artistic flair.</p>
+<p>You should design a map that shows your land cover classification overtop of the provided Landsat Imagery. Pick appropriate colours and transparency for each layer.</p>
+<p>Use inset maps to show the location of the study area within western Canada and to show a zoomed in subset of your classification map in greater detail.</p>
+<p>The physical requirements are as follows:</p>
+<ul>
+<li>Map should be 11”x17” either as a landscape or portrait layout</li>
+<li>You should export the map as a pdf</li>
+<li>Your map should incorporate the suite of standard map elements: Title, scale bar, compass, legend and appropriate inset maps.</li>
+</ul>
+<p>For review on how to create a map layout with insets refer to <strong>NRES 241 Lab 2</strong>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

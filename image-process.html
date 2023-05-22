@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 1 Lab Title | 01-image-process.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 1 Lab Title | 01-image-process.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 1 Lab Title | 01-image-process.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#image-process"><i class="fa fa-check"></i><b>1</b> Lab Title</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-1-data-types-projections"><i class="fa fa-check"></i>Task 1: Data Types &amp; Projections</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-2-cloud-and-shadow-masking"><i class="fa fa-check"></i>Task 2: Cloud and Shadow Masking</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-3-image-enhancement-and-focal-filters"><i class="fa fa-check"></i>Task 3: Image Enhancement and Focal Filters</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="image-process" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Lab 1</span> Lab Title<a href="#image-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by
+Hana Travers-Smith</p>
+<div id="lab-overview" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Lorem ipsum</p>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2 unnumbered hasAnchor">
+<h2>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Understand radiometric resolution and how it relates to Digital Numbers</li>
+<li>Learn how to resample rasters to common projections</li>
+<li>Use the Landsat Quality Assurance Band to mask clouds and shadows</li>
+<li>Understand how image enhancements and focal filters work</li>
+</ul>
+<hr />
+</div>
+<div id="deliverables" class="section level2 unnumbered hasAnchor">
+<h2>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Screenshots of historgrams and filtered images</li>
+<li>Answers to 9 questions posed in the handout</li>
+</ul>
+<hr />
+</div>
+<div id="data" class="section level2 unnumbered hasAnchor">
+<h2>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Two Landsat 8 Surface Reflectance images</li>
+</ul>
+<hr />
+</div>
+<div id="task-1-data-types-projections" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Data Types &amp; Projections<a href="#task-1-data-types-projections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Import the following rasters <strong>XXXA.tif</strong> and <strong>XXXB.tif</strong> into a new Map Project in ArcGIS Pro. Name the project Lab 1 and save it in the default documents folder on your computer, typically <code>C:\Users\YourUsername\Documents\ArcGIS\Projects\Lab2.</code></p>
+<p>These data represent Landsat 8 Collection 2 Surface Reflectance.</p>
+<div id="q1-why-is-it-best-to-use-surface-reflectance-data-over-top-of-atmosphere-data" class="section level5 unnumbered hasAnchor">
+<h5>Q1: Why is it best to use Surface Reflectance data over Top of Atmosphere data?<a href="#q1-why-is-it-best-to-use-surface-reflectance-data-over-top-of-atmosphere-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Navigate to &gt; Properties &gt; General to answer the following questions about each raster.</p>
+</div>
+<div id="q2-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-floating-point-etc" class="section level5 unnumbered hasAnchor">
+<h5>Q2: What are the projections of raster A and raster B? What are the data types (i.e. (integer, floating point etc)?<a href="#q2-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-floating-point-etc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q3-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-digital-numbers-dn-in-the-image." class="section level5 unnumbered hasAnchor">
+<h5>Q3: Define <strong>radiometric resolution</strong> and describe how it relates to the range of Digital Numbers (DN) in the image.<a href="#q3-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-digital-numbers-dn-in-the-image." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q4-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-is-the-radiometric-resolution-of-rasters-a-and-b" class="section level5 unnumbered hasAnchor">
+<h5>Q4: How many possible values would be present in an 8-bit, 16-bit and 32-bit image? What is the radiometric resolution of rasters A and B?<a href="#q4-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-is-the-radiometric-resolution-of-rasters-a-and-b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Convert both rasters into a common projection using the <strong>Resampling tool</strong>.</p>
+</div>
+<div id="q5-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="section level5 unnumbered hasAnchor">
+<h5>Q5: Which resampling method (Nearest Neighbour or Bilinear Interpolation) is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, cateogries)?<a href="#q5-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-2-cloud-and-shadow-masking" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Cloud and Shadow Masking<a href="#task-2-cloud-and-shadow-masking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Next, we will use the Quality Assurance band to mask out pixels covered by clouds and cloud shadows.</p>
+<p><strong>Step 1:</strong></p>
+<div id="q6-if-you-didnt-have-the-qa-band-what-landsat-bandsspectral-properties-could-you-use-to-idenify-cloudy-pixels" class="section level5 unnumbered hasAnchor">
+<h5>Q6: If you didn’t have the QA band, what Landsat bands/spectral properties could you use to idenify cloudy pixels?<a href="#q6-if-you-didnt-have-the-qa-band-what-landsat-bandsspectral-properties-could-you-use-to-idenify-cloudy-pixels" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-3-image-enhancement-and-focal-filters" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Image Enhancement and Focal Filters<a href="#task-3-image-enhancement-and-focal-filters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> View the NIR band of the cloud masked image in greyscale. Create a histogram of surface reflectance values and include in the deliverables.</p>
+<div id="q6-what-do-the-light-and-dark-areas-of-the-image-represent-in-terms-of-surface-reflectance-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="section level5 unnumbered hasAnchor">
+<h5>Q6: What do the light and dark areas of the image represent in terms of surface reflectance? How could you use this image to identify vegetation and urban areas?<a href="#q6-what-do-the-light-and-dark-areas-of-the-image-represent-in-terms-of-surface-reflectance-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q7-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent" class="section level5 unnumbered hasAnchor">
+<h5>Q7: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent?<a href="#q7-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Create a histogram of NIR surface reflectance. Apply a <strong>Minimum-Maximum Strech</strong> and a <strong>Standard Deviation Strech with n = 2.5</strong>, and notice how the image appearance and the histogram change.</p>
+</div>
+<div id="q8-describe-how-the-distribution-of-values-in-the-histogram-changes-with-both-image-enhancements.-what-parts-of-the-image-have-greater-contrast-how-could-this-help-you-interpret-the-image" class="section level5 unnumbered hasAnchor">
+<h5>Q8: Describe how the distribution of values in the histogram changes with both image enhancements. What parts of the image have greater contrast? How could this help you interpret the image?<a href="#q8-describe-how-the-distribution-of-values-in-the-histogram-changes-with-both-image-enhancements.-what-parts-of-the-image-have-greater-contrast-how-could-this-help-you-interpret-the-image" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 3:</strong> Apply a <strong>Sharpening</strong> and <strong>Smoothing</strong> filter to the cloud masked image. Take a screenshot of the filtered images and present them side-by-side in your deliverables.</p>
+</div>
+<div id="q10-define-a-focal-window-and-describe-how-a-filter-changes-the-pixel-values-of-an-image-usig-the-focal-window.-use-the-following-matrix-to-calculate-the-new-pixel-value-labelled-with-a-using-a-3x3-mean-filter" class="section level5 unnumbered hasAnchor">
+<h5>Q10: Define a <strong>focal window</strong> and describe how a filter changes the pixel values of an image usig the focal window. Use the following matrix to calculate the new pixel value labelled with a * using a <strong>3x3 mean filter</strong><a href="#q10-define-a-focal-window-and-describe-how-a-filter-changes-the-pixel-values-of-an-image-usig-the-focal-window.-use-the-following-matrix-to-calculate-the-new-pixel-value-labelled-with-a-using-a-3x3-mean-filter" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<span class="math display">\[\begin{bmatrix}
+1 &amp; 11 &amp; 6 &amp; 5 \\
+3 &amp; 5 &amp; 5* &amp; 9 \\
+9 &amp; 8 &amp; 11 &amp; 10
+\end{bmatrix}\]</span>
+</div>
+<div id="q9-define-spatial-frequency-and-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-their-spatial-frequencies.-what-are-some-advantages-and-disadvantages-of-these-focal-filters" class="section level5 unnumbered hasAnchor">
+<h5>Q9: Define <strong>spatial frequency</strong> and describe how the sharpened and smoothed images differ in terms of their spatial frequencies. What are some advantages and disadvantages of these focal filters?<a href="#q9-define-spatial-frequency-and-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-their-spatial-frequencies.-what-are-some-advantages-and-disadvantages-of-these-focal-filters" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
