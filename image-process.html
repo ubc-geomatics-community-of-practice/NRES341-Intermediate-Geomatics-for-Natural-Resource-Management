@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lab 1 Lab Title | 01-image-process.knit</title>
+  <title>Lab 1 Introduction to Landsat Image Processing | 01-image-process.knit</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lab 1 Lab Title | 01-image-process.knit" />
+  <meta property="og:title" content="Lab 1 Introduction to Landsat Image Processing | 01-image-process.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lab 1 Lab Title | 01-image-process.knit" />
+  <meta name="twitter:title" content="Lab 1 Introduction to Landsat Image Processing | 01-image-process.knit" />
   
   
   
@@ -70,7 +70,7 @@
 <li><a href="./">An Open Geomatics Community of Practice</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path=""><a href="#image-process"><i class="fa fa-check"></i><b>1</b> Lab Title</a>
+<li class="chapter" data-level="1" data-path=""><a href="#image-process"><i class="fa fa-check"></i><b>1</b> Introduction to Landsat Image Processing</a>
 <ul>
 <li class="chapter" data-level="" data-path=""><a href="#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
@@ -103,12 +103,14 @@
 <!--bookdown:title:end-->
 <!--bookdown:title:start-->
 <div id="image-process" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Lab 1</span> Lab Title<a href="#image-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Lab 1</span> Introduction to Landsat Image Processing<a href="#image-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Written by
 Hana Travers-Smith</p>
 <div id="lab-overview" class="section level2 unnumbered hasAnchor">
 <h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Lorem ipsum</p>
+<p>The Landsat satellite program has been active since 1972 and represents one of the most valuable remote sensing datsets in environmental monitoring and ecology. The Landsat series of satellites measure passive reflectance from the Earth’s surface and atmosphere and is used in the fields of agcriculture, forestry, geology and hydrology. In 2008, all Landsat data was made open to the public and this has triggered widespread uptake by governments and research groups across the world.</p>
+<p>In this lab, you will work with images collected by the Landsat 8 to understand radiometric resolution and get a chance to practice image processing steps including masking clouds and cloud shadows and applying image enhancements.</p>
+<p><img src="images/01/01-lsat.jpg" width="356" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="learning-objectives" class="section level2 unnumbered hasAnchor">
@@ -138,31 +140,93 @@ Hana Travers-Smith</p>
 </div>
 <div id="task-1-data-types-projections" class="section level2 unnumbered hasAnchor">
 <h2>Task 1: Data Types &amp; Projections<a href="#task-1-data-types-projections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Step 1:</strong> Import the following rasters <strong>XXXA.tif</strong> and <strong>XXXB.tif</strong> into a new Map Project in ArcGIS Pro. Name the project Lab 1 and save it in the default documents folder on your computer, typically <code>C:\Users\YourUsername\Documents\ArcGIS\Projects\Lab2.</code></p>
-<p>These data represent Landsat 8 Collection 2 Surface Reflectance.</p>
-<div id="q1-why-is-it-best-to-use-surface-reflectance-data-over-top-of-atmosphere-data" class="section level5 unnumbered hasAnchor">
-<h5>Q1: Why is it best to use Surface Reflectance data over Top of Atmosphere data?<a href="#q1-why-is-it-best-to-use-surface-reflectance-data-over-top-of-atmosphere-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p>Navigate to &gt; Properties &gt; General to answer the following questions about each raster.</p>
+<p>You are given two Landsat Surface Reflectance images.</p>
+<ul>
+<li><strong>LC08_047026_20200830_02_T1_a.tif</strong></li>
+<li><strong>LC08_047026_20200830_02_T1_b.tif</strong></li>
+</ul>
+<p>The filenames use the following naming pattern that tells you information about the data product and when the image was acquired: LXSS_PPPRRR_YYYYMMDD_CC_TX.tif</p>
+<ul>
+<li>L = Landsat</li>
+<li>X = OLI/TIRS Sensor</li>
+<li>S = Landsat 8 satellite</li>
+<li>PPP = WRS path</li>
+<li>RRR = WRS row</li>
+<li>YYYYMMDD = Acquistion year, month, day</li>
+<li>CC = Collection number</li>
+<li>TX = Collection Category</li>
+</ul>
+<p>WRS path/row refer to a worldwide grid system, where each Landsat scene is assigned a specific path (longitude) and row (latitude) coordinate.</p>
+<p><img src="images/01/01-wrs.jpg" width="75%" style="display: block; margin: auto;" /></p>
+<p>Use the USGS resource to answer the following questions: ‘<a href="https://www.usgs.gov/faqs/what-naming-convention-landsat-collections-level-1-scenes" class="uri">https://www.usgs.gov/faqs/what-naming-convention-landsat-collections-level-1-scenes</a>’</p>
+<div id="q1-for-the-landsat-scenes-you-are-given-what-landsat-sensor-and-satellite-do-the-images-come-from-when-were-the-images-acuqired-and-what-landsat-collection-number-are-they-found-in" class="section level5 unnumbered hasAnchor">
+<h5>Q1: For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acuqired and what Landsat Collection number are they found in?<a href="#q1-for-the-landsat-scenes-you-are-given-what-landsat-sensor-and-satellite-do-the-images-come-from-when-were-the-images-acuqired-and-what-landsat-collection-number-are-they-found-in" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q2-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-floating-point-etc" class="section level5 unnumbered hasAnchor">
-<h5>Q2: What are the projections of raster A and raster B? What are the data types (i.e. (integer, floating point etc)?<a href="#q2-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-floating-point-etc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q2-data-in-landsat-collections-1-2-have-been-pre-processed-so-that-images-across-time-are-geometrically-and-radiometicrally-consistent.-in-2-4-sentences-explain-what-this-means-and-why-it-is-important-for-detecting-environmental-changes." class="section level5 unnumbered hasAnchor">
+<h5>Q2: Data in Landsat Collections 1 &amp; 2 have been pre-processed so that images across time are geometrically and radiometicrally consistent. In 2-4 sentences explain what this means and why it is important for detecting environmental changes.<a href="#q2-data-in-landsat-collections-1-2-have-been-pre-processed-so-that-images-across-time-are-geometrically-and-radiometicrally-consistent.-in-2-4-sentences-explain-what-this-means-and-why-it-is-important-for-detecting-environmental-changes." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q3-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-digital-numbers-dn-in-the-image." class="section level5 unnumbered hasAnchor">
-<h5>Q3: Define <strong>radiometric resolution</strong> and describe how it relates to the range of Digital Numbers (DN) in the image.<a href="#q3-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-digital-numbers-dn-in-the-image." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q3-the-following-image-shows-the-spectral-profile-of-a-vegetated-surface-before-and-after-atmospheric-correction.-describe-the-differences-between-the-two-profiles-and-explain-the-properties-of-the-atmosphere-that-causes-this.-in-your-own-words-why-is-it-important-to-correct-for-atmospheric-effects-when-using-satellite-imagery-collectd-at-different-times" class="section level5 unnumbered hasAnchor">
+<h5>Q3: The following image shows the spectral profile of a vegetated surface before and after atmospheric correction. Describe the differences between the two profiles and explain the properties of the atmosphere that causes this. In your own words, why is it important to correct for atmospheric effects when using satellite imagery collectd at different times?<a href="#q3-the-following-image-shows-the-spectral-profile-of-a-vegetated-surface-before-and-after-atmospheric-correction.-describe-the-differences-between-the-two-profiles-and-explain-the-properties-of-the-atmosphere-that-causes-this.-in-your-own-words-why-is-it-important-to-correct-for-atmospheric-effects-when-using-satellite-imagery-collectd-at-different-times" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/01/01-nocorr.JPG" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/01/01-corr.JPG" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>Step 1:</strong> Import the following rasters <strong>LC08_047026_20200830_SR_A.tif</strong> and <strong>LC08_047026_20200830_SR_B.tif</strong> into a new Map Project in ArcGIS Pro. Name the project Lab 1 and save it in the default documents folder on your computer, typically <code>C:\Users\YourUsername\Documents\ArcGIS\Projects\Lab2.</code></p>
+<p>The bands are as follows:</p>
+<ul>
+<li>SR_B2 = Blue</li>
+<li>SR_B3 = Green</li>
+<li>SR_B4 = Red</li>
+<li>SR_B5 = NIR</li>
+<li>SR_B6 = SWIR1</li>
+</ul>
+<p>Experiment with the <strong>Symbology</strong> tab and include screenshots of the following band combinations for raster A in your final deliverables:</p>
+<ul>
+<li>RGB true-color</li>
+<li>False color infrared, with NIR in the red channel</li>
+</ul>
+<p>Navigate to &gt; Properties &gt; General and use the image metadata to answer the following questions about the Surface Reflectance rasters.</p>
+<p><img src="images/01/01-arc.JPG" width="75%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="q4-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-is-the-radiometric-resolution-of-rasters-a-and-b" class="section level5 unnumbered hasAnchor">
-<h5>Q4: How many possible values would be present in an 8-bit, 16-bit and 32-bit image? What is the radiometric resolution of rasters A and B?<a href="#q4-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-is-the-radiometric-resolution-of-rasters-a-and-b" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><strong>Step 2:</strong> Convert both rasters into a common projection using the <strong>Resampling tool</strong>.</p>
+<div id="q4-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-or-floating-point" class="section level5 unnumbered hasAnchor">
+<h5>Q4: What are the projections of raster A and raster B? What are the data types (i.e. integer or floating point)?<a href="#q4-what-are-the-projections-of-raster-a-and-raster-b-what-are-the-data-types-i.e.-integer-or-floating-point" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q5-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="section level5 unnumbered hasAnchor">
-<h5>Q5: Which resampling method (Nearest Neighbour or Bilinear Interpolation) is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, cateogries)?<a href="#q5-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q5-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-possible-values-in-the-image." class="section level5 unnumbered hasAnchor">
+<h5>Q5: Define <strong>radiometric resolution</strong> and describe how it relates to the range of possible values in the image.<a href="#q5-define-radiometric-resolution-and-describe-how-it-relates-to-the-range-of-possible-values-in-the-image." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q6-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-are-the-bit-types-of-rasters-a-and-b-hint-look-at-the-minmax-values-of-the-rasters" class="section level5 unnumbered hasAnchor">
+<h5>Q6: How many possible values would be present in an 8-bit, 16-bit and 32-bit image? What are the bit-types of rasters A and B (HINT: look at the min/max values of the rasters)?<a href="#q6-how-many-possible-values-would-be-present-in-an-8-bit-16-bit-and-32-bit-image-what-are-the-bit-types-of-rasters-a-and-b-hint-look-at-the-minmax-values-of-the-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Zoom in so you can see individual pixels and notice how the different raster projections change how the pixels align. Raster A is in the correct UTM Zone projection, while raster B is not.</p>
+</div>
+<div id="q7-imagine-you-want-to-see-how-the-reflectance-of-a-small-forest-stand-changes-over-time.-why-would-it-be-important-that-your-imagery-is-displayed-in-the-same-projection" class="section level5 unnumbered hasAnchor">
+<h5>Q7: Imagine you want to see how the reflectance of a small forest stand changes over time. Why would it be important that your imagery is displayed in the same projection?<a href="#q7-imagine-you-want-to-see-how-the-reflectance-of-a-small-forest-stand-changes-over-time.-why-would-it-be-important-that-your-imagery-is-displayed-in-the-same-projection" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Convert raster B to the <strong>NAD 1983 UTM Zone 10</strong> projection using the <strong>Project Raster</strong> tool and save the result as a new raster.</p>
+<p><img src="images/01/01-proj.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p><strong>Include a screenshot of the Spatial Reference information (in the General tab) for the new raster in your final deliverables</strong></p>
+</div>
+<div id="q8-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="section level5 unnumbered hasAnchor">
+<h5>Q8: Which resampling method (Nearest Neighbour or Bilinear Interpolation) is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, cateogries)?<a href="#q8-which-resampling-method-nearest-neighbour-or-bilinear-interpolation-is-most-appropriate-for-continuous-data-i.e.-temperature-elevation-and-why-what-about-discrete-data-i.e.-land-cover-classes-cateogries" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
 <div id="task-2-cloud-and-shadow-masking" class="section level2 unnumbered hasAnchor">
 <h2>Task 2: Cloud and Shadow Masking<a href="#task-2-cloud-and-shadow-masking" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Next, we will use the Quality Assurance band to mask out pixels covered by clouds and cloud shadows.</p>
+<p>Next, we will use the Quality Assurance (QA) band to mask out pixels covered by clouds and cloud shadows.</p>
+<p>Landsat (and many other types of remote sensing imagery) use a <strong>Bitmask</strong> to store information related to the quality of a pixel. For each pixel, a bitmask is simply a series of classifications for whether the pixel contains clouds, snow, shadows, haze, and other atmospheric artefacts we want to remove. Bitmasks also contain information on the level of confidence in the pixel classification. All this information is stored in an integer that can be transformed into it’s binary counterpart composed of 0’s and 1’s. Using a bitmask reduces the filesize of a raster, as the integer values are shorter than their binary conunterparts.</p>
+<p>The Landsat QA_BAND is a 15-bit integer, meaning that the pixel values can range from 0 to 2^15. There are 15 different indicators stored in this band that relate to pixel quality (clouds, haze etc…). The full list can be found here (expand the bitmask for QA_PIXEL section): <a href="https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_TOA#bands" class="uri">https://developers.google.com/earth-engine/datasets/catalog/LANDSAT_LC08_C02_T1_TOA#bands</a></p>
+<p><img src="images/01/01-qabits.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p>To interpret the pixel value of a bitmask first convert the integer to binary:</p>
+<p>For example: <code>22280</code> becomes <code>101011100001000</code></p>
+<p>Starting from the right, each value is assigned a <strong>Bit Position</strong> starting at 0 and counting up to the total number of values.</p>
+<p>If we want to know if a pixel is cloudy we need to look at bit 3. In this example, bit 3 is represented by the <strong>fourth number from the right</strong>, and has a value of <strong>1</strong>.</p>
+<p><img src="images/01/01-bit3.JPG" width="178" style="display: block; margin: auto;" /></p>
+<p>According to the bitmask, a value of <code>1</code> in bit position 3 indicates a pixel with high confidence cloud.</p>
+<p>You will notice that some of the indicators are represented by multiple bit positions. For example, bits 8-9 encode the degree of confidence in the cloud classification.</p>
+<p><img src="images/01/01-bit89.JPG" width="155" style="display: block; margin: auto;" /></p>
+<p>For our pixel example, bit positions 8-9 contain the values <code>10</code>, converting this binary number back to integer gives the value <code>2</code>, which corresponds to Medium confidence.</p>
+<p>Use the following online tool to convert between integer and binary numbers and answer the following question: <a href="https://www.rapidtables.com/convert/number/binary-to-decimal.html" class="uri">https://www.rapidtables.com/convert/number/binary-to-decimal.html</a></p>
+<div id="q9-for-a-pixel-with-the-integer-value-23888-what-is-the-classification-for-bit-3cloud-and-bit-4-cloud-shadow-what-about-bit-10-11-cloud-shadow-confidence" class="section level5 hasAnchor" number="1.0.0.0.1">
+<h5><span class="header-section-number">1.0.0.0.1</span> Q9: For a pixel with the integer value 23888, what is the classification for Bit 3:Cloud and Bit 4: Cloud Shadow? What about Bit 10-11: Cloud Shadow Confidence?<a href="#q9-for-a-pixel-with-the-integer-value-23888-what-is-the-classification-for-bit-3cloud-and-bit-4-cloud-shadow-what-about-bit-10-11-cloud-shadow-confidence" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 1:</strong></p>
+</div>
 <div id="q6-if-you-didnt-have-the-qa-band-what-landsat-bandsspectral-properties-could-you-use-to-idenify-cloudy-pixels" class="section level5 unnumbered hasAnchor">
 <h5>Q6: If you didn’t have the QA band, what Landsat bands/spectral properties could you use to idenify cloudy pixels?<a href="#q6-if-you-didnt-have-the-qa-band-what-landsat-bandsspectral-properties-could-you-use-to-idenify-cloudy-pixels" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
