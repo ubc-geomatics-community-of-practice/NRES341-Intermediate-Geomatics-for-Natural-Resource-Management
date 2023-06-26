@@ -29,7 +29,7 @@ In their 2017 paper, Gorelick et al. describe GEE as “a multi-petabyte analysi
 ## Deliverables {-}
 
 -   Answers to 7 questions posed in the handout
--   A final land cover classification
+-   A screenshot of the final land cover classification
 -   Annotated code used to perform the analysis
 
 ------------------------------------------------------------------------
@@ -42,7 +42,7 @@ Data will be accessed through the Google Earth Engine code editor. There are tho
 
 ## Task 1: Getting started with Google Earth Engine {.unnumbered}
 
-**Step 1:** It is reccomended that you use/register for a gmail account prior to applying for access to GEE. To protect your privacy, you can anonymize your account by creating a username that is not attached to your actual name/student ID. Take note of your usename and password. Once you have a gmail account, you need to sign-up for GEE using the following link: https://signup.earthengine.google.com/
+**Step 1:** It is recommended that you use/register for a gmail account prior to applying for access to GEE. To protect your privacy, you can anonymize your account by creating a username that is not attached to your actual name/student ID. Take note of your username and password. Once you have a gmail account, you need to sign-up for GEE using the following link: https://signup.earthengine.google.com/
 
 Upon acceptance you will receive a confirmation email. Congratulations, you are now ready to apply your coding and geospatial knowledge in the Earth Engine Code Editor. GEE runs using Javascript, but don't worry you will be given templates for all the code you will need to complete the lab. 
 
