@@ -11,7 +11,7 @@ cat(author)
 
 ## Lab Overview {-}
 
-Large-scale remote sensing requires large-scale data storage and computation, which are often limiting factors for studies with large spatial extent or temporal repetition. One solution to the challenge of big data is cloud computing, which allows data storage and processing tasks to happen on remote supercomputing systems (i.e. not on your personal laptop). Google Earth Engine (GEE) provides an interface with which users can efficiently interact with large spatial datasets, including the entire Landsat satellite image archive.
+Wide area remote sensing requires large-scale data storage and computation, which are often limiting factors for studies with large spatial extent or temporal repetition. One solution to the challenge of big data is cloud computing, which allows data storage and processing tasks to happen on remote supercomputing systems (i.e. not on your personal laptop). Google Earth Engine (GEE) provides an interface with which users can efficiently interact with large spatial datasets, including the entire Landsat satellite image archive.
 
 In their 2017 paper, Gorelick et al. describe GEE as “a multi-petabyte analysis-ready data catalog co-located with a high performance, intrinsically parallel computation service”. Essentially, GEE is an online platform that enables analyses on large, internally-stored datasets. This technology has revolutionized the manner in which remote sensing can be conducted, presenting anyone with internet access the opportunity to participate in earth observation science.
 
@@ -42,7 +42,7 @@ Data will be accessed through the Google Earth Engine code editor. There are tho
 
 ## Task 1: Getting started with Google Earth Engine {.unnumbered}
 
-**Step 1:** It is reccomended that you use/register for a gmail account prior to applying for access to GEE. Once you have a gmail account, you need to sign-up for GEE using the following link: https://signup.earthengine.google.com/
+**Step 1:** It is reccomended that you use/register for a gmail account prior to applying for access to GEE. To protect your privacy, you can anonymize your account by creating a username that is not attached to your actual name/student ID. Take note of your usename and password. Once you have a gmail account, you need to sign-up for GEE using the following link: https://signup.earthengine.google.com/
 
 Upon acceptance you will receive a confirmation email. Congratulations, you are now ready to apply your coding and geospatial knowledge in the Earth Engine Code Editor. GEE runs using Javascript, but don't worry you will be given templates for all the code you will need to complete the lab. 
 
@@ -103,9 +103,9 @@ knitr::include_graphics('images/02/bbysfirstScene.jpg')
 
 ## Task 2: Calculating NDVI  {.unnumbered}
 
-In this task, you will calculate two spectral indices relating to vegetation and urban land cover. In the next task, you will use these indices to perform a supervised classification and produce a map of land cover. 
+In this task, you will calculate the Normalized Difference Vegetation Index. In the next task you will use it to perform a supervised classification and produce a map of land cover. 
 
-Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties including Normalized Difference Vegetation Index (NDVI) Normalized Burn Ratio (NBR) and Normalzied Difference Water Index to name a few. 
+Spectral indices combine spectral reflectance from two or more bands to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to identify a different land covers and image properties including Normalized Difference Vegetation Index (NDVI) Normalized Burn Ratio (NBR) and Normalized Difference Water Index to name a few. 
 
 NDVI is calculated with the following formula: 
 
@@ -147,8 +147,7 @@ In the section you will use a Supervised Classification to classify the followin
 
 **Step 1:** First we will create a sample of pixels to train the classification on. In the Geometry Imports menu, click **+new layer**. Add a new layer for each of the four land cover classes, rename each layer and assign it a color using the gear icon. 
 
-Change Import as to **Feature Collection.**  
-Add a new property called **landcover** and fill in a **numeric value** for each land cover type. For example, Water = 0, Forest = 1, Urban = 2 etc...
+In the settings tab (accessed from the gear icon), change Import as to **Feature Collection.** Add a new property called **landcover** and fill it with a **numeric value** unique to each land cover type. For example, Water = 0, Forest = 1, Urban = 2 etc...
 
 ``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
 knitr::include_graphics('images/02/training.jpg')
@@ -174,9 +173,13 @@ knitr::include_graphics('images/02/sample.jpg')
 
 ##### Q5: Explain how a supervised and unsupervised classification are different? {.unnumbered}
 
-**Step 3:** Next we will use the **Random Forests** algorithm to train our classifier and predict land cover for all the pixels in our image. First we make a new variable for the model trained on our sample of pixels, then we apply the model to image and save it as a new image called `classified`. 
+**Step 3:** Next we will use the **Minimum Distance** algorithm to train our classifier and predict land cover for all the pixels in our image. 
 
-    var classifier = ee.Classifier.smileRandomForest(10).train({
+First we make a new variable called `classifier` which contains the minimum distance classifier trained on our sample pixels. Conceptually, for a given pixel the model takes into account reflectance from the 6 spectral bands and NDVI and compares it with statistics generated from the training sample. The pixel is then assigned to the land cover class that it is most similar to.
+
+Finally, we apply the model to the entire image and save it as a new layer called `classified`. 
+
+    var classifier = ee.Classifier.minimumDistance().train({
       features: training,
       classProperty: 'landcover',
       inputProperties: bands
@@ -187,7 +190,7 @@ knitr::include_graphics('images/02/sample.jpg')
     {min: 0, max: 3, palette: ['orange', 'green', 'blue','yellow']},
     'classification');    
     
-**Step 4:** After you click Run zoom into the greater Vancouver Area. The new classification layer will take some time to run. 
+**Step 4:** After you click Run, zoom into the greater Vancouver Area. The new classification layer will take some time to run and be displayed on the map. If you are having trouble viewing the classified layer, zoom in more so that there is less area to compute over.  
 
 **Depending on the numeric values you assigned each land cover class, you may want to reorder the palette colors so that each color is assigned to an appropriate class**
 
@@ -197,4 +200,4 @@ knitr::include_graphics('images/02/sample.jpg')
 knitr::include_graphics('images/02/classified.jpg')
 ```
 
-##### Q7: Use comments `//` to annotate each bloack of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. Include you final annotated code in your deliverables. {.unnumbered}
+##### Q7: Use comments `//` to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. Include you final annotated code in your deliverables. {.unnumbered}
