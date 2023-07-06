@@ -2,7 +2,7 @@
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["lab1shortname"]][["author"]]
 ```
-# Lab Title {#image-classification}
+# Image Classification & Intro to Google Earth Engine {#image-classification}
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -11,165 +11,193 @@ cat(author)
 
 ## Lab Overview {-}
 
-Lorem ipsum
+Wide area remote sensing requires large-scale data storage and computation, which are often limiting factors for studies with large spatial extent or temporal repetition. One solution to the challenge of big data is cloud computing, which allows data storage and processing tasks to happen on remote supercomputing systems (i.e. not on your personal laptop). Google Earth Engine (GEE) provides an interface with which users can efficiently interact with large spatial datasets, including the entire Landsat satellite image archive.
+
+In their 2017 paper, Gorelick et al. describe GEE as “a multi-petabyte analysis-ready data catalog co-located with a high performance, intrinsically parallel computation service”. Essentially, GEE is an online platform that enables analyses on large, internally-stored datasets. This technology has revolutionized the manner in which remote sensing can be conducted, presenting anyone with internet access the opportunity to participate in earth observation science.
 
 ------------------------------------------------------------------------
 
 ## Learning Objectives {-}
 
 -  Understand applications of land cover mapping
--  Learn how to calcualte simple spectral indices
+-  Introduction to Google Earth Engine for image processing tasks  
+-  Learn how to calculate simple spectral indices
 -  Use a supervised classification to create a land cover map 
 
 ------------------------------------------------------------------------
 
 ## Deliverables {-}
 
--   Answers to 13 questions posed in the handout
--   A final land cover classification map
+-   Answers to 7 questions posed in the handout
+-   A screenshot of the final land cover classification
+-   Annotated code used to perform the analysis
 
 ------------------------------------------------------------------------
 
 ## Data {-}
 
-Surface reflectance from Landsat 5 
+Data will be accessed through the Google Earth Engine code editor. There are thousands of geospatial datasets stored within the GEE catalog. Landsat, Sentinel-1 and many other Earth-observing imagery are included with various levels of pre-processing in order to expedite analyses. Land cover, climate and other relevant environmental datasets are also available. 
 
 ------------------------------------------------------------------------
 
-## Task 1: Understanding Land cover Mapping and Landsat Imagery {.unnumbered}
+## Task 1: Getting started with Google Earth Engine {.unnumbered}
 
-Land cover is ... it is important because ....
+**Step 1:** It is recommended that you use/register for a gmail account prior to applying for access to GEE. To protect your privacy, you can anonymize your account by creating a username that is not attached to your actual name/student ID. Take note of your username and password. Once you have a gmail account, you need to sign-up for GEE using the following link: https://signup.earthengine.google.com/
 
-Examine this online global land cover map created using imagery from Sentinel-2. In the search bar navigate to the town of Lytton, BC and compare land cover between 2018 and 2022. https://livingatlas.arcgis.com/landcoverexplorer/
+Upon acceptance you will receive a confirmation email. Congratulations, you are now ready to apply your coding and geospatial knowledge in the Earth Engine Code Editor. GEE runs using Javascript, but don't worry you will be given templates for all the code you will need to complete the lab. 
 
-##### Q1: Describe the major change in annual land cover shown in these maps. What year did the most significant changes occur? Do some research to determine the cause of this shift in land cover. {.unnumbered}
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/GEE.jpg')
+```
 
-##### Q2: Describe how you might expect spectral reflectance in the NIR, Red and SWIR wavelegthns to change for a pixel undergoing a transition from forest to range land (bare) vegetation. {.unnumbered} 
+The GEE Code editor is divided into four panels: 
 
-##### Q3: In 150 words or less, describe another application for annual land cover data generated from satellite imagery. Include a reference to one peer-reviewed academic article. {.unnumbered}
+- The leftmost panel is where you can access saved scripts, view documentation and access spatial data you have saved to the Cloud.
+- The middle panel is where you will write and run your code. 
+- The right panel is where you will see printed results and outputs. 
+- The bottom panel shows the map and is where you will display spatial data and imagery.
 
-In this lab, we will use the following processing steps to create a land cover classification for the greater Vancouver area and assess its accuracy: 
+**Step 2:** We will practice selecting and displaying a cloud-free Landsat scene over Vancovuer.
+First, we will need to define a Region of Interest to crop our Landsat scene to.
 
-1. 
-2. 
-3. 
-4. 
+In the Map panel, click on the Pin icon and create a point in Maple Ridge. You will see that this point is automatically named and will appear in the code editor with the variable name 'geometry'. 
+
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/geometry.jpg')
+```
+
+The following codeblock selects a cloud-free image from the Landsat 8 Surface Reflectance archive and saves it as a new variable called `image`. Each line in codeblock applies criteria to filter the image archive: 
+
+- filter by location - only include images that intersect with the region of interest
+- filter by date - include images acquired between two dates
+- sort the remaining images by the amount of cloud cover
+- finally, select the first image in the list, which will have the least cloudy pixels
+
+The `print` function will print the image metadata in the Console. 
+
+The `Map.addLayer()` function displays the multi-band image in the Map and applies a min/max filter. 
+The `//` symbols allow you to comment the code, these lines do not run anything but can help you organize code and understand what is going on. 
+
+    // Filter an image collection by location, date and cloud cover
+    var image = ee.Image(ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
+        .filterBounds(geometry)
+        .filterDate('2020-06-01', '2022-08-31')
+        .sort('CLOUD_COVER')
+        .first()); // select the least cloudy image
+    
+    // Add the image to the Map    
+    print(image);
+    Map.addLayer(image, {bands: ["SR_B4","SR_B3","SR_B2"], min:7000, max: 15000}, 'filteredScene');
+
+You should now see the following image displayed on the Map.
+
+Expand the image properties in the Console tab and answer the following questions: 
+
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/bbysfirstScene.jpg')
+```
+
+##### Q1: What UTM Zone is the image in? What date was the image acquired? How much cloud cover is present over the land? {.unnumbered}
 
 ------------------------------------------------------------------------
 
-## Task 2: Calculating NDVI and Built Up Index  {.unnumbered}
+## Task 2: Calculating NDVI  {.unnumbered}
 
-In this task, you will calculate two spectral indices relating to vegetation and urban land cover using Landsat surface reflectance imagery covering Greater Vancouver. In the next task, you will use these indices to perform a supervised classification and produce a map of land cover. 
+In this task, you will calculate the Normalized Difference Vegetation Index. In the next task you will use it to perform a supervised classification and produce a map of land cover. 
 
-Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties including burned Areas (Normalized Burn Ratio), urban/ built up areas (Normalized Difference Built-Up Index), and water (Normalized Difference Water Index) to name a few. The Normalized Difference Vegetation Index (NDVI) is a frequently used spectral index that takes advantage of the high near-infrared reflectance and high red absorption properties of healthy vegetation and is therefore often used to quantify vegetation in a remotely sensed multispectral image. 
+Spectral indices combine spectral reflectance from two or more bands to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to identify a different land covers and image properties including Normalized Difference Vegetation Index (NDVI) Normalized Burn Ratio (NBR) and Normalized Difference Water Index to name a few. 
 
-NDVI is calculated with the below formula: 
+NDVI is calculated with the following formula: 
 
 $\ NDVI = \frac{(NIR - RED)}{(NIR+RED)}$
 
-Where NIR is the near-infrared band (Landsat 7 Band 4) and Red is the red band (Landsat 7 Band 4). The results of this equation should be between -1 and 1 with values less than 0 representing water and values between 0-1 representing different levels of green vegetation. 
+Where NIR is the near-infrared band and red bands. The results of this equation should be between -1 and 1 with values less than 0 representing water and values between 0-1 representing different levels of green vegetation. 
 
-While ArcGIS Pro contains a built-in tool to calculate NDVI and a series of other spectral indices, in this lab we will be using the “band arithmetic” function and the above equation to create our own NDVI tool. 
+**Step 1:** Use the following codeblock to calculate NDVI using band 5 (NIR) and band 4 (RED), and display it on the map: 
 
-Navigate to the Imagery ribbon at the top of your ArcPro window and click the **Raster Function** button.
+    var red = image.select('SR_B4');
+    var nir = image.select('SR_B5');
+    var ndvi = nir.subtract(red).divide(nir.add(red)).rename('NDVI');
+    
+    print(ndvi);
+    Map.addLayer(ndvi, {min:0, max: 1}, 'NDVI');
 
-```{r 02-raster, out.width= "40%", echo = FALSE}
-    knitr::include_graphics("images/02/02-raster.png")
+##### Q2. Take a screenshot of NDVI over the UBC campus.{.unnumbered}
+
+##### Q3. Explain how red and NIR reflectance is different for healthy vegetation. How does NDVI use this difference to estimate productivity? {.unnumbered}
+
+Open the Inspector panel and click on pixels in the image to print their values: 
+
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/inspector.jpg')
 ```
 
-The Raster Functions pane should appear, you can either navigate the drop down menus to **Math-> Band Arithmetic** or use the search function to find the **Band Arithmetic Tool** and click to open. 
-
-```{r 02-raster-func, out.width= "75%", echo = FALSE}
-    knitr::include_graphics("images/02/02-raster-func.png")
-```
-
-The “Band Arithmetic Properties” dialogue should appear. Under “Raster” use the drop down menu and select the **L5027026subset_19990922_7B.dat**  layer. If it is not currently in your map view and can use the folder button and navigate to  your lab data folder and select the file. Under “Method” select **User Defined**. It should look like the screen shot below. 
-
-```{r 02-band-math, out.width= "75%", echo = FALSE}
-    knitr::include_graphics("images/02/02-band-math.png")
-```
-
-Use your knowledge of spectral indices, the NDVI formula given above and the table below fill in the NDVI calculation for your data. 
-
-##### Q4. Take a screenshot of your band arithmetic equation for ndvi.{.unnumbered}
-
-##### Q5. What are the minimum and maximum values of your new ndvi layer? {.unnumbered}
-
-##### Q6. What do the dark areas in the image represent? The gray areas? The white? {.unnumbered}
-
-##### Q7. What information does this type of analysis give us? When and why might this type of analysis be used? {.unnumbered}
-
-We will now use the “Band Arithmetic” window to calculate the Normalized Difference Built-Up Index (NDBI). The NDBI highlights urban areas where there is typically a higher reflectance in the shortwave-infrared region compared to the near-infrared region. The equation is as follows: 
-
-$\ NDBI = \frac{(SWIR-NIR)}{(SWIR+NIR)}$
-
-Open the “Band Arithmetic” function and select the Landsat scene as your input raster. Under “Method” use the drop-down menu and navigate to NDBI. Using what you know about Landsat imagery select the proper bands for calculating NDBI under the “Band Indexes” box and then select “Create New Layer”. 
+##### Q4. Use the Inspector tool to sample pixels in water, vegetation and urban areas: approximately what range of NDVI values do you observe for these land cover types? {.unnumbered}
 
 ------------------------------------------------------------------------
 
 ## Task 3: Perform a Supervised Classification  {.unnumbered}
 
-In the section you will use a Supervised Classification to classify the following land cover types and assess the accuracy of the final classification: 
+In the section you will use a Supervised Classification to classify the following land cover types: 
 
 - Urban
 - Water
-- Dense forest
-- Open/mixed forest
-- Desiccated vegetation
-- Bare ground
+- Forest
+- Agriculture
 
-**Step 1:** Create a composite image stack using the following indices and bands: NDVI, NDBI, Red, Green, Blue, SWIR. 
+**Step 1:** First we will create a sample of pixels to train the classification on. In the Geometry Imports menu, click **+new layer**. Add a new layer for each of the four land cover classes, rename each layer and assign it a color using the gear icon. 
 
-**Step 2:** Use the **Training Samples Manager** to select Regions of Interest that represent each of the land cover classes. Use the Imagery basemap to guide your selection of ROIs. Try to select large, homogeneous areas for each class. Collect enough ROIs so that each class has approximately 50? pixels. 
+In the settings tab (accessed from the gear icon), change Import as to **Feature Collection.** Add a new property called **landcover** and fill it with a **numeric value** unique to each land cover type. For example, Water = 0, Forest = 1, Urban = 2 etc...
 
-Make sure that the names of your classes exactly match the list above! If they do not match you will have difficulties joining your final classification to the reference dataset. 
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/training.jpg')
+```
 
-**Step 3:** Make box plots to show differences in the range of values in each land cover class. 
+Select a land cover class in the Geometry Imports menu and use the point and polygon tools to select pixels in the image representing that class. Toggle the NDVI and true color composite on/off to aid your land cover interpretation. The example below gives an idea of how many pixels you want to sample per class. 
 
-**Step 4:** Look at the class separability of the ROIs. Are any classes very similar to each other? At this point, you can adjust the location of your ROIs to try and increase separation of the land cover classes. **Include the box plot of the final ROIs in the deliverables.** 
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics('images/02/sample.jpg')
+```
 
-##### Q8: Using the box plot, what classes appear the most distinct? What bands/indices could be used to separate these classes? {.unnumbered}
+**Step 2:**Once you have selected training areas for each land cover class use the following code block to merge the Feature Collections and select a sample of pixels to train the classification model. The training pixels will be stored as a new variable called `training`.
 
-##### Q9: Using the box plot, what classes appear the most similar? How might this impact the final land cover classification? {.unnumbered}
+    var classNames = Water.merge(Urban).merge(Agriculture).merge(Forest);
+    print(classNames);
+    
+    var bands = ['SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7', 'NDVI'];
+    var training = image.select(bands).sampleRegions({
+      collection: classNames,
+      properties: ['landcover'],
+      scale: 30
+    });
 
-##### Q10: Why is it important to try and select pixels with homogeneous land cover types? (i.e. How would selecting pixels with mixed land cover impact the classification?) {.unnumbered}
+##### Q5: Explain how a supervised and unsupervised classification are different? {.unnumbered}
 
-**Step 5:** Train a Supervised Classification and create a new layer representing the land cover classes. 
+**Step 3:** Next we will use the **Minimum Distance** algorithm to train our classifier and predict land cover for all the pixels in our image. 
 
-------------------------------------------------------------------------
+First we make a new variable called `classifier` which contains the minimum distance classifier trained on our sample pixels. Conceptually, for a given pixel the model takes into account reflectance from the 6 spectral bands and NDVI and compares it with statistics generated from the training sample. The pixel is then assigned to the land cover class that it is most similar to.
 
-## Task 4: Accuracy Assessment {.unnumbered}
+Finally, we apply the model to the entire image and save it as a new layer called `classified`. 
 
-In this task, you will assess the accuracy of your land cover map using a reference dataset provided to you. 
+    var classifier = ee.Classifier.minimumDistance().train({
+      features: training,
+      classProperty: 'landcover',
+      inputProperties: bands
+    });
+    
+    var classified = image.select(bands).classify(classifier);
+    Map.addLayer(classified,
+    {min: 0, max: 3, palette: ['orange', 'green', 'blue','yellow']},
+    'classification');    
+    
+**Step 4:** After you click Run, zoom into the greater Vancouver Area. The new classification layer will take some time to run and be displayed on the map. If you are having trouble viewing the classified layer, zoom in more so that there is less area to compute over.  
 
-**Step 1:** Import the **Reference_data.shp** into your map containing the classification layer. This dataset represents spatial points, labelled using the same schema as your raster classification. Run the **Accuracy Assessment** tool on your raster classification and the reference data. 
+**Depending on the numeric values you assigned each land cover class, you may want to reorder the palette colors so that each color is assigned to an appropriate class**
 
-This will generate a confusion matrix and allow you to compare how your raster classification aligns with the labelled reference points. 
+##### Q6: Include a screenshot of the final classified layer (see example below). Include a legend for the land cover types. What classes do you think were classified the most and least accurately? Why do you think some classes are more likely to be misclassified? {.unnumbered}
 
-**Step 2:** View the confusion matrix and include a screenshot in the deliverables.
+``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
+knitr::include_graphics('images/02/classified.jpg')
+```
 
-##### Q11: What was the overall accuracy of your map? What class has the highest Users accuracy? Producers accuracy? In 3-5 sentences describe the difference between Users and Producers accuracy. {.unnumbered}
-
-##### Q12: If you wanted to know whether a randomly selected pixel on the land cover map was classified accurately, which metric (Users or Producer's accuracy) would be better and why? {.unnumbered}
-
-##### Q13: What classes had the lowest Users accuracy? Why do you think these classes were less accurate? Refer back to your box plots representing the range of spectral values in each class. {.unnumbered} 
-
-------------------------------------------------------------------------
-
-## Task 5: Creating a Map {.unnumbered}
-
-**Making your map**
-
-Now is the time for your cartographic skills to shine. To design a map of the highest quality you will need to draw on all of you GIS skills. Ensure you include all the standard components of a map along with your artistic flair.
-
-You should design a map that shows your land cover classification overtop of the provided Landsat Imagery. Pick appropriate colours and transparency for each layer.
-
-Use inset maps to show the location of the study area within western Canada and to show a zoomed in subset of your classification map in greater detail. 
-
-The physical requirements are as follows: 
-
-- Map should be 11”x17” either as a landscape or portrait layout 
-- You should export the map as a pdf 
-- Your map should incorporate the suite of standard map elements: Title, scale bar, compass, legend and appropriate inset maps. 
-
-For review on how to create a map layout with insets refer to **NRES 241 Lab 2**. 
+##### Q7: Use comments `//` to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. Include you final annotated code in your deliverables. {.unnumbered}

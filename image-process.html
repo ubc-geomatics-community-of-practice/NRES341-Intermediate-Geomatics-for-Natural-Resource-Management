@@ -237,13 +237,13 @@ Hana Travers-Smith</p>
 <p>Change the <strong>Primary Symbolology</strong> of the new QA_band so that each integer is assigned a <strong>unique</strong> color. This will help you see what values represent clear pixels. Your output should look something like the following:</p>
 <p><img src="images/01/01-qaband.jpg" width="792" style="display: block; margin: auto;" /></p>
 <p>Pixels with clear skies are represented by integers <strong>21824 (land)</strong> and <strong>21952 (water)</strong>.
-<strong>Step 2:</strong> We will use the <strong>Reclassify</strong> tool to create a new raster where clear sky pixels have a value of 1 and all other pixels have a value of 0.</p>
+<strong>Step 2:</strong> We will use the <strong>Reclassify (Spatial Analyst)</strong> tool to create a new raster where clear sky pixels have a value of 1 and all other pixels have a value of 0.</p>
 <ul>
 <li>Input raster: QA_band</li>
 <li>Reclass field: VALUE</li>
-<li>Output raster: Reclass_QA_band</li>
+<li>Output raster: Raster_mask</li>
 </ul>
-<p>Click <strong>Unique</strong>, for pixel values of 21824 and 21952 set the <strong>New</strong> value to <strong>1</strong> and <strong>0</strong> for everything else. Name the new raster <strong>Raster_mask</strong>.</p>
+<p>Click <strong>Unique</strong>, for pixel values of 21824 and 21952 set the <strong>New</strong> value to <strong>1</strong> and <strong>0</strong> for everything else.</p>
 <p><img src="images/01/01-reclass.jpg" width="242" style="display: block; margin: auto;" /></p>
 <p>You should now have a raster that looks like this:</p>
 <p><img src="images/01/01-rastmask.jpg" width="556" style="display: block; margin: auto;" /></p>
@@ -256,7 +256,7 @@ Hana Travers-Smith</p>
 </ul>
 <p>Click Run.</p>
 <p>For the new polygon mask layer, use the <strong>Select by Attributes</strong> tool to select the polygons corresponding to clouds using the expression: <code>gridcode = 0</code>, then delete these features in the attribute table. Make sure to save your edits.</p>
-<p><strong>Step 3:</strong> We are now ready to mask atmospheric effects from the Landsat scene. Navigate to Analysis &gt; Tools &gt; Extract by Mask</p>
+<p><strong>Step 3:</strong> We are now ready to mask clouds and shadows from the Landsat scene. Navigate to Analysis &gt; Tools &gt; Extract by Mask</p>
 <ul>
 <li>Input raster: <strong>LC08_047026_20200830_SR_A.tif</strong></li>
 <li>Input raster or feature mask data: Polygon_mask</li>
@@ -272,15 +272,17 @@ Hana Travers-Smith</p>
 </div>
 <div id="task-3-image-enhancement-and-focal-filters" class="section level2 unnumbered hasAnchor">
 <h2>Task 3: Image Enhancement and Focal Filters<a href="#task-3-image-enhancement-and-focal-filters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Step 1:</strong> View the NIR band of the cloud masked image in greyscale. Symbology &gt; change Primary Symbology to Stretch &gt; Set the band to SR_Band4. Notice which land cover types appear bright, and which appear dark.</p>
-<div id="q6-what-do-the-light-and-dark-areas-of-the-image-represent-in-terms-of-surface-reflectance-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="section level5 unnumbered hasAnchor">
-<h5>Q6: What do the light and dark areas of the image represent in terms of surface reflectance? How could you use this image to identify vegetation and urban areas?<a href="#q6-what-do-the-light-and-dark-areas-of-the-image-represent-in-terms-of-surface-reflectance-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 1:</strong> View the NIR band of the <strong>cloud masked image in greyscale</strong>.</p>
+<p>Symbology &gt; change Primary Symbology to Stretch &gt; Set the band to SR_Band4. Notice which land cover types appear bright, and which appear dark.</p>
+<div id="q11-what-do-the-light-and-dark-areas-of-the-nir-image-represent-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="section level5 unnumbered hasAnchor">
+<h5>Q11: What do the light and dark areas of the NIR image represent? How could you use this image to identify vegetation and urban areas?<a href="#q11-what-do-the-light-and-dark-areas-of-the-nir-image-represent-how-could-you-use-this-image-to-identify-vegetation-and-urban-areas" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Image enhancement makes it easier to see differences in light/dark areas of an image and aids in visual interpretation. For example, an 8-bit image can contain brightness values that range from 0-255. However, the range of values on a raw image may be smaller (i.e. 50-200), thus this image will have <strong>less contrast</strong> between the darkest and lightest regions, and will appear more homogeneous. A common image enhancement is called a <strong>linear contrast stretch</strong> which remaps the values of an image to cover the full dynamic range. Some image enhancements will first remove the highest and lowest values before stretching to get rid of potential outliers.</p>
 <p><img src="images/01/01-stretch.jpg" width="352" style="display: block; margin: auto;" /></p>
-<p><strong>Create a histogram of NIR surface reflectance values and include in the final deliverables.</strong> Right-click on the raster layer in the Contents pane &gt; Create Chart &gt; Histogram. Set the variable to the NIR band.</p>
+<p><strong>Create a histogram of NIR surface reflectance values and include in the final deliverables.</strong></p>
+<p>Right-click on the raster layer in the Contents pane &gt; Create Chart &gt; Histogram. Set the variable to the NIR band.</p>
 </div>
-<div id="q11-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent-what-is-the-mean-value-of-the-image" class="section level5 unnumbered hasAnchor">
-<h5>Q11: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent? What is the mean value of the image?<a href="#q11-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent-what-is-the-mean-value-of-the-image" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q12-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent-what-is-the-mean-value-of-the-cloud-masked-nir-image" class="section level5 unnumbered hasAnchor">
+<h5>Q12: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent? What is the mean value of the cloud masked NIR image?<a href="#q12-what-is-a-histogram-in-the-context-of-a-remote-sensing-image-what-do-the-x-and-y-axes-represent-what-is-the-mean-value-of-the-cloud-masked-nir-image" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 2:</strong> Next, we will change the image enhancement in the Symbology tab. Click the histogram symbol.</p>
 <p><img src="images/01/01-symbol.jpg" width="254" style="display: block; margin: auto;" /></p>
 <p>First, change the stretch type to <strong>Minimum-Maximum</strong> this stretches the image across the full range of values. Next, experiment with moving the sliders along the bottom of the histogram, this will change the minimum and maximum values displayed in the image, and the linear stretch will be applied across this new range. Notice how the image on the map changes.</p>
@@ -289,15 +291,15 @@ Hana Travers-Smith</p>
 <p>See the following link for more information about the strech types available in ArcPro: <a href="https://pro.arcgis.com/en/pro-app/latest/help/data/imagery/raster-display-ribbon.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/help/data/imagery/raster-display-ribbon.htm</a></p>
 <p><img src="images/01/01-stretchoptions.jpg" width="448" style="display: block; margin: auto;" /></p>
 </div>
-<div id="q8-describe-how-applying-a-linear-stretch-changes-the-appearance-of-the-imagery.-what-happens-as-ypu-decrease-the-maximum-value" class="section level5 unnumbered hasAnchor">
-<h5>Q8: Describe how applying a linear stretch changes the appearance of the imagery. What happens as ypu decrease the maximum value?<a href="#q8-describe-how-applying-a-linear-stretch-changes-the-appearance-of-the-imagery.-what-happens-as-ypu-decrease-the-maximum-value" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q13-describe-how-applying-a-linear-stretch-changes-the-appearance-of-the-imagery.-what-happens-as-you-decrease-the-maximum-value" class="section level5 unnumbered hasAnchor">
+<h5>Q13: Describe how applying a linear stretch changes the appearance of the imagery. What happens as you decrease the maximum value?<a href="#q13-describe-how-applying-a-linear-stretch-changes-the-appearance-of-the-imagery.-what-happens-as-you-decrease-the-maximum-value" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Next, we will explore how <strong>focal filters</strong> work and apply a <strong>Sharpening</strong> and <strong>Smoothing</strong> filter. Focal filters change the pixel values in an image by considering the values of the surrounding pixels.</p>
 <p>First, a focal window is defined around a target pixel. In a raster image this is usually the 8 adjacent pixels that touch the target pixel (forming a 3x3 grid). The values of the target pixel and pixels in the focal window are used to calculate a new value for the target pixel. In the example below, the focal filter assigns the target pixel (green) the value of the maximum value in the focal window (blue). The window then moves across the image, and every pixel in the image is transformed to a new value.</p>
 <p><img src="images/01/01-focalmax.jpg" width="705" style="display: block; margin: auto;" /></p>
 <p>Another common filter calculates the <strong>mean</strong> value of the pixels in the window:</p>
 </div>
-<div id="q10-use-the-following-matrix-to-calculate-the-target-pixel-value-green-using-a-3x3-mean-filter" class="section level5 unnumbered hasAnchor">
-<h5>Q10: Use the following matrix to calculate the target pixel value (green) using a <strong>3x3 mean filter</strong><a href="#q10-use-the-following-matrix-to-calculate-the-target-pixel-value-green-using-a-3x3-mean-filter" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q14-use-the-following-matrix-to-calculate-the-target-pixel-value-green-using-a-3x3-mean-filter" class="section level5 unnumbered hasAnchor">
+<h5>Q14: Use the following matrix to calculate the target pixel value (green) using a <strong>3x3 mean filter</strong><a href="#q14-use-the-following-matrix-to-calculate-the-target-pixel-value-green-using-a-3x3-mean-filter" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><img src="images/01/01-focalmean.jpg" width="348" style="display: block; margin: auto;" /></p>
 <p>More advanced filters use <strong>weighted</strong> functions, where the pixels in the window are multiplied by a weighting factor that makes them more or less influential in calculating the target value. <strong>Shapening</strong> and <strong>Smoothing</strong> filters use weighted means to enhance or smooth the edges of features in an image. For more information see: <a href="https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/convolution-function.htm" class="uri">https://desktop.arcgis.com/en/arcmap/latest/manage-data/raster-and-images/convolution-function.htm</a></p>
 <p><img src="images/01/01-sharpen.jpg" width="583" style="display: block; margin: auto;" /></p>
@@ -305,8 +307,8 @@ Hana Travers-Smith</p>
 <p><strong>Step 3:</strong> Apply a 3x3 <strong>Sharpening</strong> and <strong>Smoothing</strong> filter to the cloud masked image using the <strong>Convolution Tool</strong> in the Raster Functions menu.</p>
 <p><strong>Take a screenshot of the filtered images and present them side-by-side in your deliverables.</strong></p>
 </div>
-<div id="q1-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-the-variation-in-pixel-values.-give-an-example-of-when-each-filter-migh-enhance-the-image-interpretation." class="section level5 unnumbered hasAnchor">
-<h5>Q1: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of when each filter migh enhance the image interpretation.<a href="#q1-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-the-variation-in-pixel-values.-give-an-example-of-when-each-filter-migh-enhance-the-image-interpretation." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q1-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-the-variation-in-pixel-values.-give-an-example-of-how-each-filter-migh-enhance-the-image-interpretation." class="section level5 unnumbered hasAnchor">
+<h5>Q1: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of how each filter migh enhance the image interpretation.<a href="#q1-describe-how-the-sharpened-and-smoothed-images-differ-in-terms-of-the-variation-in-pixel-values.-give-an-example-of-how-each-filter-migh-enhance-the-image-interpretation." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
 </div>
 </div>

@@ -185,13 +185,13 @@ knitr::include_graphics('images/01/01-qaband.jpg')
 ```
 
 Pixels with clear skies are represented by integers **21824 (land)** and **21952 (water)**. 
-**Step 2:** We will use the **Reclassify** tool to create a new raster where clear sky pixels have a value of 1 and all other pixels have a value of 0. 
+**Step 2:** We will use the **Reclassify (Spatial Analyst)** tool to create a new raster where clear sky pixels have a value of 1 and all other pixels have a value of 0. 
 
 - Input raster: QA_band
 - Reclass field: VALUE
-- Output raster: Reclass_QA_band
+- Output raster: Raster_mask
 
-Click **Unique**, for pixel values of 21824 and 21952 set the **New** value to **1** and **0** for everything else. Name the new raster **Raster_mask**. 
+Click **Unique**, for pixel values of 21824 and 21952 set the **New** value to **1** and **0** for everything else.
 
 ``` {r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/01/01-reclass.jpg')
@@ -214,7 +214,7 @@ Click Run.
 
 For the new polygon mask layer, use the **Select by Attributes** tool to select the polygons corresponding to clouds using the expression: `gridcode = 0`, then delete these features in the attribute table. Make sure to save your edits. 
 
-**Step 3:** We are now ready to mask atmospheric effects from the Landsat scene. Navigate to Analysis > Tools > Extract by Mask
+**Step 3:** We are now ready to mask clouds and shadows from the Landsat scene. Navigate to Analysis > Tools > Extract by Mask
 
 - Input raster: **LC08_047026_20200830_SR_A.tif**
 - Input raster or feature mask data: Polygon_mask
@@ -230,9 +230,11 @@ Click Run.
 
 ## Task 3: Image Enhancement and Focal Filters {.unnumbered}
 
-**Step 1:** View the NIR band of the cloud masked image in greyscale. Symbology > change Primary Symbology to Stretch > Set the band to SR_Band4. Notice which land cover types appear bright, and which appear dark. 
+**Step 1:** View the NIR band of the **cloud masked image in greyscale**.
 
-##### Q6: What do the light and dark areas of the image represent in terms of surface reflectance? How could you use this image to identify vegetation and urban areas? {.unnumbered} 
+Symbology > change Primary Symbology to Stretch > Set the band to SR_Band4. Notice which land cover types appear bright, and which appear dark. 
+
+##### Q11: What do the light and dark areas of the NIR image represent? How could you use this image to identify vegetation and urban areas? {.unnumbered} 
 
 Image enhancement makes it easier to see differences in light/dark areas of an image and aids in visual interpretation. For example, an 8-bit image can contain brightness values that range from 0-255. However, the range of values on a raw image may be smaller (i.e. 50-200), thus this image will have **less contrast** between the darkest and lightest regions, and will appear more homogeneous. A common image enhancement is called a **linear contrast stretch** which remaps the values of an image to cover the full dynamic range. Some image enhancements will first remove  the highest and lowest values before stretching to get rid of potential outliers. 
 
@@ -240,9 +242,11 @@ Image enhancement makes it easier to see differences in light/dark areas of an i
 knitr::include_graphics('images/01/01-stretch.jpg')
 ```
 
-**Create a histogram of NIR surface reflectance values and include in the final deliverables.** Right-click on the raster layer in the Contents pane > Create Chart > Histogram. Set the variable to the NIR band.   
+**Create a histogram of NIR surface reflectance values and include in the final deliverables.** 
 
-##### Q11: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent? What is the mean value of the image? {.unnumbered}
+Right-click on the raster layer in the Contents pane > Create Chart > Histogram. Set the variable to the NIR band.   
+
+##### Q12: What is a histogram in the context of a remote sensing image? What do the X and Y axes represent? What is the mean value of the cloud masked NIR image? {.unnumbered}
 
 **Step 2:** Next, we will change the image enhancement in the Symbology tab. Click the histogram symbol. 
 
@@ -264,7 +268,7 @@ See the following link for more information about the strech types available in 
 knitr::include_graphics('images/01/01-stretchoptions.jpg')
 ```
 
-##### Q8: Describe how applying a linear stretch changes the appearance of the imagery. What happens as ypu decrease the maximum value? {.unnumbered} 
+##### Q13: Describe how applying a linear stretch changes the appearance of the imagery. What happens as you decrease the maximum value? {.unnumbered} 
 
 Next, we will explore how **focal filters** work and apply a **Sharpening** and **Smoothing** filter. Focal filters change the pixel values in an image by considering the values of the surrounding pixels. 
 
@@ -276,7 +280,7 @@ knitr::include_graphics('images/01/01-focalmax.jpg')
 
 Another common filter calculates the **mean** value of the pixels in the window:  
 
-##### Q10: Use the following matrix to calculate the target pixel value (green) using a **3x3 mean filter** {.unnumbered} 
+##### Q14: Use the following matrix to calculate the target pixel value (green) using a **3x3 mean filter** {.unnumbered} 
 
 ``` {r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/01/01-focalmean.jpg')
@@ -296,4 +300,4 @@ knitr::include_graphics('images/01/01-smooth.jpg')
 
 **Take a screenshot of the filtered images and present them side-by-side in your deliverables.** 
 
-##### Q1: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of when each filter migh enhance the image interpretation. {.unnumbered} 
+##### Q1: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of how each filter migh enhance the image interpretation. {.unnumbered} 
