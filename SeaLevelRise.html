@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 02-sea-level.knit</title>
+  <title>Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 03-suitability.knit</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 02-sea-level.knit" />
+  <meta property="og:title" content="Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 03-suitability.knit" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 02-sea-level.knit" />
+  <meta name="twitter:title" content="Lab 1 Mapping Sea Level Rise with Digitial Elevation Models | 03-suitability.knit" />
   
   
   
@@ -53,6 +53,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -80,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#task-1-mapping-current-flood-risk"><i class="fa fa-check"></i>Task 1: Mapping current flood risk</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#task-2-intersect-flooded-areas-with-agricultural-land-in-the-delta"><i class="fa fa-check"></i>Task 2: Intersect flooded areas with agricultural land in the Delta</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#task-3-create-maps-of-flood-zones"><i class="fa fa-check"></i>Task 3: Create maps of flood zones</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-3-conduct-a-suitability-analysis"><i class="fa fa-check"></i>Task 3: Conduct a suitability analysis</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -107,21 +111,20 @@
 <div id="SeaLevelRise" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Lab 1</span> Mapping Sea Level Rise with Digitial Elevation Models<a href="#SeaLevelRise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Written by
-Hana Travers-Smith</p>
+Paul Hacker &amp; Hana Travers-Smith</p>
 <div id="lab-overview" class="section level2 unnumbered hasAnchor">
 <h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Climate change is rapidly altering the stability of the Earth’s cryosphere. Over the next century thawing glaciers and ice sheets are expected to result in sea level rise between X-Ym. This is a concern for many coastal environments and communities.</p>
 <p>In this lab you will use a digital elevation model (DEM) covering the metro Vancouver region to map areas at risk of flooding during an extreme weather event under current and future conditions, assuming 1.2m of sea level rise by the year 2100. In particular, we will focus on mapping the intersection of high risk areas with critical agricultural land in the Fraser Delta region.</p>
 <p>In partnership with the Delta community, the CALP research group at UBC produced the following report on projected sea level rise and adaptation strategies for this region, which can be found here: <a href="https://www.fraserbasin.bc.ca/_Library/CCAQ_BCRAC/bcrac_delta_visioning-policy_4d.pdf" class="uri">https://www.fraserbasin.bc.ca/_Library/CCAQ_BCRAC/bcrac_delta_visioning-policy_4d.pdf</a>.</p>
-<p><img src="images/02/02-CALP.JPG" width="794" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-CALP.jpg" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="learning-objectives" class="section level3 unnumbered hasAnchor">
 <h3>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Learn how to manage spatial data in a geodatabase?</p></li>
 <li><p>Understand how to use basic spatial analysis tools (Clip, Intersect, Buffer)</p></li>
 <li><p>Experiment with visualization of spatial layers</p></li>
-<li><p>Work with a Digitial Elevation Model</p></li>
+<li><p>Conduct a suitability analysis to determine where to expand new agricultural land</p></li>
 </ul>
 <hr />
 </div>
@@ -151,10 +154,10 @@ Hana Travers-Smith</p>
 <div id="q1.-explain-what-a-return-period-is-in-terms-of-natural-disasters." class="section level5 unnumbered hasAnchor">
 <h5>Q1. Explain what a return period is in terms of natural disasters.<a href="#q1.-explain-what-a-return-period-is-in-terms-of-natural-disasters." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 1:</strong> First we will identify cells in the DEM that are below the projected high water line of 2.96m. Open the <strong>FraserValleyDEM.tif</strong> in ArcGIS Pro. Navigate to <strong>Analysis &gt; Tools &gt; Reclassify (Spatial Analyst tools)</strong>.</p>
-<p><img src="images/02/02-reclassify.JPG" width="476" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-reclassify.jpg" style="display: block; margin: auto;" /></p>
 <p>Click the Classify button and in the pop-up window set the number of classes to 2 and the method to Manual Interval. Set the Upper value to 2.96 and hit OK. In the Output raster field give the new raster a descriptive name (ie DEM_reclass_2m) and save it to the default GDB.</p>
 <p><strong>HINT:Giving concise and descriptive names to your spatial data will make things easier to keep track of later on! Note that names should not include periods or spaces</strong></p>
-<p><img src="images/02/02-reclasstable.JPG" width="228" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-reclasstable.jpg" style="display: block; margin: auto;" /></p>
 <p>Cells in the resulting raster with a value &lt;2.96 will be assigned a new value of 1 and cells &gt;2.96 will be assigned a value of 2.</p>
 </div>
 <div id="q2.-what-is-the-spatial-resolution-of-the-dem" class="section level5 unnumbered hasAnchor">
@@ -167,7 +170,7 @@ Hana Travers-Smith</p>
 <p>Click <strong>Select by Attributes</strong> and use the drop-down menus to generate the following expression:</p>
 <p><code>Where, gridcode, is equal to, 2</code></p>
 <p>Click the <strong>Delete Selection</strong> button to delete the selected polygons.</p>
-<p><img src="images/02/02-delete.JPG" width="458" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-delete.jpg" style="display: block; margin: auto;" /></p>
 <p><strong>Step 4:</strong> Examine the resulting polygon shapefile. You will notice that there are lots of small isolated polygons, not adjacent to the coastline. We will remove these by intersecting the flooded areas features with a polyline representing the coastline.</p>
 <p>Open <strong>Coastline.shp</strong>. Navigate to <strong>Map &gt; Select by Location</strong>. Set the Input Features to the flooded areas layer and the Selecting Features to the coastline layer. Set the Relationship to <strong>Within a distance</strong>. Set the distance to 30m. <strong>Make sure the Invert spatial relationship box is checked.</strong> This will select polygons that are further than 30m from the coast. Click Apply.</p>
 <p>Delete the selected features.</p>
@@ -175,7 +178,7 @@ Hana Travers-Smith</p>
 <div id="q4-describe-how-you-would-change-the-selection-parameters-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="section level5 unnumbered hasAnchor">
 <h5>Q4: Describe how you would change the selection parameters if you wanted to select flooded areas that are within 100m from the coastline?<a href="#q4-describe-how-you-would-change-the-selection-parameters-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>You should now have polygon features that look like the following:</p>
-<p><img src="images/02/02-example.JPG" width="581" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-example.jpg" style="display: block; margin: auto;" /></p>
 <p><strong>Step 5:</strong> Zoom into the polygons. You will notice that even though we used simplified polygons, the edges are still quite jagged. Next, we will smooth these polygons for better visualization.</p>
 <p>First, we will reduce the jagged edges in the polygons. Navigate to the <strong>Buffer</strong> tool. Create a 30m buffer around the <strong>flood_2m_polys</strong> layer. Set the Dissolve type to <strong>Disolve all output features to a single feature</strong>. Name the output <strong>flood_2m_30mBuffer</strong> Click Run.</p>
 </div>
@@ -183,47 +186,46 @@ Hana Travers-Smith</p>
 <h5>Q5: Describe what happens if the buffer is NOT dissolved. Which would be better (dissolved or not dissolved) if you wanted to calculate the total flooded area in km2 and why?<a href="#q5-describe-what-happens-if-the-buffer-is-not-dissolved.-which-would-be-better-dissolved-or-not-dissolved-if-you-wanted-to-calculate-the-total-flooded-area-in-km2-and-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Next, we will clip the flooded polygons to align with the extent of the coastline.</p>
 <p>Load <strong>FraserValley.shp</strong>. Navigate to the <strong>Clip</strong> tool and set the <strong>Input features</strong> to the <strong>flood_2m_30mBuffer</strong> layer and the <strong>Clip features</strong> to the FraserValley.shp. Save the output as <strong>flood_2m_30mBuffer_Clip</strong>. Click Run.</p>
-<p><strong>Step 6:</strong> Repeat Steps 1-5, but with a high water line of 4.16m to simulate a storm surge with 1.2m of sea level rise. Be sure to also include a screenshot at the end of step 5.</p>
 <hr />
 </div>
 </div>
 <div id="task-2-intersect-flooded-areas-with-agricultural-land-in-the-delta" class="section level2 unnumbered hasAnchor">
 <h2>Task 2: Intersect flooded areas with agricultural land in the Delta<a href="#task-2-intersect-flooded-areas-with-agricultural-land-in-the-delta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Step 1:</strong>Load the <strong>flooded_2m_30mBuffer_Clip</strong> layer in ArcPro. Load the agricultural land shapefile, <strong>TSLRPLS_polygon.shp</strong>.</p>
-<p><img src="images/02/02-AgPolys.JPG" width="758" style="display: block; margin: auto;" /></p>
-<p><strong>Step 2:</strong> Open the <strong>Intersect</strong> tool. Fill in the flooded areas and agricultural polygons as the Input Features. Leave the Attributes to Join field as <strong>All attributes except feature IDs</strong>. Give the new layer a name. This will create a new shapefile of just the overlapping areas from both layers. Click Run.</p>
-<p>Open the attribute table of the intersect output and the layers you used as inputs. Notice how the attributes of the original input layers are retained in the new intersected features.</p>
+<p><img src="images/03/02-Agpolys.jpg" style="display: block; margin: auto;" /></p>
+<p><strong>Step 2:</strong> Open the <strong>Intersect</strong> tool. Fill in the <strong>flooded_2m_30mBuffer_Clip</strong> and <strong>ag_polys</strong> as the Input Features. Leave the Attributes to Join field as <strong>All attributes except feature IDs</strong>. Give the new layer a name. This will create a new shapefile of just the overlapping areas from both layers. Click Run.</p>
+<p>Open the attribute table of the intersect output and the layers you used as inputs. Notice how the attributes of both the original input layers are retained in the new intersected features.</p>
 <div id="q6-what-layer-did-the-status-column-originally-come-from" class="section level5 unnumbered hasAnchor">
 <h5>Q6: What layer did the STATUS column originally come from?<a href="#q6-what-layer-did-the-status-column-originally-come-from" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/02/02-attributes.JPG" width="528" style="display: block; margin: auto;" /></p>
-<p><strong>Step 3:</strong> We will create a new column representing the area of the intersecting polygon features.
-Open the layer attribute table and click the Add button beside Field:.</p>
-<p><img src="images/02/02-addField.JPG" width="506" style="display: block; margin: auto;" /></p>
-<p>In the Fields table name the new field <strong>Int_Area</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
-<p><img src="images/02/02-newfield.JPG" width="522" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-attributes.jpg" style="display: block; margin: auto;" /></p>
+<p><strong>Step 3:</strong> We will create a new column in the shapefile of intersecting polygon features (created at end of previous step). Open the layer attribute table and click the Add button beside Field:.</p>
+<p><img src="images/03/02-addfield.jpg" style="display: block; margin: auto;" /></p>
+<p>In the Fields table name the new field <strong>Int_Area_2m</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
+<p><img src="images/03/02-newField.jpg" style="display: block; margin: auto;" /></p>
 <p>You will now have a blank field in the attribute table.</p>
-<p>In the attribute table, right click on the Int_Area field &gt; Calculate Geometry. In the Proporty drop-down select <strong>Area</strong> and select <strong>Square kilometers</strong> as the Area Unit. Click OK.</p>
-<p><strong>Step 4:</strong> Repeat Steps 1-3 for the 4m sea level rise scenario.</p>
+<p>In the attribute table, right click on the Int_Area field &gt; Calculate Geometry. In the Property drop-down select <strong>Area</strong> and select <strong>Square kilometers</strong> as the Area Unit. Click OK.</p>
 </div>
-<div id="q7-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-in-the-2m-storm-surge-scenario-in-the-4m-scenario-report-the-final-answers-in-km2." class="section level5 unnumbered hasAnchor">
-<h5>Q7: What is the total area of agricultural land is impacted by flooding in the 2m storm surge scenario? In the 4m scenario? Report the final answers in km2.<a href="#q7-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-in-the-2m-storm-surge-scenario-in-the-4m-scenario-report-the-final-answers-in-km2." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q7-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answers-in-km2." class="section level5 unnumbered hasAnchor">
+<h5>Q7: What is the total area of agricultural land is impacted by flooding? Report the final answers in km2.<a href="#q7-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answers-in-km2." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q8-for-the-feature-with-lrpld-5118996-how-much-more-area-is-flooded-in-the-4m-storm-surge-scenario-compared-to-the-2m-scenario-report-your-answer-in-km2." class="section level5 unnumbered hasAnchor">
-<h5>Q8: For the feature with LRPLD = 5118996, how much more area is flooded in the 4m storm surge scenario compared to the 2m scenario? Report your answer in km2.<a href="#q8-for-the-feature-with-lrpld-5118996-how-much-more-area-is-flooded-in-the-4m-storm-surge-scenario-compared-to-the-2m-scenario-report-your-answer-in-km2." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q8-for-the-feature-with-lrpld-5118996-how-area-is-flooded-report-your-answer-in-km2." class="section level5 unnumbered hasAnchor">
+<h5>Q8: For the feature with LRPLD = 5118996, how area is flooded? Report your answer in km2.<a href="#q8-for-the-feature-with-lrpld-5118996-how-area-is-flooded-report-your-answer-in-km2." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 4:</strong></p>
 </div>
-<div id="q9-in-the-4m-storm-surge-scenario-what-is-the-lrpld-of-the-polygon-feature-with-the-highest-proportion-of-flooded-area-hint-proportion-flooded-area-in-feature-total-area-of-feature." class="section level5 unnumbered hasAnchor">
-<h5>Q9: In the 4m storm surge scenario what is the LRPLD of the polygon feature with the highest PROPORTION of flooded area? (Hint: Proportion = flooded area in feature / total area of feature).<a href="#q9-in-the-4m-storm-surge-scenario-what-is-the-lrpld-of-the-polygon-feature-with-the-highest-proportion-of-flooded-area-hint-proportion-flooded-area-in-feature-total-area-of-feature." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q9-what-is-the-lrpld-of-the-polygon-feature-with-the-highest-proportion-of-flooded-area-hint-proportion-flooded-area-in-feature-total-area-of-feature." class="section level5 unnumbered hasAnchor">
+<h5>Q9: What is the LRPLD of the polygon feature with the highest PROPORTION of flooded area? (Hint: Proportion = flooded area in feature / total area of feature).<a href="#q9-what-is-the-lrpld-of-the-polygon-feature-with-the-highest-proportion-of-flooded-area-hint-proportion-flooded-area-in-feature-total-area-of-feature." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
-<div id="task-3-create-maps-of-flood-zones" class="section level2 unnumbered hasAnchor">
-<h2>Task 3: Create maps of flood zones<a href="#task-3-create-maps-of-flood-zones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Step 1:</strong> Using the spatial layers given to you and the layers that you have created, recreate as closely as possible the following figure using data from the <strong>2m storm surge scenario</strong>. Include the screenshot in your final report. Provide a figure title and a brief caption that describes what is being shown in the map.</p>
-<p><strong>Hint: To create the figure, experiment with changing the basemap, layer drawing order, colors and transparency.</strong></p>
-<p><img src="images/02/02-map2m.JPG" width="522" style="display: block; margin: auto;" /></p>
-<p><strong>Step 2:</strong> Create the same figure as step 1 now using data from the <strong>4m storm surge scenario</strong>. Include the screenshot in your final report. Provide a figure title and a brief caption that describes what is being shown in the map.</p>
-<div id="q10-address-the-following-points-in-500-words-or-less.-current-flood-infrastructure-is-designed-to-withstand-sea-level-rise-3.5m-above-baseline-levels.-based-on-the-analysis-here-how-should-these-standards-change-in-the-future-reference-specific-results-from-this-analysis-to-support-your-conclusion.-what-are-some-of-the-limitations-in-how-we-modeled-flood-inundation-what-other-factors-could-be-considered-to-model-flood-risk" class="section level5 unnumbered hasAnchor">
-<h5>Q10: Address the following points in 500 words or less. Current flood infrastructure is designed to withstand sea level rise 3.5m above baseline levels. Based on the analysis here how should these standards change in the future? Reference specific results from this analysis to support your conclusion. What are some of the limitations in how we modeled flood inundation? What other factors could be considered to model flood risk?<a href="#q10-address-the-following-points-in-500-words-or-less.-current-flood-infrastructure-is-designed-to-withstand-sea-level-rise-3.5m-above-baseline-levels.-based-on-the-analysis-here-how-should-these-standards-change-in-the-future-reference-specific-results-from-this-analysis-to-support-your-conclusion.-what-are-some-of-the-limitations-in-how-we-modeled-flood-inundation-what-other-factors-could-be-considered-to-model-flood-risk" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="task-3-conduct-a-suitability-analysis" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Conduct a suitability analysis<a href="#task-3-conduct-a-suitability-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this task, we will use the proportion of flooded area in the 2m and 4m storm surge scenarios to determine which agricultural polygons are most suitable to expand agricultural land.</p>
+<p><strong>Step 1:</strong> Calculate PROPORTION of flooded area per agricultural polygon for both 2m and 4m scenarios.</p>
+<p><strong>Step 2:</strong> Calculate final suitability score based on weighted sum of 2m and 4m flooded area. As the 2m scenario is more likely it will have a higher weight in the final score.</p>
+<p><strong>Step 3</strong> Color agricultural polygons by the final suitability score and create a map. A high score means lower flood hazard.</p>
+<p>The map should have all the following elements:</p>
+<div id="q10-based-on-your-analysis-where-are-the-best-places-to-safely-expand-agricultural-land" class="section level5 unnumbered hasAnchor">
+<h5>Q10: Based on your analysis where are the best places to safely expand agricultural land?<a href="#q10-based-on-your-analysis-where-are-the-best-places-to-safely-expand-agricultural-land" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
 </div>
 </div>
