@@ -2,7 +2,7 @@
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["lab3shortname"]][["author"]]
 ```
-# Lab Title {#lab-short-name}
+# Terrain Analysis {#terrain}
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -17,70 +17,60 @@ Lorem ipsum
 
 ## Learning Objectives {-}
 
--   Lorem ipsum
-
--   Lorem ipsum 
-
--   Lorem ipsum 
-
-------------------------------------------------------------------------
-
-## Competencies in This Lab {-}
-
--   Lorem ipsum
-
--   Lorem ipsum
-
--   Lorem ipsum
-
 ------------------------------------------------------------------------
 
 ## Deliverables {-}
-
--   Lorem ipsum
-
--   Lorem ipsum
-
--   Lorem ipsum
 
 ------------------------------------------------------------------------
 
 ## Data {-}
 
-Lorem ipsum
+DEM
 
 ------------------------------------------------------------------------
 
-## Task 1: Lorem ipsum {-}
+## Task 1: Preparing the DEM {-}
 
-Lorem ipsum
+Step 1: Import DEM. What is the resolution of the data? 
 
-**Step 1:** Lorem ipsum.
+What is the highest and lowest elevation in the dataset? 
 
-**Step 2:** Lorem ipsum.
-
-**Step 3:** Lorem ipsum.
-
-__HINT: Lorem ipsum.__
-
-##### Q1. LOREM IPSUM? {-}
-
-##### Q2. LOREM IPSUM? {-}
+Step 2: Fill the DEM to remove sinks/holes
 
 ------------------------------------------------------------------------
 
-## Task 2: Lorem ipsum {-}
+## Task 2: Identifying Stream Networks {-}
 
-Lorem ipsum
+Step 1: Flow Accumulation
 
-**Step 1:** Lorem ipsum.
+How does changing the accumulation threshold change the resulting stream network?  
 
-**Step 2:** Lorem ipsum.
+Step 2: Flow Direction
 
-**Step 3:** Lorem ipsum.
+Step 3: Stream ordering
 
-__HINT: Lorem ipsum.__
+Step 4: Stream to feature tool to vectorize stream networks
 
-##### Q3. LOREM IPSUM? {-}
+------------------------------------------------------------------------
 
-##### Q4. LOREM IPSUM? {-}
+## Task 3: Mapping Watersheds {-}
+
+Step 1: Snap to pour point
+
+How does changing the location of the pour point impact the results? 
+
+Step 2: Watershed tool
+
+Step 3: Vectorize/visualize watersheds
+
+------------------------------------------------------------------------
+
+## Task 4: Analyze watersheds {-}
+
+Step 1: Import temperature and precipitation trends from Climate NA
+
+Step 2: Summarize climate change variables by watershed
+
+Which watersheds have the greatest change in temperature/precipitation? 
+
+How might these changes impact the stream network you identified in Task 2? 
