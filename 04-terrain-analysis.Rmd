@@ -11,45 +11,57 @@ cat(author)
 
 ## Lab Overview {-}
 
-Lorem ipsum
+A Digital Elevation Model (DEM) is a digital representation of the Earth's terrain including mountains, valleys, rivers, and other topographic features. They are typically created using remote sensing technology, such as radar or LiDAR (Light Detection and Ranging), which capture elevation data points across the landscape. Typically, these elevation data points are organized into raster format, where each raster cell represents elevation within specific pixel. DEMs are used in a range of applications, including cartography, hydrology, geology, environmental analysis, and simulating water flow and erosion. 
+
+In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds. 
 
 ------------------------------------------------------------------------
 
-## Learning Objectives {-}
+### Learning Objectives {-}
+
+- Understand how data is represented in a DEM 
+
+- Learn how to derive slope, aspect and Topograhic Position Index (TPI) using raster focal calculations
+
+- Use the Hydrology Toolbox to map stream networks and watershed boundaries
 
 ------------------------------------------------------------------------
 
-## Deliverables {-}
+### Deliverables {-}
 
 ------------------------------------------------------------------------
 
-## Data {-}
+### Data {-}
 
-DEM
+- DEM of the XXXX region
 
 ------------------------------------------------------------------------
 
-## Task 1: Preparing the DEM {-}
+## Task 1: Understanding DEMs {-}
 
 Step 1: Import DEM. What is the resolution of the data? 
 
 What is the highest and lowest elevation in the dataset? 
 
-Step 2: Fill the DEM to remove sinks/holes
+Step 2: Calculate slope and aspect
+
+Step 3: Topographic Position Index
 
 ------------------------------------------------------------------------
 
 ## Task 2: Identifying Stream Networks {-}
 
-Step 1: Flow Accumulation
+Step 1: Fill the DEM to remove sinks/holes
+
+Step 2: Calculate Flow Accumulation
 
 How does changing the accumulation threshold change the resulting stream network?  
 
-Step 2: Flow Direction
+Step 3: Flow Direction
 
-Step 3: Stream ordering
+Step 4: Stream ordering
 
-Step 4: Stream to feature tool to vectorize stream networks
+Step 5: Stream to feature tool to vectorize stream networks
 
 ------------------------------------------------------------------------
 
