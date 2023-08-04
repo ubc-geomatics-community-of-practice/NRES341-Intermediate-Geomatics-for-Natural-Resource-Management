@@ -11,9 +11,19 @@ cat(author)
 
 ## Lab Overview {-}
 
+<<<<<<< HEAD
 A Digital Elevation Model (DEM) is a digital representation of the Earth's terrain including mountains, valleys, rivers, and other topographic features. They are typically created using remote sensing technology, such as radar or LiDAR (Light Detection and Ranging), which capture elevation data points across the landscape. Typically, these elevation data points are organized into raster format, where each raster cell represents elevation within specific pixel. DEMs are used in a range of applications, including cartography, hydrology, geology, environmental analysis, and simulating water flow and erosion. 
 
 In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds. 
+=======
+A Digital Elevation Model (DEM) is a representation of the Earth's terrain, including mountains, valleys, rivers and other topographic features. They are typically created using remote sensing technologies including radar and lidar (Light Detection and Ranging) that measure elevation data points across a landscape. Typically these data points are organized into raster format, where each raster cell is representative of elevation within a pixel. DEMs are used in a range of applications including cartography, hydrology and geology. 
+
+In this lab, you will use a DEM and Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from CLimate NA to understand how change in temperature and precipitation may impact future water flow in this watershed. 
+
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics('images/04/04-terrain.jpg')
+```
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 
 ------------------------------------------------------------------------
 
@@ -25,6 +35,12 @@ In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map st
 
 - Use the Hydrology Toolbox to map stream networks and watershed boundaries
 
+- Understand how data is represented in a DEM
+
+- Learn how to derive slope, aspect using raster focal calculations
+
+- Use the Hydrology toolbox to map stream networks and watershed boundaries
+
 ------------------------------------------------------------------------
 
 ### Deliverables {-}
@@ -33,31 +49,95 @@ In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map st
 
 ### Data {-}
 
+<<<<<<< HEAD
 - DEM of the XXXX region
+=======
+- DEM of the XXXXX region
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 
 ------------------------------------------------------------------------
 
 ## Task 1: Understanding DEMs {-}
 
-Step 1: Import DEM. What is the resolution of the data? 
+**Step 1:** Create a new ArcGIS Project name it Lab4 and save it to the default directory. Import the **Nahmint_DTM.tif** and examine the Source information (right-click on the layer in the Catalog pane). 
 
-What is the highest and lowest elevation in the dataset? 
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics('images/04/04-nahmint.jpg')
+```
 
+<<<<<<< HEAD
 Step 2: Calculate slope and aspect
 
 Step 3: Topographic Position Index
+=======
+##### Q1: What is the Projected Coordinate System and spatial resolution of the data? {.unnumbered}
+
+##### Q2: What is the Pixel Type and Pixel Depth? How many possible values can be represented by this data? (Report answer as an exponent.) {.unnumbered}
+
+##### Q3: What is the difference between a signed and unsigned integer? Which would represent elevation best and why? {.unnumbered}
+
+**Step 2:** First, we will use the **Fill** tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries. 
+
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics('images/04/04-sink.jpg')
+```
+Navigate to Analysis > Tools > Fill (Spatial Analyst). 
+
+- Input Surface Raster: Nahmint_DTM.tiff
+- Output Surface Raster: Nahmint_fill
+- Z limit: leave blank
+
+Save the output to the default file path (in your ArcMap project). 
+
+The Z-limit represents the minimum depth of sinks that will be filled. For example, if it is set to 10m then only sinks deeper than 10m will be filled. For now leave this field blank, this will fill all sinks in the data. 
+
+##### Q4: Why might you want to set a specific z-value? {.unnumbered} 
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 
 ------------------------------------------------------------------------
 
 ## Task 2: Identifying Stream Networks {-}
 
+<<<<<<< HEAD
 Step 1: Fill the DEM to remove sinks/holes
 
 Step 2: Calculate Flow Accumulation
+=======
+**Step 1:** Next we will use the **Flow Direction** tool to to calculate the direction of water flow across the landscape. 
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 
-How does changing the accumulation threshold change the resulting stream network?  
+There are three flow modelling algorithms, but we will use the simplest: **D8**. In this model water will flow from one cell its **steepest downslope neighbour**. The cell will then be assigned a value based on which of its 8 neightbours water will flow into.
 
+<<<<<<< HEAD
 Step 3: Flow Direction
+=======
+##### Q5: The following raster shows elevation above sea level. What is the flow direction from the centre cell?  Report your answer in terms of cardinal direction (North, South, Northwest etc) {.unnumbered}
+
+Use the ArcGis help page to answer to following question: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm
+
+##### Q6: If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell? {.unnumbered} 
+
+``` {r, echo=FALSE, fig.align = 'center', out.width = "40%"}
+knitr::include_graphics("images/04/04-flowDirJPG.JPG")
+```
+
+Navigate to Tools > Search **Flow Direction**
+
+- Input surface raster: **Nahmint_fill**
+- Output flow direction raster: **Nahmint_FlowDir**
+- Flow Direction Type: D8
+- Leave the rest blank/unchecked
+
+Click Run. You should now have something like the following:
+
+##### Q7: For the areas marked A and B, approximately what direction is water flowing? {.unnumbered} 
+
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics("images/04/04-flowDir2.JPG")
+```
+
+Step 2: Flow Accumulation
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 
 Step 4: Stream ordering
 

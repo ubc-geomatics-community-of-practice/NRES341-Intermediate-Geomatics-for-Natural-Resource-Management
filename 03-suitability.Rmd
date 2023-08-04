@@ -127,9 +127,9 @@ Import **FraserValley_studyarea.shp**. Navigate to the **Clip** tool and set the
 
 In this task we will **intersect** flooded areas with with land suitable for agricultural development to understand how sea level rise might impact future land use planning. 
 
-##### Q6: The figure below illustrates how the intersect tool works. Describe in one sentence (in words) how the output relates to the input features. {.unnumbered}
+##### Q6: The figure below illustrates how the intersect tool works. Describe in one sentence how the output features are generated from the inputs. {.unnumbered}
 
-``` {r, echo=FALSE, fig.align = 'center'}
+``` {r, echo=FALSE, fig.align = 'center', out.width = "75%"}
 knitr::include_graphics('images/03/02-Intersectfigure.jpg')
 ```
 
@@ -181,21 +181,19 @@ In the attribute table, right click on the Int_Area field > Calculate Geometry. 
 
 In this task, we will calculate **NON-flooded area** in each agricultural polygon to determine which regions may be most suitable to develop new agricultural land.
 
-**Step 1:** Create a new attribute in **flood_ag_intersect** and name it **SuitableArea**. Use the **Calculate Field** tool to create a new attribute representing NON-flooded area as: Area of the agriculture polygon - flooded area.
+**Step 1:** Create a new attribute in **flood_ag_intersect**, set it to type = **Double** and name it **SuitableArea**. Open the attribute table and open the **Calculate Field** tool (beside the Add Field tool). Use the fields list and the math symbols to calculate **SuitableArea** as ```Area of the agriculture polygon - flooded area.```
 
-Use the fields list and the math symbols to generate the following expression for the **SuitableArea** attribute:
-
-``` {r, echo=FALSE, fig.align = 'center'}
+``` {r, echo=FALSE, fig.align = 'center', out.width = "50%"}
 knitr::include_graphics('images/03/02-calcField.jpg')
 ```
 
 ##### Q10: What is the LRPLD number of the polygon feature with the MOST suitable land for future agriculture? What percentage of the total area is suitable? {.unnumbered}
 
-**Step 2:** Create another new attribute **ProportionFlooded** and use the **Calculate Field** tool to calculate the proportion of each agricultural polygon that is flooded. Your final values should range between 0 and 1. Make sure the data type for the attribute is **Double** so it can store decimal values.
+**Step 2:** Create another new attribute **ProportionFlooded** and use **Calculate Field** to calculate the proportion of each agricultural polygon that is flooded. Your final values should range between 0 and 1. Make sure the data type for the attribute is **Double** so it can store decimal values.
 
 ##### Q11: What expression did you use to calculate ProportionFlooded? (Copy it from the Calculate Field tool). {.unnumbered}
 
-**Step 3:** Next, we will create a **Suitability Score** that combines the **ProportionFlooded** attribute and the **SuitableArea** attribute. First, we will **standardize** the SuitableArea attribute so its values range from 0 to 1 (the same range as the ProportionFlooded.
+**Step 3:**  Next, we will **standardize** the SuitableArea attribute so its values range from 0 to 1 (the same range as the ProportionFlooded.
 
 Create a new attribute **SuitArea_Std** and use the following equation to calculate it:
 
@@ -203,11 +201,10 @@ Create a new attribute **SuitArea_Std** and use the following equation to calcul
 
 Where Minimum is the minimum value of SuitableArea, and Maximum is the Maximum value of suitableArea. 
 
-**Step 4:** Create a new attribute to represent a final **Suitability Score** and set the Data Type to **Double**.
+**Step 4:** Next, we will create a **Suitability Score** that combines the **ProportionFlooded** attribute and the **SuitArea_Std** attribute. Create a new attribute to represent a final **Suitability Score** and set the Data Type to **Double**.
 
-Use the equation below to create a Suitability Score based on the proportion of non-flooded land and the total suitable area (standardized). The final values will range from 0 (least suitable) to 2 (most suitable):  
-
-```(1-ProportionFlooded) + SuitArea_Std```
+Use the equation below to create a Suitability Score based on the proportion of non-flooded land and the total suitable area (standardized). The final values will range from 0 (least suitable) to 1 (most suitable):  
+```((1-ProportionFlooded) + SuitArea_Std)/2```
 
 ##### Q12: What is the average suitability score? {.unnumbered}
 

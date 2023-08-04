@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Lab 1 Terrain Analysis | 04-terrain-analysis.knit</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Lab 1 Terrain Analysis | 04-terrain-analysis.knit" />
   <meta property="og:type" content="book" />
@@ -53,6 +53,10 @@
 
 
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -111,6 +115,7 @@
 Hana Travers-Smith</p>
 <div id="lab-overview" class="section level2 unnumbered hasAnchor">
 <h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<<<<<<< HEAD
 <p>A Digital Elevation Model (DEM) is a digital representation of the Earth’s terrain including mountains, valleys, rivers, and other topographic features. They are typically created using remote sensing technology, such as radar or LiDAR (Light Detection and Ranging), which capture elevation data points across the landscape. Typically, these elevation data points are organized into raster format, where each raster cell represents elevation within specific pixel. DEMs are used in a range of applications, including cartography, hydrology, geology, environmental analysis, and simulating water flow and erosion.</p>
 <p>In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds.</p>
 <hr />
@@ -125,6 +130,20 @@ Hana Travers-Smith</p>
 </div>
 <div id="deliverables" class="section level3 unnumbered hasAnchor">
 <h3>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+=======
+<p>A Digital Elevation Model (DEM) is a representation of the Earth’s terrain, including mountains, valleys, rivers and other topographic features. They are typically created using remote sensing technologies including radar and lidar (Light Detection and Ranging) that measure elevation data points across a landscape. Typically these data points are organized into raster format, where each raster cell is representative of elevation within a pixel. DEMs are used in a range of applications including cartography, hydrology and geology.</p>
+<p>In this lab, you will use a DEM and Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from CLimate NA to understand how change in temperature and precipitation may impact future water flow in this watershed.</p>
+<p><img src="images/04/04-terrain.jpg" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="learning-objectives" class="section level2 unnumbered hasAnchor">
+<h2>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Understand how data is represented in a DEM</p></li>
+<li><p>Learn how to derive slope, aspect using raster focal calculations</p></li>
+<li><p>Use the Hydrology toolbox to map stream networks and watershed boundaries</p></li>
+</ul>
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 <hr />
 </div>
 <div id="data" class="section level3 unnumbered hasAnchor">
@@ -134,6 +153,7 @@ Hana Travers-Smith</p>
 </ul>
 <hr />
 </div>
+<<<<<<< HEAD
 </div>
 <div id="task-1-understanding-dems" class="section level2 unnumbered hasAnchor">
 <h2>Task 1: Understanding DEMs<a href="#task-1-understanding-dems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -141,17 +161,80 @@ Hana Travers-Smith</p>
 <p>What is the highest and lowest elevation in the dataset?</p>
 <p>Step 2: Calculate slope and aspect</p>
 <p>Step 3: Topographic Position Index</p>
+=======
+<div id="data" class="section level2 unnumbered hasAnchor">
+<h2>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>DEM of the XXXXX region</li>
+</ul>
 <hr />
+</div>
+<div id="task-1-preparing-the-dem" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Preparing the DEM<a href="#task-1-preparing-the-dem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Create a new ArcGIS Project name it Lab4 and save it to the default directory. Import the <strong>Nahmint_DTM.tif</strong> and examine the Source information (right-click on the layer in the Catalog pane).</p>
+<p><img src="images/04/04-nahmint.jpg" style="display: block; margin: auto;" /></p>
+<div id="q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="section level5 unnumbered hasAnchor">
+<h5>Q1: What is the Projected Coordinate System and spatial resolution of the data?<a href="#q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2-what-is-the-pixel-type-and-pixel-depth-how-many-possible-values-can-be-represented-by-this-data-report-answer-as-an-exponent." class="section level5 unnumbered hasAnchor">
+<h5>Q2: What is the Pixel Type and Pixel Depth? How many possible values can be represented by this data? (Report answer as an exponent.)<a href="#q2-what-is-the-pixel-type-and-pixel-depth-how-many-possible-values-can-be-represented-by-this-data-report-answer-as-an-exponent." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="section level5 unnumbered hasAnchor">
+<h5>Q3: What is the difference between a signed and unsigned integer? Which would represent elevation best and why?<a href="#q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> First, we will use the <strong>Fill</strong> tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries.</p>
+<p><img src="images/04/04-sink.jpg" style="display: block; margin: auto;" />
+Navigate to Analysis &gt; Tools &gt; Fill (Spatial Analyst).</p>
+<ul>
+<li>Input Surface Raster: Nahmint_DTM.tiff</li>
+<li>Output Surface Raster: Nahmint_fill</li>
+<li>Z limit: leave blank</li>
+</ul>
+<p>Save the output to the default file path (in your ArcMap project).</p>
+<p>The Z-limit represents the minimum depth of sinks that will be filled. For example, if it is set to 10m then only sinks deeper than 10m will be filled. For now leave this field blank, this will fill all sinks in the data.</p>
+</div>
+<div id="q4-why-might-you-want-to-set-a-specific-z-value" class="section level5 unnumbered hasAnchor">
+<h5>Q4: Why might you want to set a specific z-value?<a href="#q4-why-might-you-want-to-set-a-specific-z-value" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
+<hr />
+</div>
 </div>
 <div id="task-2-identifying-stream-networks" class="section level2 unnumbered hasAnchor">
 <h2>Task 2: Identifying Stream Networks<a href="#task-2-identifying-stream-networks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<<<<<<< HEAD
 <p>Step 1: Fill the DEM to remove sinks/holes</p>
 <p>Step 2: Calculate Flow Accumulation</p>
 <p>How does changing the accumulation threshold change the resulting stream network?</p>
 <p>Step 3: Flow Direction</p>
 <p>Step 4: Stream ordering</p>
 <p>Step 5: Stream to feature tool to vectorize stream networks</p>
+=======
+<p><strong>Step 1:</strong> Next we will use the <strong>Flow Direction</strong> tool to to calculate the direction of water flow across the landscape.</p>
+<p>There are three flow modelling algorithms, but we will use the simplest: <strong>D8</strong>. In this model water will flow from one cell its <strong>steepest downslope neighbour</strong>. The cell will then be assigned a value based on which of its 8 neightbours water will flow into.</p>
+<div id="q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="section level5 unnumbered hasAnchor">
+<h5>Q5: The following raster shows elevation above sea level. What is the flow direction from the centre cell? Report your answer in terms of cardinal direction (North, South, Northwest etc)<a href="#q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Use the ArcGis help page to answer to following question: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm</a></p>
+</div>
+<div id="q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="section level5 unnumbered hasAnchor">
+<h5>Q6: If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell?<a href="#q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/04/04-flowDirJPG.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p>Navigate to Tools &gt; Search <strong>Flow Direction</strong></p>
+<ul>
+<li>Input surface raster: <strong>Nahmint_fill</strong></li>
+<li>Output flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Flow Direction Type: D8</li>
+<li>Leave the rest blank/unchecked</li>
+</ul>
+<p>Click Run. You should now have something like the following:</p>
+</div>
+<div id="q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="section level5 unnumbered hasAnchor">
+<h5>Q7: For the areas marked A and B, approximately what direction is water flowing?<a href="#q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/04/04-flowDir2.JPG" style="display: block; margin: auto;" /></p>
+<p>Step 2: Flow Accumulation</p>
+<p>Step 3: Stream ordering</p>
+<p>Step 4: Stream to feature tool to vectorize stream networks</p>
+>>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 <hr />
+</div>
 </div>
 <div id="task-3-mapping-watersheds" class="section level2 unnumbered hasAnchor">
 <h2>Task 3: Mapping Watersheds<a href="#task-3-mapping-watersheds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
