@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 1 Terrain Analysis | 04-terrain-analysis.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 1 Terrain Analysis | 04-terrain-analysis.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 1 Terrain Analysis | 04-terrain-analysis.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#terrain"><i class="fa fa-check"></i><b>1</b> Terrain Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#lab-overview"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#data"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-1-understanding-dems"><i class="fa fa-check"></i>Task 1: Understanding DEMs</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-2-identifying-stream-networks"><i class="fa fa-check"></i>Task 2: Identifying Stream Networks</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-3-mapping-watersheds"><i class="fa fa-check"></i>Task 3: Mapping Watersheds</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="terrain" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Lab 1</span> Terrain Analysis<a href="#terrain" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by
+Hana Travers-Smith</p>
+<div id="lab-overview" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A Digital Elevation Model (DEM) is a digital representation of the Earth’s terrain including mountains, valleys, rivers, and other topographic features. They are typically created using remote sensing technology, such as radar or LiDAR (Light Detection and Ranging), which capture elevation data points across the landscape. Typically, these elevation data points are organized into raster format, where each raster cell represents elevation within specific pixel. DEMs are used in a range of applications, including cartography, hydrology, geology, environmental analysis, and simulating water flow and erosion.</p>
+<p>In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat in Nahmint, BC. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds.</p>
+<p><img src="images/04/04-terrain.jpg" style="display: block; margin: auto;" /></p>
+<hr />
+<div id="learning-objectives" class="section level3 unnumbered hasAnchor">
+<h3>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Understand how data is represented in a DEM</p></li>
+<li><p>Learn how to derive slope, aspect and Topographic Position Index (TPI) using raster focal calculations</p></li>
+<li><p>Use the Hydrology Toolbox to map stream networks and watershed boundaries</p></li>
+</ul>
+<hr />
+</div>
+<div id="deliverables" class="section level3 unnumbered hasAnchor">
+<h3>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Answers to 10 questions in the handout</p></li>
+<li><p>A map of the Nahmint watersheds and stream networks</p></li>
+</ul>
+<hr />
+</div>
+<div id="data" class="section level3 unnumbered hasAnchor">
+<h3>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>DEM of the Nahmint watershed region, BC</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="task-1-understanding-dems" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Understanding DEMs<a href="#task-1-understanding-dems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Create a new ArcGIS Project name it Lab4 and save it to the default directory. Import the <strong>Nahmint_DTM.tif</strong> and examine the Source information (right-click on the layer in the Catalog pane).</p>
+<p><img src="images/04/04-nahmint.jpg" style="display: block; margin: auto;" /></p>
+<div id="q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="section level5 unnumbered hasAnchor">
+<h5>Q1: What is the Projected Coordinate System and spatial resolution of the data?<a href="#q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2-what-is-the-pixel-type-and-pixel-depth-how-many-possible-values-can-be-represented-by-this-data-report-answer-as-an-exponent." class="section level5 unnumbered hasAnchor">
+<h5>Q2: What is the Pixel Type and Pixel Depth? How many possible values can be represented by this data? (Report answer as an exponent.)<a href="#q2-what-is-the-pixel-type-and-pixel-depth-how-many-possible-values-can-be-represented-by-this-data-report-answer-as-an-exponent." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="section level5 unnumbered hasAnchor">
+<h5>Q3: What is the difference between a signed and unsigned integer? Which would represent elevation best and why?<a href="#q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> First, we will use the <strong>Fill</strong> tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries.</p>
+<p><img src="images/04/04-sink.jpg" width="40%" style="display: block; margin: auto;" /></p>
+<p>Navigate to Analysis &gt; Tools &gt; Fill (Spatial Analyst).</p>
+<ul>
+<li>Input Surface Raster: Nahmint_DTM.tiff</li>
+<li>Output Surface Raster: Nahmint_fill</li>
+<li>Z limit: leave blank</li>
+</ul>
+<p>Save the output to the default file path (in your ArcMap project).</p>
+<p>The Z-limit represents the minimum depth of sinks that will be filled. For example, if it is set to 10m then only sinks deeper than 10m will be filled. For now leave this field blank, this will fill all sinks in the data.</p>
+</div>
+<div id="q4-why-might-you-want-to-set-a-specific-z-value" class="section level5 unnumbered hasAnchor">
+<h5>Q4: Why might you want to set a specific z-value?<a href="#q4-why-might-you-want-to-set-a-specific-z-value" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-2-identifying-stream-networks" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Identifying Stream Networks<a href="#task-2-identifying-stream-networks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Next we will use the <strong>Flow Direction</strong> tool to to calculate the direction of water flow across the landscape.</p>
+<p>There are three flow modelling algorithms, but we will use the simplest: <strong>D8</strong>. In this model water will flow from one cell its <strong>steepest downslope neighbour</strong>. The cell will then be assigned a value based on which of its 8 neightbours water will flow into.</p>
+<div id="q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="section level5 unnumbered hasAnchor">
+<h5>Q5: The following raster shows elevation above sea level. What is the flow direction from the centre cell? Report your answer in terms of cardinal direction (North, South, Northwest etc)<a href="#q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/04/04-flowDirJPG.JPG" width="40%" style="display: block; margin: auto;" /></p>
+<p>Use the ArcGis help page to answer to following question: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm</a></p>
+</div>
+<div id="q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="section level5 unnumbered hasAnchor">
+<h5>Q6: If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell?<a href="#q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Navigate to Tools &gt; Search <strong>Flow Direction</strong></p>
+<ul>
+<li>Input surface raster: <strong>Nahmint_fill</strong></li>
+<li>Output flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Flow Direction Type: D8</li>
+<li>Leave the rest blank/unchecked</li>
+</ul>
+<p>Click Run. You should now have something like the following:</p>
+</div>
+<div id="q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="section level5 unnumbered hasAnchor">
+<h5>Q7: For the areas marked A and B, approximately what direction is water flowing?<a href="#q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/04/04-flowDir2.JPG" style="display: block; margin: auto;" /></p>
+<p><strong>Step 2:</strong> We will use the flow direction raster calculated in the last step to calculate <strong>flow accumulation</strong>, which counts the total number of cells that will flow into each cell. For example, a cell located at the bottom of the hill will have high flow accumulation and a cell at the top of a hill will not have any flow accumulation.</p>
+<p>Navigate to Analysis &gt; Tools &gt; Flow Accumulation</p>
+<ul>
+<li>Input flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Output flow accumulation raster: <strong>FlowAcc</strong></li>
+<li>Output data type: <strong>Integer</strong></li>
+<li>Input flow direction type: <strong>D8</strong></li>
+</ul>
+<p>Leave all other fields blank. &gt; Run.</p>
+<p><strong>Step 4:</strong> Next, we will create a raster based stream network using a threshold in the flow accumulation raster. For example, if the threshold is 100, then only cells with flow accumulation greater than 100 will be counted as a stream. Cells with flow accumulation less than 100 will be set to a background value of 0.</p>
+<p>To see how different thresholds impact stream identification, change the <strong>Symbology</strong> of the flow accumulation raster and use the <strong>Manual Interval</strong> symbology to set two classes. See the example below for a stream network with a flow accumulation threshold of 100 (cells with flow accumulation &lt; 100 are set to no color).</p>
+<p><img src="images/04/04-streams.JPG" style="display: block; margin: auto;" /></p>
+</div>
+<div id="q8-how-does-the-stream-network-change-if-you-change-the-threshold-from-10-1000-or-3000-include-a-screenshot-of-each-stream-network-using-the-different-thresholds." class="section level5 unnumbered hasAnchor">
+<h5>Q8: How does the stream network change if you change the threshold from 10, 1000 or 3000? Include a screenshot of each stream network using the different thresholds.<a href="#q8-how-does-the-stream-network-change-if-you-change-the-threshold-from-10-1000-or-3000-include-a-screenshot-of-each-stream-network-using-the-different-thresholds." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q9-compare-your-stream-network-to-the-streams-visible-in-the-arcgis-sastellite-basemaps.-experiment-with-different-flow-acculuation-thresholds.-which-one-seems-to-represent-major-streams-in-the-satellite-basemaps-best-what-other-land-coverinfastructure-in-this-region-may-make-it-difficult-to-idenitfy-smaller-stream-netowrks" class="section level5 unnumbered hasAnchor">
+<h5>Q9: Compare your stream network to the streams visible in the ArcGIS sastellite basemaps. Experiment with different flow acculuation thresholds. Which one seems to represent <strong>major streams</strong> in the satellite basemaps best? What other land cover/infastructure in this region may make it difficult to idenitfy smaller stream netowrks?<a href="#q9-compare-your-stream-network-to-the-streams-visible-in-the-arcgis-sastellite-basemaps.-experiment-with-different-flow-acculuation-thresholds.-which-one-seems-to-represent-major-streams-in-the-satellite-basemaps-best-what-other-land-coverinfastructure-in-this-region-may-make-it-difficult-to-idenitfy-smaller-stream-netowrks" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Once you have selected a threshold, navigate to the <strong>Reclassify (Spatial Analyst Tools)</strong> tool. Use the threshold you have selected as the start and end values. <strong>Set the cells representing streams to a new value of 1 and all other cells to NO DATA</strong>.</p>
+<p>Save the new raster as <strong>StreamNetwork</strong></p>
+<p><img src="images/04/04-reclassify.JPG" style="display: block; margin: auto;" /></p>
+<p><strong>Step 5:</strong> Finally, we will use the <strong>Stream to Feature (Spatial Analyst Tools)</strong> tool to create polyline features representing our stream network. THis tool uses the stream network and the flow direction layers. See this ArcGIS help page for more information: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm</a></p>
+<p>Navigate to Analysis &gt; Tools &gt; Stream to Feature</p>
+<ul>
+<li>Input stream raster: <strong>StreamNetwork</strong></li>
+<li>Input flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Output polyline features: <strong>StreamNetwork_lines</strong></li>
+<li>Simplify polylines: Checked</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="task-3-mapping-watersheds" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Mapping Watersheds<a href="#task-3-mapping-watersheds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A watershed is an area of land where all the water that falls or flows into it converges to a common outlet, such as a river, lake, or ocean. It is bounded by a topographic or drainage divide, which separates water flowing into different basins. In this task we will delineate the boundaries of the Nahmint watershed.</p>
+<p>The watershed tool uses flow direction and <strong>stream links</strong> to delineate watershed boundaries. Stream links represent the individual stream segments that make up the entire network. The watershed boundaries will be defined such that water flows into each of the stream links.</p>
+<p><strong>Step 1:</strong> First, we will use the <strong>Stream Link</strong> tool to generate the links. Use the <strong>raster</strong> stream network and the flow direction raster as the inputs. Save the new raster as <strong>StreamLinks</strong> &gt; Run.</p>
+<p><strong>Step 2:</strong> Navigate to Analysis &gt; Tools &gt; Watershed</p>
+<ul>
+<li>Input D8 flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Input raster or feature pour point data: <strong>StreamLinks</strong></li>
+<li>Output raster: <strong>Nahmint_watersheds</strong></li>
+</ul>
+<p>The output will be a new raster where the cell values correspond to each unique watershed catchment.</p>
+<p><img src="images/04/04-maplayers.JPG" style="display: block; margin: auto;" /></p>
+<div id="q10-how-many-unique-watersheds-did-you-define-what-is-the-area-of-the-largest-watershed-area-report-your-answer-in-km2-and-round-to-2-decimal-places.-hint-examine-the-raster-attribute-table-to-estiamte-watershed-area." class="section level5 unnumbered hasAnchor">
+<h5>Q10: How many unique watersheds did you define? What is the area of the largest watershed area? Report your answer in km2 and round to 2 decimal places. HINT: Examine the raster attribute table to estiamte watershed area.<a href="#q10-how-many-unique-watersheds-did-you-define-what-is-the-area-of-the-largest-watershed-area-report-your-answer-in-km2-and-round-to-2-decimal-places.-hint-examine-the-raster-attribute-table-to-estiamte-watershed-area." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 4:</strong> Create a map and include it in the final deliverables. The map must have the following elements:</p>
+<ul>
+<li>Stream network polylines</li>
+<li>Watershed polygons - assign different colors to each polygon</li>
+<li>Title</li>
+<li>North arrow</li>
+<li>Scale bar</li>
+<li>Legend</li>
+</ul>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
