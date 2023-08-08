@@ -129,7 +129,7 @@ In this task we will **intersect** flooded areas with with land suitable for agr
 
 ##### Q6: The figure below illustrates how the intersect tool works. Describe in one sentence how the output features are generated from the inputs. {.unnumbered}
 
-``` {r, echo=FALSE, fig.align = 'center', out.width = "75%"}
+``` {r, echo=FALSE, fig.align = 'center', out.width = "60%"}
 knitr::include_graphics('images/03/02-Intersectfigure.jpg')
 ```
 

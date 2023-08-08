@@ -25,13 +25,17 @@ knitr::include_graphics('images/04/04-terrain.jpg')
 
 - Understand how data is represented in a DEM 
 
-- Learn how to derive slope, aspect and Topograhic Position Index (TPI) using raster focal calculations
+- Learn how to derive slope, aspect and Topographic Position Index (TPI) using raster focal calculations
 
 - Use the Hydrology Toolbox to map stream networks and watershed boundaries
 
 ------------------------------------------------------------------------
 
 ### Deliverables {-}
+
+- Answers to 10 questions in the handout
+
+- A map of the Nahmint watersheds and stream networks
 
 ------------------------------------------------------------------------
 
@@ -57,9 +61,10 @@ knitr::include_graphics('images/04/04-nahmint.jpg')
 
 **Step 2:** First, we will use the **Fill** tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries. 
 
-``` {r, echo=FALSE, fig.align = 'center'}
+``` {r, echo=FALSE, fig.align = 'center', out.width = "40%"}
 knitr::include_graphics('images/04/04-sink.jpg')
 ```
+
 Navigate to Analysis > Tools > Fill (Spatial Analyst). 
 
 - Input Surface Raster: Nahmint_DTM.tiff
@@ -110,56 +115,64 @@ knitr::include_graphics("images/04/04-flowDir2.JPG")
 Navigate to Analysis > Tools > Flow Accumulation 
 
 - Input flow direction raster: **Nahmint_FlowDir**
-- Output flow accumulation raster: **Nahmint_FlowAcc**
+- Output flow accumulation raster: **FlowAcc**
+- Output data type: **Integer**
+- Input flow direction type: **D8**
 
 Leave all other fields blank. > Run.
 
 **Step 4:** Next, we will create a raster based stream network using a threshold in the flow accumulation raster. For example, if the threshold is 100, then only cells with flow accumulation greater than 100 will be counted as a stream. Cells with flow accumulation less than 100 will be set to a background value of 0. 
 
-##### Q8: How would your stream network change if you changed the threshold from 100 to 1000? Would there be more or less streams? Which kinds of streams would be retained using a higher threshold? {.unnumbered} 
+To see how different thresholds impact stream identification, change the **Symbology** of the flow accumulation raster and use the **Manual Interval**  symbology to set two classes. See the example below for a stream network with  a flow accumulation threshold of 100 (cells with flow accumulation < 100 are set to no color). 
 
-**Step 5:** Finally, we will use the **Stream to Feature** tool to create polyline features representing our stream network. THis tool uses the stream network and the flow direction layers. See this ArcGIS help page for more information: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics("images/04/04-streams.JPG")
+```
+
+##### Q8: How does the stream network change if you change the threshold from 10, 1000 or 3000? Include a screenshot of each stream network using the different thresholds. {.unnumbered} 
+
+##### Q9: Compare your stream network to the streams visible in the ArcGIS sastellite basemaps. Experiment with different flow acculuation thresholds. Which one seems to represent **major streams** in the satellite basemaps best? What other land cover/infastructure in this region may make it difficult to idenitfy smaller stream netowrks?  {.unnumbered} 
+
+Once you have selected a threshold, navigate to the **Reclassify (Spatial Analyst Tools)** tool. Use the threshold you have selected as the start and end values. **Set the cells representing streams to a new value of 1 and all other cells to NO DATA**. 
+
+Save the new raster as **StreamNetwork**
+
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics("images/04/04-reclassify.JPG")
+```
+
+**Step 5:** Finally, we will use the **Stream to Feature (Spatial Analyst Tools)** tool to create polyline features representing our stream network. THis tool uses the stream network and the flow direction layers. See this ArcGIS help page for more information: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm
 
 Navigate to Analysis > Tools > Stream to Feature
 
-- Input stream raster: **Nahmint_Streams**
+- Input stream raster: **StreamNetwork**
 - Input flow direction raster: **Nahmint_FlowDir**
-- Output polyline features: **Nahmint_StreamNetwork**
+- Output polyline features: **StreamNetwork_lines**
 - Simplify polylines: Checked
-
-##### Q9: Compare your stream network to the streams in the ArcGIS basemaps (satellite, or topographic). Does it seem like your stream network identified all the streams in the area? Are there any missing streams or weird results? {.unnumbered} 
 
 ------------------------------------------------------------------------
 
 ## Task 3: Mapping Watersheds {-}
 
-A watershed is an area of land where all the water that falls or flows into it converges to a common outlet, such as a river, lake, or ocean. It is defined by the topographic or drainage divide, which separates the water flowing into different basins. In this task we will delineate the boundaries of the Nahmint watershed. 
+A watershed is an area of land where all the water that falls or flows into it converges to a common outlet, such as a river, lake, or ocean. It is bounded by a topographic or drainage divide, which separates water flowing into different basins. In this task we will delineate the boundaries of the Nahmint watershed. 
 
-The watershed tool uses flow direction and user defined **pour points** to delineate watershed boundaries. The watershed boundaries will be defined such that water flows into the defined pour points. This is useful for determining the area of land that contributes water to a specific stream or lake.  
+The watershed tool uses flow direction and **stream links** to delineate watershed boundaries. Stream links represent the individual stream segments that make up the entire network. The watershed boundaries will be defined such that water flows into each of the stream links.  
 
-**Step 1:** First, we will create a new shapefile for our pour points. Navigate to the Catalog Pane and locate the default project directory. Right-click on the default geodatabase > New Layer. 
-
-Edit the layer > Create Features
-
-Click on the map where you want to define pour points. Use the stream network to define pour points at the intersection of stream segments (see example below). You should have approximately 6 pour points. 
-
-If you want to delete a point, open the Attribute table, select the pour point you want to remove (either by clickon on it in the attribute table or using the select tool on the top ribbon) and click delete. You can also move existing points by selecting them and dragging them to new locations
+**Step 1:** First, we will use the **Stream Link** tool to generate the links. Use the **raster** stream network and the flow direction raster as the inputs. Save the new raster as **StreamLinks** > Run.  
 
 **Step 2:** Navigate to Analysis > Tools > Watershed
 
 - Input D8 flow direction raster: **Nahmint_FlowDir**
-- Input raster or feature pour point data: **PourPoints.shp**
+- Input raster or feature pour point data: **StreamLinks**
 - Output raster: **Nahmint_watersheds**
 
-The output will be a raster where the cell values correspond to the different watershed catchment areas. 
+The output will be a new raster where the cell values correspond to each unique watershed catchment.
 
-**Step 3:** Next, we will convert the raster based watersheds into polygon features. 
+``` {r, echo=FALSE, fig.align = 'center'}
+knitr::include_graphics("images/04/04-maplayers.JPG")
+```
 
-Analysis > Tools > **Raster to Polygon** (you may remember this tool from Lab 3). 
-
-Set the input raster to the watersheds raster, name the features **Watershed_polys** and save to the default GDB. Make sure the **Simplify Polygons** box is checked. 
-
-##### Q10: What is the area of the largest watershed? Report answer in km2 and round to two decimal places. {.unnumbered} 
+##### Q10: How many unique watersheds did you define? What is the area of the largest watershed area? Report your answer in km2 and round to 2 decimal places. HINT: Examine the raster attribute table to estiamte watershed area. {.unnumbered} 
 
 **Step 4:** Create a map and include it in the final deliverables. The map must have the following elements: 
 
