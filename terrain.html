@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Lab 1 Terrain Analysis | 04-terrain-analysis.knit</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Lab 1 Terrain Analysis | 04-terrain-analysis.knit" />
   <meta property="og:type" content="book" />
@@ -53,10 +53,6 @@
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -85,7 +81,6 @@
 <li class="chapter" data-level="" data-path=""><a href="#task-1-understanding-dems"><i class="fa fa-check"></i>Task 1: Understanding DEMs</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#task-2-identifying-stream-networks"><i class="fa fa-check"></i>Task 2: Identifying Stream Networks</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#task-3-mapping-watersheds"><i class="fa fa-check"></i>Task 3: Mapping Watersheds</a></li>
-<li class="chapter" data-level="" data-path=""><a href="#task-4-analyze-watersheds"><i class="fa fa-check"></i>Task 4: Analyze watersheds</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -115,9 +110,9 @@
 Hana Travers-Smith</p>
 <div id="lab-overview" class="section level2 unnumbered hasAnchor">
 <h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<<<<<<< HEAD
 <p>A Digital Elevation Model (DEM) is a digital representation of the Earth’s terrain including mountains, valleys, rivers, and other topographic features. They are typically created using remote sensing technology, such as radar or LiDAR (Light Detection and Ranging), which capture elevation data points across the landscape. Typically, these elevation data points are organized into raster format, where each raster cell represents elevation within specific pixel. DEMs are used in a range of applications, including cartography, hydrology, geology, environmental analysis, and simulating water flow and erosion.</p>
-<p>In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds.</p>
+<p>In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat in Nahmint, BC. You will then use data from Climate NA to understand how changes in temperature and precipitation may impact future water flow in these watersheds.</p>
+<p><img src="images/04/04-terrain.jpg" width="612" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="learning-objectives" class="section level3 unnumbered hasAnchor">
 <h3>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -130,49 +125,20 @@ Hana Travers-Smith</p>
 </div>
 <div id="deliverables" class="section level3 unnumbered hasAnchor">
 <h3>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-=======
-<p>A Digital Elevation Model (DEM) is a representation of the Earth’s terrain, including mountains, valleys, rivers and other topographic features. They are typically created using remote sensing technologies including radar and lidar (Light Detection and Ranging) that measure elevation data points across a landscape. Typically these data points are organized into raster format, where each raster cell is representative of elevation within a pixel. DEMs are used in a range of applications including cartography, hydrology and geology.</p>
-<p>In this lab, you will use a DEM and Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat. You will then use data from CLimate NA to understand how change in temperature and precipitation may impact future water flow in this watershed.</p>
-<p><img src="images/04/04-terrain.jpg" style="display: block; margin: auto;" /></p>
-<hr />
-</div>
-<div id="learning-objectives" class="section level2 unnumbered hasAnchor">
-<h2>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>Understand how data is represented in a DEM</p></li>
-<li><p>Learn how to derive slope, aspect using raster focal calculations</p></li>
-<li><p>Use the Hydrology toolbox to map stream networks and watershed boundaries</p></li>
-</ul>
->>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 <hr />
 </div>
 <div id="data" class="section level3 unnumbered hasAnchor">
 <h3>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>DEM of the XXXX region</li>
+<li>DEM of the Nahmint watershed region, BC</li>
 </ul>
 <hr />
 </div>
-<<<<<<< HEAD
 </div>
 <div id="task-1-understanding-dems" class="section level2 unnumbered hasAnchor">
 <h2>Task 1: Understanding DEMs<a href="#task-1-understanding-dems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Step 1: Import DEM. What is the resolution of the data?</p>
-<p>What is the highest and lowest elevation in the dataset?</p>
-<p>Step 2: Calculate slope and aspect</p>
-<p>Step 3: Topographic Position Index</p>
-=======
-<div id="data" class="section level2 unnumbered hasAnchor">
-<h2>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>DEM of the XXXXX region</li>
-</ul>
-<hr />
-</div>
-<div id="task-1-preparing-the-dem" class="section level2 unnumbered hasAnchor">
-<h2>Task 1: Preparing the DEM<a href="#task-1-preparing-the-dem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Step 1:</strong> Create a new ArcGIS Project name it Lab4 and save it to the default directory. Import the <strong>Nahmint_DTM.tif</strong> and examine the Source information (right-click on the layer in the Catalog pane).</p>
-<p><img src="images/04/04-nahmint.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/04/04-nahmint.jpg" width="706" style="display: block; margin: auto;" /></p>
 <div id="q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="section level5 unnumbered hasAnchor">
 <h5>Q1: What is the Projected Coordinate System and spatial resolution of the data?<a href="#q1-what-is-the-projected-coordinate-system-and-spatial-resolution-of-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
@@ -182,7 +148,7 @@ Hana Travers-Smith</p>
 <div id="q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="section level5 unnumbered hasAnchor">
 <h5>Q3: What is the difference between a signed and unsigned integer? Which would represent elevation best and why?<a href="#q3-what-is-the-difference-between-a-signed-and-unsigned-integer-which-would-represent-elevation-best-and-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 2:</strong> First, we will use the <strong>Fill</strong> tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries.</p>
-<p><img src="images/04/04-sink.jpg" style="display: block; margin: auto;" />
+<p><img src="images/04/04-sink.jpg" width="160" style="display: block; margin: auto;" />
 Navigate to Analysis &gt; Tools &gt; Fill (Spatial Analyst).</p>
 <ul>
 <li>Input Surface Raster: Nahmint_DTM.tiff</li>
@@ -194,29 +160,20 @@ Navigate to Analysis &gt; Tools &gt; Fill (Spatial Analyst).</p>
 </div>
 <div id="q4-why-might-you-want-to-set-a-specific-z-value" class="section level5 unnumbered hasAnchor">
 <h5>Q4: Why might you want to set a specific z-value?<a href="#q4-why-might-you-want-to-set-a-specific-z-value" class="anchor-section" aria-label="Anchor link to header"></a></h5>
->>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
 <hr />
 </div>
 </div>
 <div id="task-2-identifying-stream-networks" class="section level2 unnumbered hasAnchor">
 <h2>Task 2: Identifying Stream Networks<a href="#task-2-identifying-stream-networks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<<<<<<< HEAD
-<p>Step 1: Fill the DEM to remove sinks/holes</p>
-<p>Step 2: Calculate Flow Accumulation</p>
-<p>How does changing the accumulation threshold change the resulting stream network?</p>
-<p>Step 3: Flow Direction</p>
-<p>Step 4: Stream ordering</p>
-<p>Step 5: Stream to feature tool to vectorize stream networks</p>
-=======
 <p><strong>Step 1:</strong> Next we will use the <strong>Flow Direction</strong> tool to to calculate the direction of water flow across the landscape.</p>
 <p>There are three flow modelling algorithms, but we will use the simplest: <strong>D8</strong>. In this model water will flow from one cell its <strong>steepest downslope neighbour</strong>. The cell will then be assigned a value based on which of its 8 neightbours water will flow into.</p>
 <div id="q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="section level5 unnumbered hasAnchor">
 <h5>Q5: The following raster shows elevation above sea level. What is the flow direction from the centre cell? Report your answer in terms of cardinal direction (North, South, Northwest etc)<a href="#q5-the-following-raster-shows-elevation-above-sea-level.-what-is-the-flow-direction-from-the-centre-cell-report-your-answer-in-terms-of-cardinal-direction-north-south-northwest-etc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/04/04-flowDirJPG.JPG" width="40%" style="display: block; margin: auto;" /></p>
 <p>Use the ArcGis help page to answer to following question: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm</a></p>
 </div>
 <div id="q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="section level5 unnumbered hasAnchor">
 <h5>Q6: If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell?<a href="#q6-if-a-cell-is-assigned-a-flow-direction-value-of-32-what-cardinal-direction-is-water-flowing-out-of-the-cell" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/04/04-flowDirJPG.JPG" width="40%" style="display: block; margin: auto;" /></p>
 <p>Navigate to Tools &gt; Search <strong>Flow Direction</strong></p>
 <ul>
 <li>Input surface raster: <strong>Nahmint_fill</strong></li>
@@ -228,28 +185,62 @@ Navigate to Analysis &gt; Tools &gt; Fill (Spatial Analyst).</p>
 </div>
 <div id="q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="section level5 unnumbered hasAnchor">
 <h5>Q7: For the areas marked A and B, approximately what direction is water flowing?<a href="#q7-for-the-areas-marked-a-and-b-approximately-what-direction-is-water-flowing" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/04/04-flowDir2.JPG" style="display: block; margin: auto;" /></p>
-<p>Step 2: Flow Accumulation</p>
-<p>Step 3: Stream ordering</p>
-<p>Step 4: Stream to feature tool to vectorize stream networks</p>
->>>>>>> 1ac0f3178871b6a7293be19114925cff0d10f777
+<p><img src="images/04/04-flowDir2.JPG" width="812" style="display: block; margin: auto;" /></p>
+<p><strong>Step 2:</strong> We will use the flow direction raster calculated in the last step to calculate <strong>flow accumulation</strong>, which counts the total number of cells that will flow into each cell. For example, a cell located at the bottom of the hill will have high flow accumulation and a cell at the top of a hill will not have any flow accumulation.</p>
+<p>Navigate to Analysis &gt; Tools &gt; Flow Accumulation</p>
+<ul>
+<li>Input flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Output flow accumulation raster: <strong>Nahmint_FlowAcc</strong></li>
+</ul>
+<p>Leave all other fields blank. &gt; Run.</p>
+<p><strong>Step 4:</strong> Next, we will create a raster based stream network using a threshold in the flow accumulation raster. For example, if the threshold is 100, then only cells with flow accumulation greater than 100 will be counted as a stream. Cells with flow accumulation less than 100 will be set to a background value of 0.</p>
+</div>
+<div id="q8-how-would-your-stream-network-change-if-you-changed-the-threshold-from-100-to-1000-would-there-be-more-or-less-streams-which-kinds-of-streams-would-be-retained-using-a-higher-threshold" class="section level5 unnumbered hasAnchor">
+<h5>Q8: How would your stream network change if you changed the threshold from 100 to 1000? Would there be more or less streams? Which kinds of streams would be retained using a higher threshold?<a href="#q8-how-would-your-stream-network-change-if-you-changed-the-threshold-from-100-to-1000-would-there-be-more-or-less-streams-which-kinds-of-streams-would-be-retained-using-a-higher-threshold" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 5:</strong> Finally, we will use the <strong>Stream to Feature</strong> tool to create polyline features representing our stream network. THis tool uses the stream network and the flow direction layers. See this ArcGIS help page for more information: <a href="https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm" class="uri">https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm</a></p>
+<p>Navigate to Analysis &gt; Tools &gt; Stream to Feature</p>
+<ul>
+<li>Input stream raster: <strong>Nahmint_Streams</strong></li>
+<li>Input flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Output polyline features: <strong>Nahmint_StreamNetwork</strong></li>
+<li>Simplify polylines: Checked</li>
+</ul>
+</div>
+<div id="q9-compare-your-stream-network-to-the-streams-in-the-arcgis-basemaps-satellite-or-topographic.-does-it-seem-like-your-stream-network-identified-all-the-streams-in-the-area-are-there-any-missing-streams-or-weird-results" class="section level5 unnumbered hasAnchor">
+<h5>Q9: Compare your stream network to the streams in the ArcGIS basemaps (satellite, or topographic). Does it seem like your stream network identified all the streams in the area? Are there any missing streams or weird results?<a href="#q9-compare-your-stream-network-to-the-streams-in-the-arcgis-basemaps-satellite-or-topographic.-does-it-seem-like-your-stream-network-identified-all-the-streams-in-the-area-are-there-any-missing-streams-or-weird-results" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
 <div id="task-3-mapping-watersheds" class="section level2 unnumbered hasAnchor">
 <h2>Task 3: Mapping Watersheds<a href="#task-3-mapping-watersheds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Step 1: Snap to pour point</p>
-<p>How does changing the location of the pour point impact the results?</p>
-<p>Step 2: Watershed tool</p>
-<p>Step 3: Vectorize/visualize watersheds</p>
-<hr />
+<p>A watershed is an area of land where all the water that falls or flows into it converges to a common outlet, such as a river, lake, or ocean. It is defined by the topographic or drainage divide, which separates the water flowing into different basins. In this task we will delineate the boundaries of the Nahmint watershed.</p>
+<p>The watershed tool uses flow direction and user defined <strong>pour points</strong> to delineate watershed boundaries. The watershed boundaries will be defined such that water flows into the defined pour points. This is useful for determining the area of land that contributes water to a specific stream or lake.</p>
+<p><strong>Step 1:</strong> First, we will create a new shapefile for our pour points. Navigate to the Catalog Pane and locate the default project directory. Right-click on the default geodatabase &gt; New Layer.</p>
+<p>Edit the layer &gt; Create Features</p>
+<p>Click on the map where you want to define pour points. Use the stream network to define pour points at the intersection of stream segments (see example below). You should have approximately 6 pour points.</p>
+<p>If you want to delete a point, open the Attribute table, select the pour point you want to remove (either by clickon on it in the attribute table or using the select tool on the top ribbon) and click delete. You can also move existing points by selecting them and dragging them to new locations</p>
+<p><strong>Step 2:</strong> Navigate to Analysis &gt; Tools &gt; Watershed</p>
+<ul>
+<li>Input D8 flow direction raster: <strong>Nahmint_FlowDir</strong></li>
+<li>Input raster or feature pour point data: <strong>PourPoints.shp</strong></li>
+<li>Output raster: <strong>Nahmint_watersheds</strong></li>
+</ul>
+<p>The output will be a raster where the cell values correspond to the different watershed catchment areas.</p>
+<p><strong>Step 3:</strong> Next, we will convert the raster based watersheds into polygon features.</p>
+<p>Analysis &gt; Tools &gt; <strong>Raster to Polygon</strong> (you may remember this tool from Lab 3).</p>
+<p>Set the input raster to the watersheds raster, name the features <strong>Watershed_polys</strong> and save to the default GDB. Make sure the <strong>Simplify Polygons</strong> box is checked.</p>
+<div id="q10-what-is-the-area-of-the-largest-watershed-report-answer-in-km2-and-round-to-two-decimal-places." class="section level5 unnumbered hasAnchor">
+<h5>Q10: What is the area of the largest watershed? Report answer in km2 and round to two decimal places.<a href="#q10-what-is-the-area-of-the-largest-watershed-report-answer-in-km2-and-round-to-two-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 4:</strong> Create a map and include it in the final deliverables. The map must have the following elements:</p>
+<ul>
+<li>Stream network polylines</li>
+<li>Watershed polygons - assign different colors to each polygon</li>
+<li>Title</li>
+<li>North arrow</li>
+<li>Scale bar</li>
+<li>Legend</li>
+</ul>
 </div>
-<div id="task-4-analyze-watersheds" class="section level2 unnumbered hasAnchor">
-<h2>Task 4: Analyze watersheds<a href="#task-4-analyze-watersheds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Step 1: Import temperature and precipitation trends from Climate NA</p>
-<p>Step 2: Summarize climate change variables by watershed</p>
-<p>Which watersheds have the greatest change in temperature/precipitation?</p>
-<p>How might these changes impact the stream network you identified in Task 2?</p>
 </div>
 </div>
             </section>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Lab 1 Mapping suitability and sea level rise | 03-suitability.knit</title>
   <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Lab 1 Mapping suitability and sea level rise | 03-suitability.knit" />
   <meta property="og:type" content="book" />
@@ -53,10 +53,6 @@
 
 
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -118,7 +114,7 @@ Hana Travers-Smith</p>
 <p>In this lab you will use a digital elevation model (DEM) covering the metro Vancouver region to map areas at risk of flooding during an extreme weather event under current and future conditions, assuming 2.96 m of sea level rise by the year 2100. In particular, we will focus on mapping the intersection of high risk areas with critical agricultural land in the Fraser Delta region. In this assignment, you will produce a map to assess regions where agricultural land can be developed safely from flood hazards.</p>
 <p>In partnership with the Delta community, the CALP research group at UBC produced the following report on projected sea level rise and adaptation strategies for this region, which can be found here:</p>
 <p><a href="https://www.fraserbasin.bc.ca/_Library/CCAQ_BCRAC/bcrac_delta_visioning-policy_4d.pdf" class="uri">https://www.fraserbasin.bc.ca/_Library/CCAQ_BCRAC/bcrac_delta_visioning-policy_4d.pdf</a></p>
-<p><img src="images/03/02-CALP.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-CALP.jpg" width="794" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="learning-objectives" class="section level3 unnumbered hasAnchor">
 <h3>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -154,10 +150,10 @@ Hana Travers-Smith</p>
 <div id="q1-from-the-calp-report-section-2-briefly-list-the-4-primary-drivers-of-sea-level-rise" class="section level5 unnumbered hasAnchor">
 <h5>Q1: From the CALP report (Section 2), briefly list the 4 primary drivers of sea level rise?<a href="#q1-from-the-calp-report-section-2-briefly-list-the-4-primary-drivers-of-sea-level-rise" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 1:</strong> Set up a new Map Project and import the DEM into ArcGIS Pro. First we will identify cells in the DEM that are below the projected high water line of 2.96m. Open the <strong>FraserValleyDEM.tif</strong> in ArcGIS Pro. Navigate to <strong>Analysis &gt; Tools &gt; Reclassify (Spatial Analyst tools)</strong>.</p>
-<p><img src="images/03/02-reclassify.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-reclassify.jpg" width="476" style="display: block; margin: auto;" /></p>
 <p>Click the Classify button and in the pop-up window set the number of classes to 2 and the method to Manual Interval. Set the Upper value to 2.96 and hit OK. In the Output raster field give the new raster a descriptive name (ie DEM_reclass_2m) and save it to the default GDB.</p>
 <p><strong>HINT: Giving concise and descriptive names to your spatial data will make things easier to keep track of later on! Note that names should not include periods or spaces</strong></p>
-<p><img src="images/03/02-reclasstable.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-reclasstable.jpg" width="228" style="display: block; margin: auto;" /></p>
 <p>Cells in the resulting raster with a value &lt;2.96 will be assigned a new value of 1 and cells &gt;2.96 will be assigned a value of 2.</p>
 </div>
 <div id="q2.-what-is-the-spatial-resolution-of-the-dem" class="section level5 unnumbered hasAnchor">
@@ -170,7 +166,7 @@ Hana Travers-Smith</p>
 <p>Click <strong>Select by Attributes</strong> and use the drop-down menus to generate the following expression:</p>
 <p><code>Where, gridcode, is equal to, 2</code></p>
 <p>Click the <strong>Delete Selection</strong> button to delete the selected polygons.</p>
-<p><img src="images/03/02-delete.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-delete.jpg" width="458" style="display: block; margin: auto;" /></p>
 <p><strong>Step 4:</strong> Examine the resulting polygon shapefile. You will notice that there are lots of small isolated polygons, not adjacent to the coastline. We will remove these by intersecting the flooded areas features with a polyline representing the coastline.</p>
 <p>Open <strong>Coastline.shp</strong>. Navigate to <strong>Map &gt; Select by Location</strong>. Set the Input Features to the <strong>flooded areas polygons</strong> and the Selecting Features to the <strong>coastline layer</strong>. Set the Relationship to <strong>Within a distance</strong>. Set the distance to 30m. <strong>Make sure the Invert spatial relationship box is checked.</strong> This will select polygons that are further than 30m from the coast. Click Apply.</p>
 <p>Delete the selected features.</p>
@@ -178,7 +174,7 @@ Hana Travers-Smith</p>
 <div id="q4-describe-how-you-would-change-the-selection-parameters-relationship-distance-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="section level5 unnumbered hasAnchor">
 <h5>Q4: Describe how you would change the selection parameters (Relationship &amp; Distance) if you wanted to select flooded areas that are within 100m from the coastline?<a href="#q4-describe-how-you-would-change-the-selection-parameters-relationship-distance-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>You should now have polygon features that look like the following:</p>
-<p><img src="images/03/02-example.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-example.jpg" width="581" style="display: block; margin: auto;" /></p>
 <p><strong>Step 5:</strong> Zoom into the polygons. You will notice that even though we used simplified polygons, the edges are still quite jagged and have many small holes. Next, we will smooth these polygons for better visualization and create more realistic shapes.</p>
 <p>First, we will reduce the jagged edges in the polygons. Navigate to the <strong>Buffer</strong> tool. Create a 30m buffer around the <strong>flood_2m_polys</strong> layer. Set the Dissolve type to <strong>Disolve all output features to a single feature</strong>. Name the output <strong>flood_2m_30mBuffer</strong> Click Run.</p>
 </div>
@@ -196,7 +192,7 @@ Hana Travers-Smith</p>
 <h5>Q6: The figure below illustrates how the intersect tool works. Describe in one sentence how the output features are generated from the inputs.<a href="#q6-the-figure-below-illustrates-how-the-intersect-tool-works.-describe-in-one-sentence-how-the-output-features-are-generated-from-the-inputs." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><img src="images/03/02-Intersectfigure.jpg" width="75%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 1:</strong>Load the <strong>flooded_2m_30mBuffer_Clip</strong> layer in ArcPro. Load the agricultural land shapefile, <strong>ag_polys.shp</strong>.</p>
-<p><img src="images/03/02-Agpolys.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-Agpolys.jpg" width="758" style="display: block; margin: auto;" /></p>
 <p><strong>Step 2:</strong> Open the <strong>Intersect</strong> tool.</p>
 <ul>
 <li>Input Features: <strong>flooded_2m_30mBuffer_Clip</strong> and <strong>ag_polys</strong></li>
@@ -207,12 +203,12 @@ Hana Travers-Smith</p>
 </div>
 <div id="q7-what-layer-did-the-status-and-area_sqm-attributes-originally-come-from" class="section level5 unnumbered hasAnchor">
 <h5>Q7: What layer did the STATUS and AREA_SQM attributes originally come from?<a href="#q7-what-layer-did-the-status-and-area_sqm-attributes-originally-come-from" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/03/02-attributes.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-attributes.jpg" width="528" style="display: block; margin: auto;" /></p>
 <p><strong>Step 3:</strong> Next, we will calculate the flooded area within each agricultural polygon.</p>
 <p>First, create a new attribute in <strong>flood_ag_intersect</strong>. Open the layer attribute table and click the Add button beside Field:</p>
-<p><img src="images/03/02-addfield.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-addfield.jpg" width="506" style="display: block; margin: auto;" /></p>
 <p>In the Fields table name the new field <strong>FloodedArea</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
-<p><img src="images/03/02-newField.jpg" style="display: block; margin: auto;" /></p>
+<p><img src="images/03/02-newField.jpg" width="522" style="display: block; margin: auto;" /></p>
 <p>You will now have a blank field in the attribute table.</p>
 <p>In the attribute table, right click on the Int_Area field &gt; Calculate Geometry. In the Property drop-down select <strong>Area</strong> and select <strong>Square meters</strong> as the Area Unit. Click OK.</p>
 </div>
