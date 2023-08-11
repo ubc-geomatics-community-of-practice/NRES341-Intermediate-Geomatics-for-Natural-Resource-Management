@@ -2,7 +2,7 @@
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["lab5shortname"]][["author"]]
 ```
-# Lab Title {#lab-short-name}
+# Modeling vegetation with LiDAR {#lidar}
 
 Written by
 ```{r results='asis', echo=FALSE}
@@ -11,76 +11,87 @@ cat(author)
 
 ## Lab Overview {-}
 
-Lorem ipsum
+LiDAR, short for Light Detection and Ranging, is a remote sensing technology that uses laser pulses to measure distances and create detailed 3D maps of objects and environments. To map vegetation, LiDAR emits laser beams from an aircraft or ground-based system towards the vegetation canopy. The laser pulses bounce back upon hitting objects, including leaves, branches, and the ground. By measuring the time it takes for the pulses to return, LiDAR calculates the distance to each point, generating a "point cloud" of data. 
+
+"Point clouds" can be used to create high-resolution maps depicting the vertical structure of vegetation, including tree heights, density, and ground cover. These maps are invaluable for understanding ecosystem health, biodiversity, carbon storage, and assisting in land management decisions such as forest monitoring, conservation planning, and urban development.
+
+In this lab you will use high resolution LiDAR data collected by the City of Vancouver to create a model of terrain and vegetation for a forest located on UBC campus.
 
 ------------------------------------------------------------------------
 
-## Learning Objectives {-}
+### Learning Objectives {-}
 
--   Lorem ipsum
+-   Understand how LiDAR data is collected 
 
--   Lorem ipsum 
+-   Learn how to model terrain and vegetation from a LiDAR point cloud
 
--   Lorem ipsum 
-
-------------------------------------------------------------------------
-
-## Competencies in This Lab {-}
-
--   Lorem ipsum
-
--   Lorem ipsum
-
--   Lorem ipsum
+-   Introduction to methods for mapping vegetation strucutre
 
 ------------------------------------------------------------------------
 
-## Deliverables {-}
+### Deliverables {-}
 
--   Lorem ipsum
+-   Screenshots of 3 terrain and vegetation models (DEM, DSM, CHM)
 
--   Lorem ipsum
+-   Answers to questions posed in the lab
 
--   Lorem ipsum
-
-------------------------------------------------------------------------
-
-## Data {-}
-
-Lorem ipsum
+-   Map of tree stems generated from a canopy height model
 
 ------------------------------------------------------------------------
 
-## Task 1: Lorem ipsum {-}
+### Data {-}
 
-Lorem ipsum
-
-**Step 1:** Lorem ipsum.
-
-**Step 2:** Lorem ipsum.
-
-**Step 3:** Lorem ipsum.
-
-__HINT: Lorem ipsum.__
-
-##### Q1. LOREM IPSUM? {-}
-
-##### Q2. LOREM IPSUM? {-}
+Lidar data collected by the City of Vancouver in .las format
 
 ------------------------------------------------------------------------
 
-## Task 2: Lorem ipsum {-}
+## Task 1: Load and understand LiDAR data {-}
 
-Lorem ipsum
+**Step 3:** The specifications for the .las dataset can be found here: https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/
 
-**Step 1:** Lorem ipsum.
+Use this information to answer the following questions: 
 
-**Step 2:** Lorem ipsum.
+##### Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums? {-}
 
-**Step 3:** Lorem ipsum.
+##### Q2: What is the point density of the dataset? 
 
-__HINT: Lorem ipsum.__
+**Step 2:** Create a new ArcGIS Project name it Lab5 and save it to the default directory. 
 
-##### Q3. LOREM IPSUM? {-}
+ArcGIS Pro has several tools that we can use to view and analyse LiDAR point clouds. In order to view the dataset, we need to import it as a LAS Dataset. Analysis > Tools > type ‘Create LAS dataset’ in the search box. 
 
-##### Q4. LOREM IPSUM? {-}
+Specify your input file as all of the .las files in the LidarVan folder this lab. Make sure to name the output **LAS Dataset** and specify a 
+coordinate system (hint: look in the specifications website). Check the ‘Compute Statistics' box. Surface Constraints can be left blank, and we want to make sure that ‘All LAS Files’ are selected 
+for ‘Create PRJ For LAS Files’.
+
+**Step 3:** We can now add our LAS Dataset to a Map document (insert New Map). Depending on the zoom extent, you may only see the red bounding box of the las file; this isn’t an error, you just need to zoom in to see the actual points.
+
+The points have been classified into the following categories: 
+
+- Unclassified;
+- Bare-earth and low grass;
+- Low vegetation (height <2m);
+- High vegetation (height >2m);
+- Water;
+- Buildings;
+- Other; and
+- Noise (noise points, blunders, outliners, etc)​
+
+The default display is that no point cloud filters are applied; if you want to view only ground points, right click on the file, navigate to ‘LAS Filters’, and click ‘Ground’. 
+
+##### Q3: What percentage of the points are classified as ground? 
+
+------------------------------------------------------------------------
+
+## Task 2: Create a models of terrain and vegetation {-}
+
+In this task we will create 3 raster datasets from the point cloud: 
+
+- Digitial Elevation Model (DEM)
+- Digital Surface Model (DSM)
+- Canopy Height Model (CHM)
+
+These models will utilize different parts of the point cloud 
+
+------------------------------------------------------------------------
+
+## Task 3: Map tree stems using the CHM {-}

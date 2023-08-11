@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 1 Modeling vegetation with LiDAR | 05-lidar.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 1 Modeling vegetation with LiDAR | 05-lidar.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 1 Modeling vegetation with LiDAR | 05-lidar.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path=""><a href="#lidar"><i class="fa fa-check"></i><b>1</b> Modeling vegetation with LiDAR</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#lab-overview"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#data"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-1-load-and-understand-lidar-data"><i class="fa fa-check"></i>Task 1: Load and understand LiDAR data</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-2-create-a-models-of-terrain-and-vegetation"><i class="fa fa-check"></i>Task 2: Create a models of terrain and vegetation</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#task-3-map-tree-stems-using-the-chm"><i class="fa fa-check"></i>Task 3: Map tree stems using the CHM</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="lidar" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Lab 1</span> Modeling vegetation with LiDAR<a href="#lidar" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by
+Paul Pickell</p>
+<div id="lab-overview" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>LiDAR, short for Light Detection and Ranging, is a remote sensing technology that uses laser pulses to measure distances and create detailed 3D maps of objects and environments. To map vegetation, LiDAR emits laser beams from an aircraft or ground-based system towards the vegetation canopy. The laser pulses bounce back upon hitting objects, including leaves, branches, and the ground. By measuring the time it takes for the pulses to return, LiDAR calculates the distance to each point, generating a “point cloud” of data.</p>
+<p>“Point clouds” can be used to create high-resolution maps depicting the vertical structure of vegetation, including tree heights, density, and ground cover. These maps are invaluable for understanding ecosystem health, biodiversity, carbon storage, and assisting in land management decisions such as forest monitoring, conservation planning, and urban development.</p>
+<p>In this lab you will use high resolution LiDAR data collected by the City of Vancouver to create a model of terrain and vegetation for a forest located on UBC campus.</p>
+<hr />
+<div id="learning-objectives" class="section level3 unnumbered hasAnchor">
+<h3>Learning Objectives<a href="#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Understand how LiDAR data is collected</p></li>
+<li><p>Learn how to model terrain and vegetation from a LiDAR point cloud</p></li>
+<li><p>Introduction to methods for mapping vegetation strucutre</p></li>
+</ul>
+<hr />
+</div>
+<div id="deliverables" class="section level3 unnumbered hasAnchor">
+<h3>Deliverables<a href="#deliverables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Screenshots of 3 terrain and vegetation models (DEM, DSM, CHM)</p></li>
+<li><p>Answers to questions posed in the lab</p></li>
+<li><p>Map of tree stems generated from a canopy height model</p></li>
+</ul>
+<hr />
+</div>
+<div id="data" class="section level3 unnumbered hasAnchor">
+<h3>Data<a href="#data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lidar data collected by the City of Vancouver in .las format</p>
+<hr />
+</div>
+</div>
+<div id="task-1-load-and-understand-lidar-data" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Load and understand LiDAR data<a href="#task-1-load-and-understand-lidar-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 3:</strong> The specifications for the .las dataset can be found here: <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/" class="uri">https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/</a></p>
+<p>Use this information to answer the following questions:</p>
+<div id="q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="section level5 unnumbered hasAnchor">
+<h5>Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums?<a href="#q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2-what-is-the-point-density-of-the-dataset" class="section level5 hasAnchor" number="1.0.0.0.1">
+<h5><span class="header-section-number">1.0.0.0.1</span> Q2: What is the point density of the dataset?<a href="#q2-what-is-the-point-density-of-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Create a new ArcGIS Project name it Lab5 and save it to the default directory.</p>
+<p>ArcGIS Pro has several tools that we can use to view and analyse LiDAR point clouds. In order to view the dataset, we need to import it as a LAS Dataset. Analysis &gt; Tools &gt; type ‘Create LAS dataset’ in the search box.</p>
+<p>Specify your input file as all of the .las files in the LidarVan folder this lab. Make sure to name the output <strong>LAS Dataset</strong> and specify a
+coordinate system (hint: look in the specifications website). Check the ‘Compute Statistics’ box. Surface Constraints can be left blank, and we want to make sure that ‘All LAS Files’ are selected
+for ‘Create PRJ For LAS Files’.</p>
+<p><strong>Step 3:</strong> We can now add our LAS Dataset to a Map document (insert New Map). Depending on the zoom extent, you may only see the red bounding box of the las file; this isn’t an error, you just need to zoom in to see the actual points.</p>
+<p>The points have been classified into the following categories:</p>
+<ul>
+<li>Unclassified;</li>
+<li>Bare-earth and low grass;</li>
+<li>Low vegetation (height &lt;2m);</li>
+<li>High vegetation (height &gt;2m);</li>
+<li>Water;</li>
+<li>Buildings;</li>
+<li>Other; and</li>
+<li>Noise (noise points, blunders, outliners, etc)​</li>
+</ul>
+<p>The default display is that no point cloud filters are applied; if you want to view only ground points, right click on the file, navigate to ‘LAS Filters’, and click ‘Ground’.</p>
+</div>
+<div id="q3-what-percentage-of-the-points-are-classified-as-ground" class="section level5 hasAnchor" number="1.0.0.0.2">
+<h5><span class="header-section-number">1.0.0.0.2</span> Q3: What percentage of the points are classified as ground?<a href="#q3-what-percentage-of-the-points-are-classified-as-ground" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-2-create-a-models-of-terrain-and-vegetation" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Create a models of terrain and vegetation<a href="#task-2-create-a-models-of-terrain-and-vegetation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this task we will create 3 raster datasets from the point cloud:</p>
+<ul>
+<li>Digitial Elevation Model (DEM)</li>
+<li>Digital Surface Model (DSM)</li>
+<li>Canopy Height Model (CHM)</li>
+</ul>
+<p>These models will utilize different parts of the point cloud</p>
+<hr />
+</div>
+<div id="task-3-map-tree-stems-using-the-chm" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Map tree stems using the CHM<a href="#task-3-map-tree-stems-using-the-chm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
