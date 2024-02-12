@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 5 LiDAR Point Clouds for Forest Management | NRES 341: Intermediate Geomatics for Natural Resource Management</title>
+  <meta name="description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 5 LiDAR Point Clouds for Forest Management | NRES 341: Intermediate Geomatics for Natural Resource Management" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  <meta name="github-repo" content="github.com/ubc-geomatics-community-of-practice/NRES341-Intermediate-Geomatics-for-Natural-Resource-Management/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 5 LiDAR Point Clouds for Forest Management | NRES 341: Intermediate Geomatics for Natural Resource Management" />
+  
+  <meta name="twitter:description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  
+
+<meta name="author" content="Paul D. Pickell" />
+
+
+<meta name="date" content="2024-02-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="terrain-hydrology-analysis.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-these-resources"><i class="fa fa-check"></i>How to use these resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-get-involved"><i class="fa fa-check"></i>How to get involved</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html"><i class="fa fa-check"></i><b>1</b> Introduction to Landsat Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#lab-overview"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#data"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-1-data-types-projections"><i class="fa fa-check"></i>Task 1: Data Types &amp; Projections</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-2-cloud-and-shadow-masking"><i class="fa fa-check"></i>Task 2: Cloud and Shadow Masking</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-3-image-enhancement-and-focal-filters"><i class="fa fa-check"></i>Task 3: Image Enhancement and Focal Filters</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html"><i class="fa fa-check"></i><b>2</b> Image Classification and Introduction to Google Earth Engine</a>
+<ul>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#lab-overview-1"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#deliverables-1"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#task-1-getting-started-with-google-earth-engine"><i class="fa fa-check"></i>Task 1: Getting started with Google Earth Engine</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#task-2-calculating-ndvi"><i class="fa fa-check"></i>Task 2: Calculating NDVI</a></li>
+<li class="chapter" data-level="" data-path="google-earth-engine-image-classification.html"><a href="google-earth-engine-image-classification.html#task-3-perform-a-supervised-classification"><i class="fa fa-check"></i>Task 3: Perform a Supervised Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html"><i class="fa fa-check"></i><b>3</b> Mapping suitability and sea level rise</a>
+<ul>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#lab-overview-2"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#learning-objectives-2"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#deliverables-2"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-1-mapping-flood-hazard"><i class="fa fa-check"></i>Task 1: Mapping flood hazard</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-2-intersection"><i class="fa fa-check"></i>Task 2: Intersection</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-3-calculating-visualizing-suitability"><i class="fa fa-check"></i>Task 3: Calculating &amp; visualizing suitability</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html"><i class="fa fa-check"></i><b>4</b> Terrain and Hydology Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#lab-overview-3"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#learning-objectives-3"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#deliverables-3"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-1-understanding-dems"><i class="fa fa-check"></i>Task 1: Understanding DEMs</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-2-identifying-stream-networks"><i class="fa fa-check"></i>Task 2: Identifying Stream Networks</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-3-mapping-watersheds"><i class="fa fa-check"></i>Task 3: Mapping Watersheds</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html"><i class="fa fa-check"></i><b>5</b> LiDAR Point Clouds for Forest Management</a>
+<ul>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#lab-overview-4"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#learning-objectives-4"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#deliverables-4"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#data-4"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-1-load-and-understand-lidar-data-in-a-map-project"><i class="fa fa-check"></i>Task 1: Load and understand LiDAR data in a Map Project</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-2-create-a-dem-dsm-and-chm"><i class="fa fa-check"></i>Task 2: Create a DEM, DSM and CHM</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-3-mapping-tree-tops"><i class="fa fa-check"></i>Task 3: Mapping Tree Tops</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-4-visualization-in-3d"><i class="fa fa-check"></i>Task 4: Visualization in 3D</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NRES 341: Intermediate Geomatics for Natural Resource Management</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lidar-forest-management" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Lab 5</span> LiDAR Point Clouds for Forest Management<a href="lidar-forest-management.html#lidar-forest-management" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by
+Hana Travers-Smith</p>
+<div id="lab-overview-4" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="lidar-forest-management.html#lab-overview-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>LiDAR, short for Light Detection and Ranging, is a remote sensing technology that uses laser pulses to measure distances and create detailed 3D maps of objects and environments. To map vegetation, LiDAR emits laser beams from an aircraft or ground-based system towards the vegetation canopy. The laser pulses bounce back upon hitting objects, including leaves, branches, and the ground. By measuring the time it takes for the pulses to return, LiDAR calculates the distance to each point, generating a “point cloud” of data.</p>
+<p>“Point clouds” can be used to create high-resolution maps depicting the vertical structure of vegetation, including tree heights, density, and ground cover. These maps are invaluable for understanding ecosystem health, biodiversity, carbon storage, and assisting in land management decisions such as forest monitoring, conservation planning, and urban development.</p>
+<p>In this lab you will use high resolution LiDAR data collected by the City of Vancouver to create a model of terrain and vegetation for a forest located on UBC campus.</p>
+<p><img src="images/05/05-river_pointcloud.png" width="960" style="display: block; margin: auto;" /></p>
+<hr />
+<div id="learning-objectives-4" class="section level3 unnumbered hasAnchor">
+<h3>Learning Objectives<a href="lidar-forest-management.html#learning-objectives-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Understand how LiDAR data is collected</p></li>
+<li><p>Learn how to model terrain and vegetation from a LiDAR point cloud</p></li>
+<li><p>Visualize 3D data in a Scene</p></li>
+</ul>
+<hr />
+</div>
+<div id="deliverables-4" class="section level3 unnumbered hasAnchor">
+<h3>Deliverables<a href="lidar-forest-management.html#deliverables-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Screenshots of terrain and vegetation models derived from pointclouds (DEM, DSM, CHM)</p></li>
+<li><p>Map of tree stems generated from a canopy height model</p></li>
+<li><p>3D Visualization of a DSM generated from a point cloud</p></li>
+<li><p>Answers to 10 questions posed in the lab</p></li>
+</ul>
+<hr />
+</div>
+<div id="data-4" class="section level3 unnumbered hasAnchor">
+<h3>Data<a href="lidar-forest-management.html#data-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Lidar data collected by the City of Vancouver in .las format</p>
+<hr />
+</div>
+</div>
+<div id="task-1-load-and-understand-lidar-data-in-a-map-project" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Load and understand LiDAR data in a Map Project<a href="lidar-forest-management.html#task-1-load-and-understand-lidar-data-in-a-map-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1</strong>: Download the LiDAR data from the following link: <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/" class="uri">https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/</a></p>
+<p>THe data is split up into a tiled grid system. You will download one tile covering a section of UBC. Use the <strong>Table</strong> view and search for the following tile and download it: <strong>4840E_54550N</strong> by clicking on the .zip link.</p>
+<p>Use the metadata from the City of Vancouver data portal to answer the following questions:</p>
+<div id="q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="section level5 unnumbered hasAnchor">
+<h5>Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums?<a href="lidar-forest-management.html#q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2-what-is-the-point-density-of-the-dataset" class="section level5 unnumbered hasAnchor">
+<h5>Q2: What is the point density of the dataset?<a href="lidar-forest-management.html#q2-what-is-the-point-density-of-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Create a new ArcGIS <strong>Map Project</strong> name it Lab5 and save it to the default directory.</p>
+<p>ArcGIS Pro has several tools that we can use to view and analyse LiDAR point clouds. In order to view the dataset, we need to import it as a LAS Dataset. Analysis &gt; Tools &gt; type ‘Create LAS dataset’ in the search box.</p>
+<ul>
+<li>Input File: <strong>4840E_54550N.las</strong></li>
+<li>Output LAS Dataset: <strong>LAS Dataset.lasd</strong></li>
+<li>Coodinate System: Use the horizontal datum from the dataset specifications</li>
+<li>Create PRJ for LAS Files: <strong>All LAS files</strong></li>
+<li>Check the ‘Compute Statistics’ box.</li>
+<li>Surface Constraints can be left blank</li>
+</ul>
+<p><img src="images/05/05-lasd.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>Step 3:</strong> Depending on the zoom extent, you may only see the red bounding box of the las file; this isn’t an error, you just need to zoom in to see the actual points.</p>
+<p>The points can be classified into the following categories:</p>
+<ul>
+<li>Ground</li>
+<li>Non-Ground</li>
+<li>1st Return (highest feature)</li>
+</ul>
+<p>The default display is that no point cloud filters are applied. To quickly filter only ground points right click on the file in the Contents Pane, navigate to ‘LAS Filters’, and click ‘Ground’.</p>
+<p>There is also a more detailed classification system, which includes vegetation, water, noise, buildings etc. Right-click on the the file &gt; Properties &gt; LAS Filter. This menu gives you more control for which points you want to display from the dataset.</p>
+<p><img src="images/05/05-filter.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="task-2-create-a-dem-dsm-and-chm" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Create a DEM, DSM and CHM<a href="lidar-forest-management.html#task-2-create-a-dem-dsm-and-chm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this task we will create 3 raster datasets by interpolating heights from the point cloud to create continuous surfaces:</p>
+<ul>
+<li>Digitial Elevation Model (DEM) - sometimes referred to as a Digitial Terrain Model (DTM)</li>
+<li>Digital Surface Model (DSM)</li>
+<li>Canopy Height Model (CHM)</li>
+</ul>
+<div id="q3-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="section level5 unnumbered hasAnchor">
+<h5>Q3: What does a DEM, DSM and CHM represent? How do you interpret the values in each one?<a href="lidar-forest-management.html#q3-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 1:</strong> First, we will create a DEM from the .lasd point cloud. <strong>Filter the point cloud so that only points labelled ‘02 Ground’ are displayed.</strong></p>
+<p>Analysis &gt; Tools &gt; Search for <strong>LAS Dataset to Raster</strong>. We will use the <strong>Binning</strong> method to interpolate elevation. This method works by dividing the point cloud into cells (pixels) and assigning a value to each cell based on the heights of all the points in the cell. For example, cell values could be assigned as the average height of all points within a 10x10m pixel.</p>
+<ul>
+<li>Input LAS Dataset: <strong>LAS Dataset.lasd</strong></li>
+<li>Output Raster: <strong>DEM</strong></li>
+<li>Value Field: <strong>Elevation</strong>
+<ul>
+<li>Interpolation Type: <strong>Binning</strong></li>
+<li>Cell Assignment: <strong>Average</strong></li>
+<li>Void Fill Method: <strong>Linear</strong></li>
+</ul></li>
+<li>Output Data Type: <strong>Floating Point</strong></li>
+<li>Sampling Type: <strong>Cell size</strong>
+<ul>
+<li>Sampling Value: <strong>10</strong> (this defines the resolution of the output raster as 10m)</li>
+<li>Z factor: <strong>1</strong></li>
+</ul></li>
+</ul>
+</div>
+<div id="q4-what-is-the-minimum-and-maximum-value-of-the-dem" class="section level5 unnumbered hasAnchor">
+<h5>Q4: What is the minimum and maximum value of the DEM?<a href="lidar-forest-management.html#q4-what-is-the-minimum-and-maximum-value-of-the-dem" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>You should now have something that looks like this:</p>
+<p><img src="images/05/05-dem.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>Step 2:</strong> Next, we will create a DSM. We need to ensure that all point labelled as ‘Noise’ are filtered out from the dataset, we will also filter out ‘Ground’ points and just retain points coming from vegetation/infastructure. Navigate to the LAS Filter menu in the data Properties tab.</p>
+<p><strong>Uncheck the following codes:</strong></p>
+<ul>
+<li>0 Never Classified</li>
+<li>1 Unassigned</li>
+<li>2 Ground</li>
+<li>7 Noise</li>
+</ul>
+<p>Once you have correctly filtered the point cloud open the <strong>LAS Dataset to Raster</strong> tool. This time we will use the <strong>Maximum</strong> value as the Cell Assignment. Name the output raster <strong>DSM</strong>. All other settings can stay the same as the DEM. &gt; Run</p>
+</div>
+<div id="q5-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q5: Why might we want to use the Maximum value as the Cell Assignment method for a DSM?<a href="lidar-forest-management.html#q5-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q6-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q6: What features or land cover types can you idenify from the DSM?<a href="lidar-forest-management.html#q6-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 3:</strong> Finally, we will create a CHM using the DEM and DSM. Navigate to Analysis &gt; Tools &gt; Raster Calculator (Image Analyst Tools).This tool allows you to create a new raster by combining multiple rasters using simple mathematical operators (adding, subtracting etc).</p>
+<p>Calculate the CHM as: DSM - DEM</p>
+</div>
+<div id="q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="section level5 unnumbered hasAnchor">
+<h5>Q7: Explain why we need to subtract the DEM from the DSM to calculate canopy height. Describe potential sources of error in deriving a CHM from this method.<a href="lidar-forest-management.html#q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/05/05-RasterCalc.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>Include a screenshot of your final CHM in your deliverables. Change the default symbology to show unvegetated areas, medium vegetation &lt;30m and tall vegetation &gt;30m.</strong></p>
+<hr />
+</div>
+</div>
+<div id="task-3-mapping-tree-tops" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Mapping Tree Tops<a href="lidar-forest-management.html#task-3-mapping-tree-tops" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using what you learned in the last task, now you will create a point shapefile of treetops using a higher resolution canopy height model.</p>
+<p><strong>Step 1:</strong> First, we will derive a <strong>DSM</strong> using points representing <strong>High Vegetation</strong>. Open the LAS Filter menu and make sure only points labelled <strong>5 High Vegetation</strong> are checked.</p>
+<p>Next, use the <strong>LAS Dataset to Raster</strong> tool to create a raster from the filtered point cloud with the following properties:</p>
+<ul>
+<li><strong>1m</strong> spatial resolution</li>
+<li>the raster values should represent the highest point in each cell</li>
+<li>name the output <strong>TreeTops</strong></li>
+</ul>
+<div id="q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q8: What features are now visible in the 1m DSM that were not visible in the 10m DSM?<a href="lidar-forest-management.html#q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><strong>Step 2:</strong> Next we will use the <strong>Focal Statistics</strong> Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 5m (5 x 1m) circular moving window. Use the following parameters:</p>
+<ul>
+<li>Input raster: <strong>TreeTops</strong></li>
+<li>Output raster: <strong>TreeTop_max</strong></li>
+<li>Neighbourhood: Circle
+<ul>
+<li>Radius: 5</li>
+<li>Unit type: Cell</li>
+</ul></li>
+<li>Statistic Type: Maximum</li>
+<li>Ignore no data in calculations: Checked</li>
+</ul>
+<div id="q9-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="section level6 unnumbered hasAnchor">
+<h6>Q9: What is a moving window? If you are using a focal maximum, explain how cell values assigned in the final output.<a href="lidar-forest-management.html#q9-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<p><strong>Step 3:</strong> Open the <strong>Raster Calculator</strong> tool. We will use this tool to find the pixels in the <strong>TreeTops</strong> raster that match the maximum focal height in the <strong>TreeTops_max</strong>. To do this, we will use a True/False conditional statement using the <code>Con</code> syntax:</p>
+<p><code>Con(statement, iftrue, if false)</code> - Essentially for each pixel the statement is evaulated and if it is true an action is taken, and if it is false a different action is taken.</p>
+<p>Enter the following statement in the <strong>Raster Calculator</strong> tool:</p>
+<p><code>Con(“TreeTops”==”TreeTops_max”, ”TreeTops_max”)</code></p>
+<p>Basically, this is a calculation that evaluates the statement “where is the
+<strong>TreeTops</strong> raster equal to the maximum elevation value identified from the focal statistics?” Where these pixels match, write the maximum value to the output. Otherwise, write a value of NoData to the output. Save the output as <strong>tree_with_height</strong>.</p>
+<p>Refer to the screenshot below for writing this statement correctly.</p>
+<p><img src="images/05/CalcJPG.JPG" width="50%" style="display: block; margin: auto;" /></p>
+<p>Inspect the output. Zooming in reveals what we have done. Pixels that represent the maximum height in each focal window are assigned a value equal to the maximum height, while all other pixels have a NoData value.</p>
+<p><img src="images/05/treetops_rast.JPG" width="602" style="display: block; margin: auto;" /></p>
+<p><strong>Step 4:</strong> Open the ‘Raster to Point’ tool. The input raster is the
+raster that you just made. Field is Value, and the output name should be ‘tree_with_height’.</p>
+<ul>
+<li>Input: <strong>tree_with_height</strong></li>
+<li>Field: Value</li>
+<li>Output: <strong>Final_treetops</strong></li>
+</ul>
+</div>
+</div>
+<div id="q10-how-many-tree-tops-are-in-the-final-output" class="section level5 unnumbered hasAnchor">
+<h5>Q10: How many tree tops are in the final output?<a href="lidar-forest-management.html#q10-how-many-tree-tops-are-in-the-final-output" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-4-visualization-in-3d" class="section level2 unnumbered hasAnchor">
+<h2>Task 4: Visualization in 3D<a href="lidar-forest-management.html#task-4-visualization-in-3d" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>So far we have worked with the point cloud data in flat, 2-dimensional space. In this task, you will explore the point cloud in 3-dimensions in a Scene.</p>
+<p>On the top ribbon Insert &gt; New Map &gt; New Local Scene.</p>
+<p><strong>Step 1:</strong> Practice using the On Screen Navigator to manipulate the scene. The first toggle let’s you navigate in the normal directions and the second toggle (the person) let’s you rotate the scene in 3D.</p>
+<p><img src="images/05/05-nav1.jpg" width="20%" style="display: block; margin: auto;" />
+<img src="images/05/05-nav2.jpg" width="20%" style="display: block; margin: auto;" /></p>
+<p><strong>Step 2:</strong> Navigate to the UBC campus study area and change the Basemap to <strong>Imagery</strong> in the Map tab located on the top ribbon. In the Contents pane, right-click Ground, located below the Elevation Surfaces group layer. Click ‘Add Elevation Source’. Browse to the location of your 10m DSM and select it. You can now start to see how the surface features have been incorporated into the surface. Make sure to zoom in to look at areas with high relief and roads.</p>
+<p>Add the <strong>TreeTops_Final</strong> point shapefile to the Scene.</p>
+<p><strong>Step 3:</strong> Click on ‘Ground’ underneath the Elevation Surfaces tab. On the top ribbon click ’Elevation Surface Layer. Set the Vertical Exaggeration to 2 - this will increase the contrast between high/low elevation in the scene. Finally, turn off the WOrldElevation3D/Terrain3d layer to better see how the DSM.</p>
+<p><strong>Include a screenshot of the final Scene in your final deliverables. Add the tree tops point shapefile to the visualization. (See example below, note that yours will also include the tree tops points).</strong></p>
+<div id="q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="section level5 unnumbered hasAnchor">
+<h5>Q11: Experiment with the 10m and 1m DSM. How does the DSM resolution impact the 3D visualization? Which visualization is more realistic?<a href="lidar-forest-management.html#q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/05/05-example.jpg" width="808" style="display: block; margin: auto;" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="terrain-hydrology-analysis.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
