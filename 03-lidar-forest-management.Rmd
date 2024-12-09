@@ -35,13 +35,9 @@ knitr::include_graphics('images/05/05-river_pointcloud.png')
 
 ### Deliverables {-}
 
--   Screenshots of terrain and vegetation models derived from pointclouds (DEM, DSM, CHM)
+-   Screenshots of CHM and final 3D scene
 
--   Map of tree stems generated from a canopy height model
-
--   3D Visualization of a DSM generated from a point cloud
-
--   Answers to 10 questions posed in the lab
+-   Answers to 11 questions posed in the lab
 
 ------------------------------------------------------------------------
 
@@ -61,7 +57,7 @@ Use the metadata from the City of Vancouver data portal to answer the following 
 
 ##### Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums? {-}
 
-##### Q2: What is the point density of the dataset? {-}
+##### Q2: What is the point density of the dataset (points per m^2^)? {-}
 
 **Step 2:** Create a new ArcGIS **Map Project** name it Lab5 and save it to the default directory. 
 
@@ -154,7 +150,7 @@ Calculate the CHM as: DSM - DEM
 knitr::include_graphics('images/05/05-RasterCalc.jpg')
 ```
 
-**Include a screenshot of your final CHM in your deliverables. Change the default symbology to show unvegetated areas, medium vegetation <30m and tall vegetation >30m.** 
+##### Screenshot 1: Upload a screenshot of your final CHM. Change the default symbology to show unvegetated areas, medium vegetation <30m and tall vegetation >30m. {-}
 
 ------------------------------------------------------------------------
 
@@ -239,7 +235,7 @@ Add the **TreeTops_Final** point shapefile to the Scene.
 
 **Step 3:**  Click on 'Ground' underneath the Elevation Surfaces tab. On the top ribbon click 'Elevation Surface Layer. Set the Vertical Exaggeration to 2 - this will increase the contrast between high/low elevation in the scene. Finally, turn off the WOrldElevation3D/Terrain3d layer to better see how the DSM. 
 
-**Include a screenshot of the final Scene in your final deliverables. Add the tree tops point shapefile to the visualization. (See example below, note that yours will also include the tree tops points).**
+##### Screenshot 2: Upload a screenshot of the final Scene. Add the tree tops points to the visualization. (See example below, note that yours will also include the tree tops points). {-}
 
 ##### Q11: Experiment with the 10m and 1m DSM. How does the DSM resolution impact the 3D visualization? Which visualization is more realistic? {-}
 

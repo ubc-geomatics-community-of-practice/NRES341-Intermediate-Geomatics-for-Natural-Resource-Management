@@ -71,7 +71,7 @@ Use the USGS resource to answer the following questions: 'https://www.usgs.gov/f
 
 ##### Q1: For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acquired and what Landsat Collection number are they found in? {.unnumbered} 
 
-##### Q2: Data in Landsat Collections 1 & 2 have been pre-processed so that images across time are geometrically and radiometicrally consistent. In 2-4 sentences explain what this means and why it is important for detecting environmental changes. {.unnumbered}
+##### Q2: Data in Landsat Collections 1 & 2 have been pre-processed so that images across time are geometrically and radiometrically consistent. In 2-4 sentences explain what this means and why it is important for detecting environmental changes. {.unnumbered}
 
 ##### Q3: The following image shows the spectral profile of a vegetated surface before and after atmospheric correction. Describe the differences between the two profiles and explain the properties of the atmosphere that causes this. In your own words, why is it important to correct for atmospheric effects when using satellite imagery collected at different times? {.unnumbered}
 
@@ -94,10 +94,11 @@ The bands are as follows:
 - SR_B5 = NIR
 - SR_B6 = SWIR1
 
-Experiment with the **Symbology** tab and include screenshots of the following band combinations for raster A in your final deliverables: 
+Experiment with the **Symbology** tab.  
 
-- RGB true-color
-- False color infrared, with NIR in the red channel
+##### Screenshot 1: Upload a screenshot of Raster A in RGB true-color. {-}
+
+##### Screenshot 2: Upload a screenshot of Raster A in false color infrared, with NIR in the red channel. {-}
 
 Navigate to > Properties > General and use the image metadata to answer the following questions about the Surface Reflectance rasters.
 
@@ -121,7 +122,7 @@ Zoom in so you can see individual pixels and notice how the different raster pro
 knitr::include_graphics('images/01/01-proj.jpg')
 ```
 
-**Include a screenshot of the Spatial Reference information (in the General tab) for the new raster in your final deliverables**
+##### Screenshot 3: Upload a screenshot of the Spatial Reference information (in the General tab) for the new raster. {.unnumbered}
 
 ##### Q8: Which resampling method is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, categories)? {.unnumbered}
 
@@ -217,7 +218,7 @@ For the new polygon mask layer, use the **Select by Attributes** tool to select 
 
 Click Run. 
 
-##### Screenshot 1: Upload a screenshot of your masked Landsat scene displayed as false color infrared. Make sure you tun off the basemap layer, so the cloud mask is visible. Note that the bands have been renamed 1-6 corresponding to B, G, R, NIR, SWIR, and the QA band. {.unnumbered}
+##### Screenshot 4: Upload a screenshot of your masked Landsat scene displayed as false color infrared. Make sure you tun off the basemap layer, so the cloud mask is visible. Note that the bands have been renamed 1-6 corresponding to B, G, R, NIR, SWIR, and the QA band. {.unnumbered}
 
 ##### Q10: If you did not have the QA band, what Landsat bands/spectral properties could you use to identify cloudy pixels? {.unnumbered}
 
@@ -237,7 +238,7 @@ Image enhancement makes it easier to see differences in light/dark areas of an i
 knitr::include_graphics('images/01/01-stretch.jpg')
 ```
 
-##### Screenshot 2: Upload a screenshot of the histogram of NIR surface reflectance values {.unnumbered} 
+##### Screenshot 5: Upload a screenshot of the histogram of NIR surface reflectance values. {.unnumbered} 
 
 Right-click on the raster layer in the Contents pane > Create Chart > Histogram. Set the variable to the NIR band.   
 
@@ -293,6 +294,8 @@ knitr::include_graphics('images/01/01-smooth.jpg')
 
 **Step 3:** Apply a 3x3 **Sharpening** and **Smoothing** filter to the cloud masked image using the **Convolution Tool** in the Raster Functions menu. 
 
-**Take a screenshot of the filtered images and present them side-by-side in your deliverables.** 
+##### Screenshot 6: Upload a screenshot of the sharpened image. {.unnumbered}
+
+##### Screenshot 7: Upload a screeenshot of the smoothed image. {.unnumbered}
 
 ##### Q15: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of how each filter might enhance the image interpretation. {.unnumbered} 

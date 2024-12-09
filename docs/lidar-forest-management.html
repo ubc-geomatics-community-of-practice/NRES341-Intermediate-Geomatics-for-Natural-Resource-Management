@@ -183,10 +183,8 @@ Hana Travers-Smith</p>
 <div id="deliverables-2" class="section level3 unnumbered hasAnchor">
 <h3>Deliverables<a href="lidar-forest-management.html#deliverables-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p>Screenshots of terrain and vegetation models derived from pointclouds (DEM, DSM, CHM)</p></li>
-<li><p>Map of tree stems generated from a canopy height model</p></li>
-<li><p>3D Visualization of a DSM generated from a point cloud</p></li>
-<li><p>Answers to 10 questions posed in the lab</p></li>
+<li><p>Screenshots of CHM and final 3D scene</p></li>
+<li><p>Answers to 11 questions posed in the lab</p></li>
 </ul>
 <hr />
 </div>
@@ -204,8 +202,8 @@ Hana Travers-Smith</p>
 <div id="q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="section level5 unnumbered hasAnchor">
 <h5>Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums?<a href="lidar-forest-management.html#q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q2-what-is-the-point-density-of-the-dataset" class="section level5 unnumbered hasAnchor">
-<h5>Q2: What is the point density of the dataset?<a href="lidar-forest-management.html#q2-what-is-the-point-density-of-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q2-what-is-the-point-density-of-the-dataset-points-per-m2" class="section level5 unnumbered hasAnchor">
+<h5>Q2: What is the point density of the dataset (points per m<sup>2</sup>)?<a href="lidar-forest-management.html#q2-what-is-the-point-density-of-the-dataset-points-per-m2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 2:</strong> Create a new ArcGIS <strong>Map Project</strong> name it Lab5 and save it to the default directory.</p>
 <p>ArcGIS Pro has several tools that we can use to view and analyse LiDAR point clouds. In order to view the dataset, we need to import it as a LAS Dataset. Analysis &gt; Tools &gt; type ‘Create LAS dataset’ in the search box.</p>
 <ul>
@@ -284,7 +282,9 @@ Hana Travers-Smith</p>
 <div id="q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="section level5 unnumbered hasAnchor">
 <h5>Q7: Explain why we need to subtract the DEM from the DSM to calculate canopy height. Describe potential sources of error in deriving a CHM from this method.<a href="lidar-forest-management.html#q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><img src="images/05/05-RasterCalc.jpg" width="50%" style="display: block; margin: auto;" /></p>
-<p><strong>Include a screenshot of your final CHM in your deliverables. Change the default symbology to show unvegetated areas, medium vegetation &lt;30m and tall vegetation &gt;30m.</strong></p>
+</div>
+<div id="screenshot-1-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 1: Upload a screenshot of your final CHM. Change the default symbology to show unvegetated areas, medium vegetation &lt;30m and tall vegetation &gt;30m.<a href="lidar-forest-management.html#screenshot-1-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
@@ -348,7 +348,9 @@ raster that you just made. Field is Value, and the output name should be ‘tree
 <p><strong>Step 2:</strong> Navigate to the UBC campus study area and change the Basemap to <strong>Imagery</strong> in the Map tab located on the top ribbon. In the Contents pane, right-click Ground, located below the Elevation Surfaces group layer. Click ‘Add Elevation Source’. Browse to the location of your 10m DSM and select it. You can now start to see how the surface features have been incorporated into the surface. Make sure to zoom in to look at areas with high relief and roads.</p>
 <p>Add the <strong>TreeTops_Final</strong> point shapefile to the Scene.</p>
 <p><strong>Step 3:</strong> Click on ‘Ground’ underneath the Elevation Surfaces tab. On the top ribbon click ’Elevation Surface Layer. Set the Vertical Exaggeration to 2 - this will increase the contrast between high/low elevation in the scene. Finally, turn off the WOrldElevation3D/Terrain3d layer to better see how the DSM.</p>
-<p><strong>Include a screenshot of the final Scene in your final deliverables. Add the tree tops point shapefile to the visualization. (See example below, note that yours will also include the tree tops points).</strong></p>
+<div id="screenshot-2-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 2: Upload a screenshot of the final Scene. Add the tree tops points to the visualization. (See example below, note that yours will also include the tree tops points).<a href="lidar-forest-management.html#screenshot-2-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
 <div id="q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="section level5 unnumbered hasAnchor">
 <h5>Q11: Experiment with the 10m and 1m DSM. How does the DSM resolution impact the 3D visualization? Which visualization is more realistic?<a href="lidar-forest-management.html#q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><img src="images/05/05-example.jpg" width="808" style="display: block; margin: auto;" /></p>

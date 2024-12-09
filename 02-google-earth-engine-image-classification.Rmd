@@ -28,8 +28,8 @@ In their 2017 paper, Gorelick et al. describe GEE as “a multi-petabyte analysi
 
 ## Deliverables {-}
 
--   Answers to 7 questions posed in the handout
--   A screenshot of the final land cover classification
+-   Answers to 5 questions posed in the handout
+-   Two screenshots of NDVI and the final land cover classification
 -   Annotated code used to perform the analysis
 
 ------------------------------------------------------------------------
