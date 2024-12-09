@@ -122,9 +122,9 @@ Where NIR is the near-infrared band and red bands. The results of this equation 
     print(ndvi);
     Map.addLayer(ndvi, {min:0, max: 1}, 'NDVI');
 
-##### Q2. Take a screenshot of NDVI over the UBC campus.{.unnumbered}
+##### Screenshot 1: Upload a screenshot of NDVI over the UBC campus. {.unnumbered}
 
-##### Q3. Explain how red and NIR reflectance is different for healthy vegetation. How does NDVI use this difference to estimate productivity? {.unnumbered}
+##### Q2. Explain how red and NIR reflectance is different for healthy vegetation. How does NDVI use this difference to estimate productivity? {.unnumbered}
 
 Open the Inspector panel and click on pixels in the image to print their values: 
 
@@ -132,7 +132,7 @@ Open the Inspector panel and click on pixels in the image to print their values:
 knitr::include_graphics('images/02/inspector.jpg')
 ```
 
-##### Q4. Use the Inspector tool to sample pixels in water, vegetation and urban areas: approximately what range of NDVI values do you observe for these land cover types? {.unnumbered}
+##### Q3. Use the Inspector tool to sample pixels in water, vegetation and urban areas: approximately what range of NDVI values do you observe for these land cover types? {.unnumbered}
 
 ------------------------------------------------------------------------
 
@@ -171,7 +171,7 @@ knitr::include_graphics('images/02/sample.jpg')
       scale: 30
     });
 
-##### Q5: Explain how a supervised and unsupervised classification are different? {.unnumbered}
+##### Q4: Explain how a supervised and unsupervised classification are different. {.unnumbered}
 
 **Step 3:** Next we will use the **Minimum Distance** algorithm to train our classifier and predict land cover for all the pixels in our image. 
 
@@ -194,10 +194,12 @@ Finally, we apply the model to the entire image and save it as a new layer calle
 
 **Depending on the numeric values you assigned each land cover class, you may want to reorder the palette colors so that each color is assigned to an appropriate class**
 
-##### Q6: Include a screenshot of the final classified layer (see example below). Include a legend for the land cover types. What classes do you think were classified the most and least accurately? Why do you think some classes are more likely to be misclassified? {.unnumbered}
+##### Screenshot 2: Upload a screenshot of the final classified layer (see example below). Include a legend for the land cover types. {.unnumbered}
+
+##### Q5: What classes do you think were classified the most and least accurately? Why do you think some classes are more likely to be misclassified? {.unnumbered}
 
 ``` {r, echo=FALSE, out.width = "75%", fig.align = 'center'}
 knitr::include_graphics('images/02/classified.jpg')
 ```
 
-##### Q7: Use comments `//` to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. Include you final annotated code in your deliverables. {.unnumbered}
+##### Annotated Code: Use comments `//` to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. {.unnumbered}

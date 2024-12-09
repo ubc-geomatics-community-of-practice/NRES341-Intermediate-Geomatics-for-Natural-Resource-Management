@@ -253,16 +253,16 @@ var ndvi = nir.subtract(red).divide(nir.add(red)).rename(&#39;NDVI&#39;);
 
 print(ndvi);
 Map.addLayer(ndvi, {min:0, max: 1}, &#39;NDVI&#39;);</code></pre>
-<div id="q2.-take-a-screenshot-of-ndvi-over-the-ubc-campus." class="section level5 unnumbered hasAnchor">
-<h5>Q2. Take a screenshot of NDVI over the UBC campus.<a href="google-earth-engine-image-classification.html#q2.-take-a-screenshot-of-ndvi-over-the-ubc-campus." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="screenshot-1-upload-a-screenshot-of-ndvi-over-the-ubc-campus." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 1: Upload a screenshot of NDVI over the UBC campus.<a href="google-earth-engine-image-classification.html#screenshot-1-upload-a-screenshot-of-ndvi-over-the-ubc-campus." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q3.-explain-how-red-and-nir-reflectance-is-different-for-healthy-vegetation.-how-does-ndvi-use-this-difference-to-estimate-productivity" class="section level5 unnumbered hasAnchor">
-<h5>Q3. Explain how red and NIR reflectance is different for healthy vegetation. How does NDVI use this difference to estimate productivity?<a href="google-earth-engine-image-classification.html#q3.-explain-how-red-and-nir-reflectance-is-different-for-healthy-vegetation.-how-does-ndvi-use-this-difference-to-estimate-productivity" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q2.-explain-how-red-and-nir-reflectance-is-different-for-healthy-vegetation.-how-does-ndvi-use-this-difference-to-estimate-productivity" class="section level5 unnumbered hasAnchor">
+<h5>Q2. Explain how red and NIR reflectance is different for healthy vegetation. How does NDVI use this difference to estimate productivity?<a href="google-earth-engine-image-classification.html#q2.-explain-how-red-and-nir-reflectance-is-different-for-healthy-vegetation.-how-does-ndvi-use-this-difference-to-estimate-productivity" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Open the Inspector panel and click on pixels in the image to print their values:</p>
 <p><img src="images/02/inspector.jpg" width="75%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="q4.-use-the-inspector-tool-to-sample-pixels-in-water-vegetation-and-urban-areas-approximately-what-range-of-ndvi-values-do-you-observe-for-these-land-cover-types" class="section level5 unnumbered hasAnchor">
-<h5>Q4. Use the Inspector tool to sample pixels in water, vegetation and urban areas: approximately what range of NDVI values do you observe for these land cover types?<a href="google-earth-engine-image-classification.html#q4.-use-the-inspector-tool-to-sample-pixels-in-water-vegetation-and-urban-areas-approximately-what-range-of-ndvi-values-do-you-observe-for-these-land-cover-types" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q3.-use-the-inspector-tool-to-sample-pixels-in-water-vegetation-and-urban-areas-approximately-what-range-of-ndvi-values-do-you-observe-for-these-land-cover-types" class="section level5 unnumbered hasAnchor">
+<h5>Q3. Use the Inspector tool to sample pixels in water, vegetation and urban areas: approximately what range of NDVI values do you observe for these land cover types?<a href="google-earth-engine-image-classification.html#q3.-use-the-inspector-tool-to-sample-pixels-in-water-vegetation-and-urban-areas-approximately-what-range-of-ndvi-values-do-you-observe-for-these-land-cover-types" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
@@ -290,8 +290,8 @@ var training = image.select(bands).sampleRegions({
   properties: [&#39;landcover&#39;],
   scale: 30
 });</code></pre>
-<div id="q5-explain-how-a-supervised-and-unsupervised-classification-are-different" class="section level5 unnumbered hasAnchor">
-<h5>Q5: Explain how a supervised and unsupervised classification are different?<a href="google-earth-engine-image-classification.html#q5-explain-how-a-supervised-and-unsupervised-classification-are-different" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q4-explain-how-a-supervised-and-unsupervised-classification-are-different." class="section level5 unnumbered hasAnchor">
+<h5>Q4: Explain how a supervised and unsupervised classification are different.<a href="google-earth-engine-image-classification.html#q4-explain-how-a-supervised-and-unsupervised-classification-are-different." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 3:</strong> Next we will use the <strong>Minimum Distance</strong> algorithm to train our classifier and predict land cover for all the pixels in our image.</p>
 <p>First we make a new variable called <code>classifier</code> which contains the minimum distance classifier trained on our sample pixels. Conceptually, for a given pixel the model takes into account reflectance from the 6 spectral bands and NDVI and compares it with statistics generated from the training sample. The pixel is then assigned to the land cover class that it is most similar to.</p>
 <p>Finally, we apply the model to the entire image and save it as a new layer called <code>classified</code>.</p>
@@ -308,12 +308,15 @@ Map.addLayer(classified,
 <p><strong>Step 4:</strong> After you click Run, zoom into the greater Vancouver Area. The new classification layer will take some time to run and be displayed on the map. If you are having trouble viewing the classified layer, zoom in more so that there is less area to compute over.</p>
 <p><strong>Depending on the numeric values you assigned each land cover class, you may want to reorder the palette colors so that each color is assigned to an appropriate class</strong></p>
 </div>
-<div id="q6-include-a-screenshot-of-the-final-classified-layer-see-example-below.-include-a-legend-for-the-land-cover-types.-what-classes-do-you-think-were-classified-the-most-and-least-accurately-why-do-you-think-some-classes-are-more-likely-to-be-misclassified" class="section level5 unnumbered hasAnchor">
-<h5>Q6: Include a screenshot of the final classified layer (see example below). Include a legend for the land cover types. What classes do you think were classified the most and least accurately? Why do you think some classes are more likely to be misclassified?<a href="google-earth-engine-image-classification.html#q6-include-a-screenshot-of-the-final-classified-layer-see-example-below.-include-a-legend-for-the-land-cover-types.-what-classes-do-you-think-were-classified-the-most-and-least-accurately-why-do-you-think-some-classes-are-more-likely-to-be-misclassified" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="screenshot-2-upload-a-screenshot-of-the-final-classified-layer-see-example-below.-include-a-legend-for-the-land-cover-types." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 2: Upload a screenshot of the final classified layer (see example below). Include a legend for the land cover types.<a href="google-earth-engine-image-classification.html#screenshot-2-upload-a-screenshot-of-the-final-classified-layer-see-example-below.-include-a-legend-for-the-land-cover-types." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q5-what-classes-do-you-think-were-classified-the-most-and-least-accurately-why-do-you-think-some-classes-are-more-likely-to-be-misclassified" class="section level5 unnumbered hasAnchor">
+<h5>Q5: What classes do you think were classified the most and least accurately? Why do you think some classes are more likely to be misclassified?<a href="google-earth-engine-image-classification.html#q5-what-classes-do-you-think-were-classified-the-most-and-least-accurately-why-do-you-think-some-classes-are-more-likely-to-be-misclassified" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><img src="images/02/classified.jpg" width="75%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="q7-use-comments-to-annotate-each-block-of-code-you-used-to-run-this-analysis.-your-annotation-should-be-brief-but-explain-what-each-processing-step-does.-use-the-first-annotated-code-block-for-as-example.-include-you-final-annotated-code-in-your-deliverables." class="section level5 unnumbered hasAnchor">
-<h5>Q7: Use comments <code>//</code> to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example. Include you final annotated code in your deliverables.<a href="google-earth-engine-image-classification.html#q7-use-comments-to-annotate-each-block-of-code-you-used-to-run-this-analysis.-your-annotation-should-be-brief-but-explain-what-each-processing-step-does.-use-the-first-annotated-code-block-for-as-example.-include-you-final-annotated-code-in-your-deliverables." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="annotated-code-use-comments-to-annotate-each-block-of-code-you-used-to-run-this-analysis.-your-annotation-should-be-brief-but-explain-what-each-processing-step-does.-use-the-first-annotated-code-block-for-as-example." class="section level5 unnumbered hasAnchor">
+<h5>Annotated Code: Use comments <code>//</code> to annotate each block of code you used to run this analysis. Your annotation should be brief, but explain what each processing step does. Use the first annotated code block for as example.<a href="google-earth-engine-image-classification.html#annotated-code-use-comments-to-annotate-each-block-of-code-you-used-to-run-this-analysis.-your-annotation-should-be-brief-but-explain-what-each-processing-step-does.-use-the-first-annotated-code-block-for-as-example." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 
 <pre><code>## Warning in readLines(file, warn = readLines.warn): incomplete final line found
 ## on &#39;chapterauthors.yml&#39;</code></pre>
