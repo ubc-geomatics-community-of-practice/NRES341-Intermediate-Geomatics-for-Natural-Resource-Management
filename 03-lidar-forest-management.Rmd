@@ -129,7 +129,7 @@ You should now have something that looks like this:
 knitr::include_graphics('images/05/05-dem.jpg')
 ```
 
-**Step 2:** Next, we will create a DSM. We need to ensure that all point labelled as 'Noise' are filtered out from the dataset, we will also filter out 'Ground' points and just retain points coming from vegetation/infastructure. Navigate to the LAS Filter menu in the data Properties tab. 
+**Step 2:** Next, we will create a DSM. We need to ensure that all point labelled as 'Noise' are filtered out from the dataset, we will also filter out 'Ground' points and just retain points coming from vegetation/infrastructure. Navigate to the LAS Filter menu in the data Properties tab. 
 
 **Uncheck the following codes:**
 
