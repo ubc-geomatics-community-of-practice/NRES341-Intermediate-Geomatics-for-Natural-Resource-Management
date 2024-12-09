@@ -33,7 +33,7 @@ knitr::include_graphics('images/01/01-lsat.jpg')
 ### Deliverables {-}
 
 -   Screenshots of image metadata and histograms
--   Answers to 11 questions posed in the handout
+-   Answers to 15 questions posed in the handout
 
 ------------------------------------------------------------------------
 
@@ -69,11 +69,11 @@ knitr::include_graphics('images/01/01-wrs.jpg')
 
 Use the USGS resource to answer the following questions: 'https://www.usgs.gov/faqs/what-naming-convention-landsat-collections-level-1-scenes'
 
-##### Q1: For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acuqired and what Landsat Collection number are they found in? {.unnumbered} 
+##### Q1: For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acquired and what Landsat Collection number are they found in? {.unnumbered} 
 
 ##### Q2: Data in Landsat Collections 1 & 2 have been pre-processed so that images across time are geometrically and radiometicrally consistent. In 2-4 sentences explain what this means and why it is important for detecting environmental changes. {.unnumbered}
 
-##### Q3: The following image shows the spectral profile of a vegetated surface before and after atmospheric correction. Describe the differences between the two profiles and explain the properties of the atmosphere that causes this. In your own words, why is it important to correct for atmospheric effects when using satellite imagery collectd at different times? {.unnumbered}
+##### Q3: The following image shows the spectral profile of a vegetated surface before and after atmospheric correction. Describe the differences between the two profiles and explain the properties of the atmosphere that causes this. In your own words, why is it important to correct for atmospheric effects when using satellite imagery collected at different times? {.unnumbered}
 
 ``` {r, echo=FALSE, out.width = "50%", fig.align = 'center'}
 knitr::include_graphics('images/01/01-nocorr.jpg')
@@ -105,7 +105,7 @@ Navigate to > Properties > General and use the image metadata to answer the foll
 knitr::include_graphics('images/01/01-arc.jpg')
 ```
 
-##### Q4: What are the projections of raster A and raster B? What are the data types (i.e. integer or floating point)? {.unnumbered}
+##### Q4: What are the projections of raster A and raster B? What are the data types? {.unnumbered}
 
 ##### Q5: Define **radiometric resolution** and describe how it relates to the range of possible values in the image. {.unnumbered}
 
@@ -123,7 +123,7 @@ knitr::include_graphics('images/01/01-proj.jpg')
 
 **Include a screenshot of the Spatial Reference information (in the General tab) for the new raster in your final deliverables**
 
-##### Q8: Which resampling method (Nearest Neighbour or Bilinear Interpolation) is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, cateogries)? {.unnumbered}
+##### Q8: Which resampling method is most appropriate for continuous data (i.e. temperature, elevation) and why? What about discrete data (i.e. land cover classes, categories)? {.unnumbered}
 
 ------------------------------------------------------------------------
 
@@ -178,7 +178,8 @@ Change the **Primary Symbolology** of the new QA_band so that each integer is as
 knitr::include_graphics('images/01/01-qaband.jpg')
 ```
 
-Pixels with clear skies are represented by integers **21824 (land)** and **21952 (water)**. 
+Pixels with clear skies are represented by integers **21824 (land)** and **21952 (water)**.
+
 **Step 2:** We will use the **Reclassify (Spatial Analyst)** tool to create a new raster where clear sky pixels have a value of 1 and all other pixels have a value of 0. 
 
 - Input raster: QA_band
@@ -216,9 +217,9 @@ For the new polygon mask layer, use the **Select by Attributes** tool to select 
 
 Click Run. 
 
-**In your final deliverables include a screenshot of your masked Landsat scene displayed as  false color infrared. Make sure you tun off the basemap layer, so the cloud mask is visible. Note that the bands have been renamed 1-6 corresponding to B, G, R, NIR, SWIR, and the QA band.** 
+##### Screenshot 1: Upload a screenshot of your masked Landsat scene displayed as false color infrared. Make sure you tun off the basemap layer, so the cloud mask is visible. Note that the bands have been renamed 1-6 corresponding to B, G, R, NIR, SWIR, and the QA band. {.unnumbered}
 
-##### Q10: If you didn't have the QA band, what Landsat bands/spectral properties could you use to idenify cloudy pixels? {.unnumbered}
+##### Q10: If you did not have the QA band, what Landsat bands/spectral properties could you use to identify cloudy pixels? {.unnumbered}
 
 ------------------------------------------------------------------------
 
@@ -236,7 +237,7 @@ Image enhancement makes it easier to see differences in light/dark areas of an i
 knitr::include_graphics('images/01/01-stretch.jpg')
 ```
 
-**Create a histogram of NIR surface reflectance values and include in the final deliverables.** 
+##### Screenshot 2: Upload a screenshot of the histogram of NIR surface reflectance values {.unnumbered} 
 
 Right-click on the raster layer in the Contents pane > Create Chart > Histogram. Set the variable to the NIR band.   
 
@@ -274,7 +275,7 @@ knitr::include_graphics('images/01/01-focalmax.jpg')
 
 Another common filter calculates the **mean** value of the pixels in the window:  
 
-##### Q14: Use the following matrix to calculate the target pixel value (green) using a **3x3 mean filter** {.unnumbered} 
+##### Q14: Use the following matrix to calculate the target pixel value (green) using a **3x3 mean filter**. {.unnumbered} 
 
 ``` {r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/01/01-focalmean.jpg')
@@ -294,4 +295,4 @@ knitr::include_graphics('images/01/01-smooth.jpg')
 
 **Take a screenshot of the filtered images and present them side-by-side in your deliverables.** 
 
-##### Q1: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of how each filter migh enhance the image interpretation. {.unnumbered} 
+##### Q15: Describe how the sharpened and smoothed images differ in terms of the variation in pixel values. Give an example of how each filter might enhance the image interpretation. {.unnumbered} 
