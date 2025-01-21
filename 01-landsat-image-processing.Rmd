@@ -173,7 +173,7 @@ Use the following online tool to convert between integer and binary numbers and 
 - Bands: 6
 - leave the other settings as defaults. > Run
 
-Change the **Primary Symbolology** of the new QA_band so that each integer is assigned a **unique** color. This will help you see what values represent clear pixels. Your output should look something like the following: 
+Change the **Primary Symbology** of the new QA_band so that each integer is assigned a **unique** color. This will help you see what values represent clear pixels. Your output should look something like the following: 
 
 ``` {r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/01/01-qaband.jpg')

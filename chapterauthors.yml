@@ -1,7 +1,7 @@
 landsat-image-processing:
   author: Hana Travers-Smith
-google-earth-engine-image-classification:
-  author: Kailey Chelswick
+landsat-image-classification:
+  author: Paul Pickell
 sea-level-rise-suitability:
   author: Hana Travers-Smith
 terrain-hydrology-analysis:
