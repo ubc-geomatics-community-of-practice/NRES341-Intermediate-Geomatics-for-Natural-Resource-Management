@@ -6,7 +6,6 @@ author <- yml_content[["landsat-image-classification"]][["author"]]
 # Landsat Image Classification in ArcGIS Pro {#landsat-image-classification}
 
 Written by
-
 ```{r results='asis', echo=FALSE}
 cat(author)
 ```

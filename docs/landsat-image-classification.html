@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lab 2 Landsat Image Classification in ArcGIS Pro | NRES 341: Intermediate Geomatics for Natural Resource Management</title>
+  <meta name="description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lab 2 Landsat Image Classification in ArcGIS Pro | NRES 341: Intermediate Geomatics for Natural Resource Management" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  <meta name="github-repo" content="github.com/ubc-geomatics-community-of-practice/NRES341-Intermediate-Geomatics-for-Natural-Resource-Management/book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lab 2 Landsat Image Classification in ArcGIS Pro | NRES 341: Intermediate Geomatics for Natural Resource Management" />
+  
+  <meta name="twitter:description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
+  
+
+<meta name="author" content="Paul D. Pickell" />
+
+
+<meta name="date" content="2025-01-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="landsat-image-processing.html"/>
+<link rel="next" href="lidar-forest-management.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Open Geomatics Community of Practice</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-use-these-resources"><i class="fa fa-check"></i>How to use these resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-to-get-involved"><i class="fa fa-check"></i>How to get involved</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html"><i class="fa fa-check"></i><b>1</b> Introduction to Landsat Image Processing</a>
+<ul>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#lab-overview"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#data"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-1-data-types-projections"><i class="fa fa-check"></i>Task 1: Data Types &amp; Projections</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-2-cloud-and-shadow-masking"><i class="fa fa-check"></i>Task 2: Cloud and Shadow Masking</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-processing.html"><a href="landsat-image-processing.html#task-3-image-enhancement-and-focal-filters"><i class="fa fa-check"></i>Task 3: Image Enhancement and Focal Filters</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html"><i class="fa fa-check"></i><b>2</b> Landsat Image Classification in ArcGIS Pro</a>
+<ul>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#lab-overview-1"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#deliverables-1"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#data-1"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#task-1-prepare-data-for-analysis"><i class="fa fa-check"></i>Task 1: Prepare data for analysis</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#task-2-unsupervised-image-classification"><i class="fa fa-check"></i>Task 2: Unsupervised Image Classification</a></li>
+<li class="chapter" data-level="" data-path="landsat-image-classification.html"><a href="landsat-image-classification.html#task-3-supervised-image-classification"><i class="fa fa-check"></i>Task 3: Supervised Image Classification</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html"><i class="fa fa-check"></i><b>3</b> LiDAR Point Clouds for Forest Management</a>
+<ul>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#lab-overview-2"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#learning-objectives-2"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#deliverables-2"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#data-2"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-1-load-and-understand-lidar-data-in-a-map-project"><i class="fa fa-check"></i>Task 1: Load and understand LiDAR data in a Map Project</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-2-create-a-dem-dsm-and-chm"><i class="fa fa-check"></i>Task 2: Create a DEM, DSM and CHM</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-3-mapping-tree-tops"><i class="fa fa-check"></i>Task 3: Mapping Tree Tops</a></li>
+<li class="chapter" data-level="" data-path="lidar-forest-management.html"><a href="lidar-forest-management.html#task-4-visualization-in-3d"><i class="fa fa-check"></i>Task 4: Visualization in 3D</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html"><i class="fa fa-check"></i><b>4</b> Terrain and Hydology Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#lab-overview-3"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#learning-objectives-3"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#deliverables-3"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#data-3"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-1-understanding-dems"><i class="fa fa-check"></i>Task 1: Understanding DEMs</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-2-identifying-stream-networks"><i class="fa fa-check"></i>Task 2: Identifying Stream Networks</a></li>
+<li class="chapter" data-level="" data-path="terrain-hydrology-analysis.html"><a href="terrain-hydrology-analysis.html#task-3-mapping-watersheds"><i class="fa fa-check"></i>Task 3: Mapping Watersheds</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html"><i class="fa fa-check"></i><b>5</b> Mapping suitability and sea level rise</a>
+<ul>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#lab-overview-4"><i class="fa fa-check"></i>Lab Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#learning-objectives-4"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#deliverables-4"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#data-4"><i class="fa fa-check"></i>Data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-1-mapping-flood-hazard"><i class="fa fa-check"></i>Task 1: Mapping flood hazard</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-2-intersection"><i class="fa fa-check"></i>Task 2: Intersection</a></li>
+<li class="chapter" data-level="" data-path="sea-level-rise-suitability.html"><a href="sea-level-rise-suitability.html#task-3-calculating-visualizing-suitability"><i class="fa fa-check"></i>Task 3: Calculating &amp; visualizing suitability</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">NRES 341: Intermediate Geomatics for Natural Resource Management</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="landsat-image-classification" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Lab 2</span> Landsat Image Classification in ArcGIS Pro<a href="landsat-image-classification.html#landsat-image-classification" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Written by</p>
+<p>Paul Pickell</p>
+<div id="lab-overview-1" class="section level2 unnumbered hasAnchor">
+<h2>Lab Overview<a href="landsat-image-classification.html#lab-overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Image classification is a common task in image analysis. Land cover classification maps can be useful for calculating the total area of different classes and other spatial information about a land base. In this lab, we will explore simple methods that involve thresholding a spectral index and more complex unsupervised and supervised algorithms. At the end, you will be asked to reflect on the choices and assumptions that were made and what impact those have on the final classification and how we can use it.</p>
+<hr />
+</div>
+<div id="learning-objectives-1" class="section level2 unnumbered hasAnchor">
+<h2>Learning Objectives<a href="landsat-image-classification.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Calculate a simple spectral index</li>
+<li>Apply supervised and unsupervised classification algorithms to create a land cover map</li>
+<li>Interpet a confusion matrix</li>
+</ul>
+<hr />
+</div>
+<div id="deliverables-1" class="section level2 unnumbered hasAnchor">
+<h2>Deliverables<a href="landsat-image-classification.html#deliverables-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Answers to questions posed throughout the lab handout</li>
+<li>Screenshot of NDVI image</li>
+<li>Screenshot of ISO cluster map</li>
+<li>Screenshot of confusion matrix</li>
+<li>Map of supervised EOSD land cover classification</li>
+</ul>
+<hr />
+</div>
+<div id="data-1" class="section level2 unnumbered hasAnchor">
+<h2>Data<a href="landsat-image-classification.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral image and a number of quality assurance (QA) bands and other metadata that are distributed with this product. You can download these data from Canvas.</p>
+<hr />
+</div>
+<div id="task-1-prepare-data-for-analysis" class="section level2 unnumbered hasAnchor">
+<h2>Task 1: Prepare data for analysis<a href="landsat-image-classification.html#task-1-prepare-data-for-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Open ArcGIS Pro and create a new project. Download the lab data from Canvas and extract those data into your ArcGIS Pro project folder that you just created, usually in <code>C:\Users\you\Documents\ArcGIS\Projects\lab2</code>.</p>
+<p><strong>Step 2:</strong> Search for the “Compsite Bands” tool in ArcGIS Pro. Add all of the seven surface reflectance bands and then name the output “sr_composite.tif” and save it in your ArcGIS Pro project folder.</p>
+<p><img src="images/02/02-arcgispro-composite-bands.png" width="40%" /></p>
+<p><strong>Step 3:</strong> Right-click the <strong>sr_composite.tif</strong> layer and open the symbology. Create a 6-5-4 false colour image.</p>
+<p><img src="images/02/02-arcgispro-654.png" width="100%" /></p>
+<p>Next, we will calculate some spectral indices from this composite image. Spectral indices are mathematical equations containing spectral reflectance values from two or more wavelengths used to highlight areas of spectral importance in an image. There are a wide variety of spectral indices used to highlight a variety of different land covers and image properties. The Normalized Difference Vegetation Index (NDVI) is a frequently used spectral index that takes advantage of the high near-infrared reflectance and high red absorption properties of healthy vegetation and is therefore often used to quantify vegetation in a remotely sensed multispectral image.</p>
+<p>NDVI is calculated with the below formula:</p>
+<p><span class="math inline">\(\ NDVI = \frac{(NIR - RED)}{(NIR+RED)}\)</span></p>
+<p>Where NIR is the near-infrared band (Landsat 9 Band 5) and Red is the red band (Landsat 9 Band 4). The results of this equation should be an index with values ranging between -1 and 1. Values less than 0 represent water (i.e., a higher absorption of NIR compared to Red) and values between 0-1 representing different levels of green vegetation.</p>
+<p>ArcGIS Pro contains several ways to calculate common indices like NDVI. In this lab we will be using the “band arithmetic” function as it is a bit more flexible and easier to understand.</p>
+<p><strong>Step 4:</strong> Navigate to the Imagery tab on the ribbon at the top of your ArcGIS Pro window and click the “Raster Function” button. The Raster Functions pane should appear, you can either navigate the drop down menus to “Math” &gt; “Band Arithmetic” or use the search function to find the “Band Arithmetic Tool” and click to open.</p>
+<p><img src="images/02/02-arcgispro-band-arithmetic.png" width="40%" /></p>
+<p>The “Band Arithmetic Properties” dialogue should appear. Under “Raster” use the drop down menu and select the <strong>sr_composite.tif</strong> layer. If it is not currently in your map view and can use the folder button and navigate to your lab data folder and select the file. Under “Method” select “User Defined”.</p>
+<p>Using your knowledge of spectral indices, fill in the NDVI calculation for your data.</p>
+<div id="screenshot-1-upload-a-screenshot-of-your-ndvi-image." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 1: Upload a screenshot of your NDVI image.<a href="landsat-image-classification.html#screenshot-1-upload-a-screenshot-of-your-ndvi-image." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q1.-what-are-the-minimum-and-maximum-values-of-your-new-ndvi-layer" class="section level5 unnumbered hasAnchor">
+<h5>Q1. What are the minimum and maximum values of your new NDVI layer?<a href="landsat-image-classification.html#q1.-what-are-the-minimum-and-maximum-values-of-your-new-ndvi-layer" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q2.-what-do-the-dark-areas-in-the-image-represent-the-gray-areas-the-white" class="section level5 unnumbered hasAnchor">
+<h5>Q2. What do the dark areas in the image represent? The gray areas? The white?<a href="landsat-image-classification.html#q2.-what-do-the-dark-areas-in-the-image-represent-the-gray-areas-the-white" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q3.-what-information-does-this-type-of-analysis-give-us-when-and-why-might-this-type-of-analysis-be-used" class="section level5 unnumbered hasAnchor">
+<h5>Q3. What information does this type of analysis give us? When and why might this type of analysis be used?<a href="landsat-image-classification.html#q3.-what-information-does-this-type-of-analysis-give-us-when-and-why-might-this-type-of-analysis-be-used" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Next, we will use a technique called thresholding to extract highly vegetated areas (high NDVI).</p>
+<p><strong>Step 5:</strong> Under the “Analysis” ribbon select the “Tools” option. The geoprocessing window should appear in the search box type “Reclassify” and select the option with “(Spatial Analyst Tools)” beside it.</p>
+<p><img src="images/02/02-arcgispro-reclassify.png" width="40%" /></p>
+<p><strong>Step 6:</strong> Select the NDVI band arithmetic raster layer that you produced from Task 1. Reclassify the NDVI values so that values greater than or equal to 0.3 have a new value of 1 and all others have a value of NODATA. Under “Output Raster” save the file as “ndvi_threshold.tif” and run the tool.</p>
+<p><img src="images/02/02-arcgispro-reclassify-ndvi.png" width="40%" /></p>
+<hr />
+</div>
+</div>
+<div id="task-2-unsupervised-image-classification" class="section level2 unnumbered hasAnchor">
+<h2>Task 2: Unsupervised Image Classification<a href="landsat-image-classification.html#task-2-unsupervised-image-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Left-click on the <strong>sr_composite.tif</strong> layer in your Contents pane to select it.</p>
+<p><strong>Step 2:</strong> From the top ribbon, select “Imagery”, then click the “Classification Tools” button and finally select “Classify”.</p>
+<p><img src="images/02/02-arcgispro-classify.png" width="40%" /></p>
+<p><strong>Step 3:</strong> At the top of the tool, select “ISO Cluster” from the “Classifer drop-down menu. Set”Maximum Number of Classes” to 10. Change the “Output Classified Dataset” name to “iso_cluster.tif” and run the tool.</p>
+<p><strong>Step 4:</strong> Inspect the output. You may want to open the layer Symbology and change the color scheme to a random set of colours. From the Symbology pane, you can change the “Label” of each class value to anything your want by double-clicking the cell and typing any text. Spend some time interpreting the unsupervised classes and providing appropriate labels for each. You may want to toggle between the ISO cluster classification and the 6-5-4 false colour image to aid your interpretations.</p>
+<p><img src="images/02/02-arcgispro-iso-cluster.png" width="100%" /></p>
+<div id="screenshot-2-upload-a-screenshot-of-your-iso-cluster-map-result-with-your-labelled-legend-visible-in-the-contents-pane." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 2: Upload a screenshot of your ISO cluster map result with your labelled legend visible in the Contents pane.<a href="landsat-image-classification.html#screenshot-2-upload-a-screenshot-of-your-iso-cluster-map-result-with-your-labelled-legend-visible-in-the-contents-pane." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<hr />
+</div>
+</div>
+<div id="task-3-supervised-image-classification" class="section level2 unnumbered hasAnchor">
+<h2>Task 3: Supervised Image Classification<a href="landsat-image-classification.html#task-3-supervised-image-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Step 1:</strong> Left-click on the <strong>sr_composite.tif</strong> layer in your Contents pane to select it.</p>
+<p><strong>Step 2:</strong> From the top ribbon, select “Imagery”, then click the “Classification Tools” button and finally select “Training Samples Manager”.</p>
+<p><img src="images/02/02-arcgispro-training-samples-manager.png" width="40%" /></p>
+<p>In the tool, you should see the “NLCD2011” classification scheme pre-loaded at the top and it contains some generic classes. If you do not, you can load it by clicking the folder icon and then selecting “Use default schema”. NLCD stands for National Land Cover Database and 2011 is the nominal year that this schema was produced for. “National” in this case refers to the United States, not Canada. This is a land cover schema you would typically find for the United States. Canada has a similar land cover dataset called Earth Observation for Sustainable Development of Forests (EOSD). We are going to create a new schema that uses the Canadian labels from the EOSD legend.</p>
+<p><img src="images/02/02-arcgispro-nlcd2011.png" width="40%" /></p>
+<p><img src="images/02/02-arcgispro-create-new-schema.png" width="40%" /></p>
+<p><strong>Step 3:</strong> Click the button to the left of the folder icon to “Create New Schema”. This will get rid of the NLCD2011 schema that was loaded and allow you to start populating the class values. To add a new class value, click the green plus mark + and then type the name of the class and then the value of that class to be encoded in the raster. If you want, you can pick colours for your classes at this stage or just accept the default. Using this process, enter the classes in the following table as your new schema:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Class Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Water</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Snow/Ice</td>
+<td>31</td>
+</tr>
+<tr class="odd">
+<td>Rock/Rubble</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>Exposed/Barren Land</td>
+<td>33</td>
+</tr>
+<tr class="odd">
+<td>Shrubs</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td>Wetland</td>
+<td>80</td>
+</tr>
+<tr class="odd">
+<td>Wetland-Treed</td>
+<td>81</td>
+</tr>
+<tr class="even">
+<td>Herbs</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>Coniferous Forest</td>
+<td>210</td>
+</tr>
+<tr class="even">
+<td>Broadleaf</td>
+<td>220</td>
+</tr>
+<tr class="odd">
+<td>Mixedwood</td>
+<td>230</td>
+</tr>
+</tbody>
+</table>
+<p>Your final schema should look like the image below. You might want to save your schema now in case you need to stop the lab and finish later.</p>
+<p><img src="images/02/02-arcgispro-eosd.png" width="40%" /></p>
+<p><strong>Step 4:</strong> Left-click on any class in the schema in order to make the digitizing tools available at the top. Once a class is selected, you can choose to digitize a training sample for that class using a rectangle, polygon, circle or free-hand by selecting one of those tools at the top. Then, you can digitize directly onto the map. You will want to have the 6-5-4 false colour image displayed and you will want to digitize training samples that are relatively small and homogenous, so be careful with how you draw your lines. Repeat this process until you have about 5-8 training samples per class. This will take a great deal of interpretation and you may not be able to distinguish between “Wetland” and “Wetland-Treed”, but do your best. If you cannot find any samples for a class, skip it. Feel free to consult other information to help you create the training samples. When you are finished creating training samples, save them into your project geodatabase as “EOSD_training_samples”.</p>
+<p><img src="images/02/02-arcgispro-digitize-training-samples.png" width="100%" /></p>
+<p><strong>Step 5:</strong> Left-click on the <strong>sr_composite.tif</strong> layer in the Contents pane and then from the ribbon select “Imagery”, “Classification Tools”, and “Classify”. Change the “Classifier” to “Maximum Likelihood” and navigate to the “EOSD_training_samples” that you saved in your geodatabase for the Training Samples. Save the “Output Classified Dataset” as “EOSD_Classified”, then run the tool.</p>
+<p><img src="images/02/02-arcgispro-create-accuracy-assessment-points.png" width="100%" /></p>
+<p><strong>Step 6:</strong> From the Geoprocessing pane, search for the “Create Accuracy Assessment Points” tool. Add the <strong>CA_forest_VLCE2_2022_clip.tif</strong> as the Input Raster (this is the classified EOSD land cover). Save the Output Accuracy Assessment Points as “eosd_accuracy_assessment_points” in your project geodatabase. Change the Target Filed to “Ground Truth”, leave the other parameters as default and then run the tool. This will generate 500 points randomly stratified across the classes in the official EOSD land cover classification. Open the attribute table to inspect the output.</p>
+<p><img src="images/02/02-arcgispro-accuracy-assessment-points-attributes.png" width="75%" /></p>
+<p><strong>Step 7:</strong> From the Geoprocessing pane, search for the “Update Accuracy Assessment Points” tool. This time, we are going to select our “EOSD_Classified” image that we classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the “Target Field” to “Classified” and then run the tool.</p>
+<p><img src="images/02/02-arcgispro-update-accuracy-assessment-points.png" width="40%" /></p>
+<p><strong>Step 8:</strong> From the Geoprocessing pane, search for the “Compute Confusion Matrix” tool. Use the “eosd_accuracy_assessment_points” as the Input Accuracy Assessment Points and save the output as “confusion_matrix” in your geodatabase then run the tool.</p>
+<p><img src="images/02/02-arcgispro-confusion-matrix.png" width="100%" /></p>
+<div id="screenshot-3-upload-a-screenshot-of-your-confusion-matrix." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 3: Upload a screenshot of your confusion matrix.<a href="landsat-image-classification.html#screenshot-3-upload-a-screenshot-of-your-confusion-matrix." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q4.-which-of-your-classes-had-the-highest-users-accuracy-why" class="section level5 unnumbered hasAnchor">
+<h5>Q4. Which of your classes had the highest User’s accuracy? Why?<a href="landsat-image-classification.html#q4.-which-of-your-classes-had-the-highest-users-accuracy-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q5.-which-of-your-classes-had-the-lowest-users-accuracy-why" class="section level5 unnumbered hasAnchor">
+<h5>Q5. Which of your classes had the lowest User’s accuracy? Why?<a href="landsat-image-classification.html#q5.-which-of-your-classes-had-the-lowest-users-accuracy-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q6.-which-of-your-classes-had-the-highest-producers-accuracy-why" class="section level5 unnumbered hasAnchor">
+<h5>Q6. Which of your classes had the highest Producer’s accuracy? Why?<a href="landsat-image-classification.html#q6.-which-of-your-classes-had-the-highest-producers-accuracy-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q7.-which-of-your-classes-had-the-lowest-producers-accuracy-why" class="section level5 unnumbered hasAnchor">
+<h5>Q7. Which of your classes had the lowest Producer’s accuracy? Why?<a href="landsat-image-classification.html#q7.-which-of-your-classes-had-the-lowest-producers-accuracy-why" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q8.-compare-and-contrast-your-unsupervised-classification-with-your-supervised-classification.-how-did-these-methods-compare-with-the-very-simple-thresholding-approach-you-did-earlier-with-ndvi" class="section level5 unnumbered hasAnchor">
+<h5>Q8. Compare and contrast your unsupervised classification with your supervised classification. How did these methods compare with the very simple thresholding approach you did earlier with NDVI?<a href="landsat-image-classification.html#q8.-compare-and-contrast-your-unsupervised-classification-with-your-supervised-classification.-how-did-these-methods-compare-with-the-very-simple-thresholding-approach-you-did-earlier-with-ndvi" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+</div>
+<div id="q9.-how-did-the-thematic-resolution-of-the-eosd-classification-impact-your-ability-to-discern-classes-in-an-urban-environment-if-you-had-to-do-this-again-are-there-any-classes-that-you-would-drop-combine-or-introduce" class="section level5 unnumbered hasAnchor">
+<h5>Q9. How did the thematic resolution of the EOSD classification impact your ability to discern classes in an urban environment? If you had to do this again, are there any classes that you would drop, combine, or introduce?<a href="landsat-image-classification.html#q9.-how-did-the-thematic-resolution-of-the-eosd-classification-impact-your-ability-to-discern-classes-in-an-urban-environment-if-you-had-to-do-this-again-are-there-any-classes-that-you-would-drop-combine-or-introduce" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Export a professional map of your final supervised EOSD classification and upload to Canvas.</p>
+
+<pre><code>## Warning in readLines(file, warn = readLines.warn): incomplete final line found
+## on &#39;chapterauthors.yml&#39;</code></pre>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="landsat-image-processing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lidar-forest-management.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["open-geomatics-community-of-practice.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
