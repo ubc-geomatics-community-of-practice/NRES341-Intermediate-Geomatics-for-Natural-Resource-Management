@@ -43,7 +43,7 @@ We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral ima
 
 ## Task 1: Prepare data for analysis {.unnumbered}
 
-**Step 1:** Open ArcGIS Pro and create a new project. Download the lab data from Canvas and extract those data into your ArcGIS Pro project folder that you just created, usually in "C:\Users\you\Documents\ArcGIS\Projects\lab2".
+**Step 1:** Open ArcGIS Pro and create a new project. Download the lab data from Canvas and extract those data into your ArcGIS Pro project folder that you just created, usually in `C:\Users\you\Documents\ArcGIS\Projects\lab2`.
 
 **Step 2:** Search for the "Compsite Bands" tool in ArcGIS Pro. Add all of the seven surface reflectance bands and then name the output "sr_composite.tif" and save it in your ArcGIS Pro project folder.
 
@@ -53,7 +53,7 @@ We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral ima
 
 **Step 3:** Right-click the **sr_composite.tif** layer and open the symbology. Create a 6-5-4 false colour image.
 
-```{r 02-arcgispro-654, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-654, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-654.png")
 ```
 
@@ -89,13 +89,13 @@ Next, we will use a technique called thresholding to extract highly vegetated ar
 
 **Step 5:** Under the "Analysis" ribbon select the "Tools" option. The geoprocessing window should appear in the search box type "Reclassify" and select the option with "(Spatial Analyst Tools)" beside it.
 
-```{r 02-arcgispro-reclassify, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-reclassify, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-reclassify.png")
 ```
 
 **Step 6:** Select the NDVI band arithmetic raster layer that you produced from Task 1. Reclassify the NDVI values so that values greater than or equal to 0.3 have a new value of 1 and all others have a value of NODATA. Under "Output Raster" save the file as "ndvi_threshold.tif" and run the tool.
 
-```{r 02-arcgispro-reclassify-ndvi, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-reclassify-ndvi, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-reclassify-ndvi.png")
 ```
 
@@ -107,7 +107,7 @@ Next, we will use a technique called thresholding to extract highly vegetated ar
 
 **Step 2:** From the top ribbon, select "Imagery", then click the "Classification Tools" button and finally select "Classify".
 
-```{r 02-arcgispro-classify, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-classify, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-classify.png")
 ```
 
@@ -115,7 +115,7 @@ Next, we will use a technique called thresholding to extract highly vegetated ar
 
 **Step 4:** Inspect the output. You may want to open the layer Symbology and change the color scheme to a random set of colours. From the Symbology pane, you can change the "Label" of each class value to anything your want by double-clicking the cell and typing any text. Spend some time interpreting the unsupervised classes and providing appropriate labels for each. You may want to toggle between the ISO cluster classification and the 6-5-4 false colour image to aid your interpretations.
 
-```{r 02-arcgispro-iso-cluster, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-iso-cluster, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-iso-cluster.png")
 ```
 
@@ -129,7 +129,7 @@ Next, we will use a technique called thresholding to extract highly vegetated ar
 
 **Step 2:** From the top ribbon, select "Imagery", then click the "Classification Tools" button and finally select "Training Samples Manager".
 
-```{r 02-arcgispro-training-samples-manager, out.width= "75%", echo = FALSE}
+```{r 02-arcgispro-training-samples-manager, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-training-samples-manager.png")
 ```
 
@@ -137,6 +137,10 @@ In the tool, you should see the "NLCD2011" classification scheme pre-loaded at t
 
 ```{r 02-arcgispro-nlcd2011, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-nlcd2011.png")
+```
+
+```{r 02-arcgispro-create-new-schema, out.width= "40%", echo = FALSE}
+    knitr::include_graphics("images/02/02-arcgispro-create-new-schema.png")
 ```
 
 **Step 3:** Click the button to the left of the folder icon to "Create New Schema". This will get rid of the NLCD2011 schema that was loaded and allow you to start populating the class values. To add a new class value, click the green plus mark + and then type the name of the class and then the value of that class to be encoded in the raster. If you want, you can pick colours for your classes at this stage or just accept the default. Using this process, enter the classes in the following table as your new schema:
@@ -163,13 +167,13 @@ Your final schema should look like the image below. You might want to save your 
 
 **Step 4:** Left-click on any class in the schema in order to make the digitizing tools available at the top. Once a class is selected, you can choose to digitize a training sample for that class using a rectangle, polygon, circle or free-hand by selecting one of those tools at the top. Then, you can digitize directly onto the map. You will want to have the 6-5-4 false colour image displayed and you will want to digitize training samples that are relatively small and homogenous, so be careful with how you draw your lines. Repeat this process until you have about 5-8 training samples per class. This will take a great deal of interpretation and you may not be able to distinguish between "Wetland" and "Wetland-Treed", but do your best. If you cannot find any samples for a class, skip it. Feel free to consult other information to help you create the training samples. When you are finished creating training samples, save them into your project geodatabase as "EOSD_training_samples".
 
-```{r 02-arcgispro-digitize-trainging-samples, out.width= "40%", echo = FALSE}
-    knitr::include_graphics("images/02/02-arcgispro-digitize-trainging-samples.png")
+```{r 02-arcgispro-digitize-training-samples, out.width= "100%", echo = FALSE}
+    knitr::include_graphics("images/02/02-arcgispro-digitize-training-samples.png")
 ```
 
 **Step 5:** Left-click on the **sr_composite.tif** layer in the Contents pane and then from the ribbon select "Imagery", "Classification Tools", and "Classify". Change the "Classifier" to "Maximum Likelihood" and navigate to the "EOSD_training_samples" that you saved in your geodatabase for the Training Samples. Save the "Output Classified Dataset" as "EOSD_Classified", then run the tool.
 
-```{r 02-arcgispo-create-accuracy-assessment-points, out.width= "75%", echo = FALSE}
+```{r 02-arcgispo-create-accuracy-assessment-points, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-create-accuracy-assessment-points.png")
 ```
 
@@ -187,7 +191,7 @@ Your final schema should look like the image below. You might want to save your 
 
 **Step 8:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
 
-```{r 02-arcgispro-confusion-matrix, out.width= "40%", echo = FALSE}
+```{r 02-arcgispro-confusion-matrix, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-confusion-matrix.png")
 ```
 
