@@ -36,7 +36,7 @@ Image classification is a common task in image analysis. Land cover classificati
 
 ## Data {.unnumbered}
 
-We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral image and a number of quality assurance (QA) bands and other metadata that are distributed with this product. You can download these data from Canvas.
+We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral image and other metadata that are distributed with this product. You can download these data from Canvas.
 
 ------------------------------------------------------------------------
 
@@ -176,19 +176,27 @@ Your final schema should look like the image below. You might want to save your 
     knitr::include_graphics("images/02/02-arcgispro-create-accuracy-assessment-points.png")
 ```
 
-**Step 6:** From the Geoprocessing pane, search for the "Create Accuracy Assessment Points" tool. Add the **CA_forest_VLCE2_2022_clip.tif** as the Input Raster (this is the classified EOSD land cover). Save the Output Accuracy Assessment Points as "eosd_accuracy_assessment_points" in your project geodatabase. Change the Target Filed to "Ground Truth", leave the other parameters as default and then run the tool. This will generate 500 points randomly stratified across the classes in the official EOSD land cover classification. Open the attribute table to inspect the output.
+Before we can actually place testing points on our map, we need to change the EOSD classification raster by replacing 0 with NoData/Null. Zero is a valid value to ArcGIS Pro, but it is not an actual class, so setting these zeros to NoData/Null ensures that we will not sample in those areas.
+
+**Step 6:** From the Geoprocessing pane, search for the "Set Null" tool (Image Analyst). Add the **CA_forest_VLCE2_2022_clip.tif** as the Input Conditional Raster (this is the classified EOSD land cover). Change the expression so that it reads "WHERE VALUE is equal to 0", this is the conditional statement that we are going to test. If the tool finds any values of 0 in the raster (grey coloured in the screenshot above), then those will be set to NoData/Null. Under "Input false raster or constant value", you will select **CA_forest_VLCE2_2022_clip.tif** again. This is because if the value is not 0 (false), then we want to keep the existing value in the EOSD classification. Name the output **CA_forest_VLCE2_2022_clip_null.tif** (or **CA_forest_VLCE2_2022_clip_null** if you save it inside your geodatabase) and then run the tool.
+
+```{r 02-arcgispro-set-null, out.width= "40%", echo = FALSE}
+    knitr::include_graphics("images/02/02-arcgispro-set-null.png")
+```
+
+**Step 7:** From the Geoprocessing pane, search for the "Create Accuracy Assessment Points" tool. Add the **CA_forest_VLCE2_2022_clip_null.tif** (or **CA_forest_VLCE2_2022_clip_null** if you saved inside your geodatabase) as the Input Raster (this is the classified EOSD land cover). Save the Output Accuracy Assessment Points as "eosd_accuracy_assessment_points" in your project geodatabase. Change the Target Filed to "Ground Truth", leave the other parameters as default and then run the tool. This will generate 500 points randomly stratified across the classes in the official EOSD land cover classification. Open the attribute table to inspect the output.
 
 ```{r 02-arcgispro-accuracy-assessment-points-attributes, out.width= "75%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-accuracy-assessment-points-attributes.png")
 ```
 
-**Step 7:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool. This time, we are going to select our "EOSD_Classified" image that we classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified" and then run the tool.
+**Step 8:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool. This time, we are going to select our "EOSD_Classified" image that we classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified", leave "Dimension Field for Test points" blank, and then run the tool.
 
 ```{r 02-arcgispro-update-accuracy-assessment-points, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-update-accuracy-assessment-points.png")
 ```
 
-**Step 8:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
+**Step 9:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
 
 ```{r 02-arcgispro-confusion-matrix, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02/02-arcgispro-confusion-matrix.png")
