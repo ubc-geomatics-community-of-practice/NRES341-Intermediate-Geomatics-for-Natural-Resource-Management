@@ -23,7 +23,7 @@
 <meta name="author" content="Paul D. Pickell" />
 
 
-<meta name="date" content="2025-01-28" />
+<meta name="date" content="2025-02-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,11 +296,13 @@ Hana Travers-Smith</p>
 <ul>
 <li><strong>1m</strong> spatial resolution</li>
 <li>the raster values should represent the highest point in each cell</li>
-<li>name the output <strong>TreeTops</strong></li>
+<li>name the output <strong>DSM_1m</strong></li>
 </ul>
+<p><strong>Step 2:</strong> Next, produce a DEM <strong>DEM_1m</strong> at the same spatial resolution of 1m using what you learned in the last task.</p>
+<p><strong>Step 3:</strong> Again following what you learned in the last task, subtract the 1m DEM from the 1m DSM and name the output file <strong>TreeTops</strong>.</p>
 <div id="q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="section level5 unnumbered hasAnchor">
 <h5>Q8: What features are now visible in the 1m DSM that were not visible in the 10m DSM?<a href="lidar-forest-management.html#q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><strong>Step 2:</strong> Next we will use the <strong>Focal Statistics</strong> Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 5m (5 x 1m) circular moving window. Use the following parameters:</p>
+<p><strong>Step 4:</strong> Next we will use the <strong>Focal Statistics</strong> Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 11m circular moving window (5m is the radius, 10m is the diameter, plus one more cell for the focal cell = 11m). Use the following parameters:</p>
 <ul>
 <li>Input raster: <strong>TreeTops</strong></li>
 <li>Output raster: <strong>TreeTop_max</strong></li>

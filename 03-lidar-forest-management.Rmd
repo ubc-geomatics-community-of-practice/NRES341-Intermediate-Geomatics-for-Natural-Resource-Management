@@ -164,11 +164,15 @@ Next, use the **LAS Dataset to Raster** tool to create a raster from the filtere
 
 - **1m** spatial resolution
 - the raster values should represent the highest point in each cell
-- name the output **TreeTops**
+- name the output **DSM_1m**
+
+**Step 2:** Next, produce a DEM **DEM_1m** at the same spatial resolution of 1m using what you learned in the last task.
+
+**Step 3:** Again following what you learned in the last task, subtract the 1m DEM from the 1m DSM and name the output file **TreeTops**.
 
 ##### Q8: What features are now visible in the 1m DSM that were not visible in the 10m DSM? {-} 
 
-**Step 2:** Next we will use the **Focal Statistics** Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 5m (5 x 1m) circular moving window. Use the following parameters: 
+**Step 4:** Next we will use the **Focal Statistics** Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 11m circular moving window (5m is the radius, 10m is the diameter, plus one more cell for the focal cell = 11m). Use the following parameters: 
 
 - Input raster: **TreeTops**
 - Output raster: **TreeTop_max**
