@@ -6,7 +6,6 @@ author <- yml_content[["sea-level-rise-suitability"]][["author"]]
 # Mapping suitability and sea level rise {#sea-level-rise-suitability}
 
 Written by
-
 ```{r results='asis', echo=FALSE}
 cat(author)
 ```
@@ -19,7 +18,7 @@ In this lab you will use a digital elevation model (DEM) covering the metro Vanc
 
 In partnership with the Delta community, the Collaborative for Advanced Landscape Planning (CALP) research group at UBC produced the following report on projected sea level rise and adaptation strategies for this region, which can be found here:
 
-[Delta-RAC Sea Level Rise Adaptation Visioning Study (54.4 MB)](/NRES341-Intermediate-Geomatics-for-Natural-Resource-Management/data/05/bcrac_delta_visioning-policy_4d.pdf)
+<a href="https://raw.githubusercontent.com/ubc-geomatics-community-of-practice/NRES341-Intermediate-Geomatics-for-Natural-Resource-Management/refs/heads/main/data/05/BCRAC_Delta_Visioning-Policy_4d.pdf?raw=true" target="_blank">Delta-RAC Sea Level Rise Adaptation Visioning Study (54.4 MB)</a>
 
 ```{r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/03/02-CALP.jpg')
