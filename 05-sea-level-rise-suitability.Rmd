@@ -19,7 +19,7 @@ In this lab you will use a digital elevation model (DEM) covering the metro Vanc
 
 In partnership with the Delta community, the Collaborative for Advanced Landscape Planning (CALP) research group at UBC produced the following report on projected sea level rise and adaptation strategies for this region, which can be found here:
 
-[Delta-RAC Sea Level Rise Adaptation Visioning Study (54.4 MB)](/data/05/bcrac_delta_visioning-policy_4d.pdf)
+[Delta-RAC Sea Level Rise Adaptation Visioning Study (54.4 MB)](/NRES341-Intermediate-Geomatics-for-Natural-Resource-Management/data/05/bcrac_delta_visioning-policy_4d.pdf)
 
 ```{r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/03/02-CALP.jpg')
@@ -216,7 +216,7 @@ Right click on the **ag_polys** layer in the Contents pane \> Joins and Relates 
 -   Join Attribute: LRPLD
 -   **Un-check** Keep all target features
 
-**Step 6** Change the Symbology of the **ag_polys** layer to reflect the **Suitability Score**. Finally, create a map with the following elements and include it in your final deliverables:
+**Step 6:** Change the Symbology of the **ag_polys** layer to reflect the **Suitability Score**. Finally, create a map with the following elements and include it in your final deliverables:
 
 -   Agricultural polygons color coded by suitability score
 -   Title
