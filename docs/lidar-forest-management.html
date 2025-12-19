@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Lab 3 LiDAR Point Clouds for Forest Management | NRES 341: Intermediate Geomatics for Natural Resource Management</title>
   <meta name="description" content="Open Educational Resources for NRES 341 course at the University of British Columbia" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Lab 3 LiDAR Point Clouds for Forest Management | NRES 341: Intermediate Geomatics for Natural Resource Management" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Paul D. Pickell" />
 
 
-<meta name="date" content="2025-03-10" />
+<meta name="date" content="2025-12-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,7 +169,7 @@ Hana Travers-Smith</p>
 <p>LiDAR, short for Light Detection and Ranging, is a remote sensing technology that uses laser pulses to measure distances and create detailed 3D maps of objects and environments. To map vegetation, LiDAR emits laser beams from an aircraft or ground-based system towards the vegetation canopy. The laser pulses bounce back upon hitting objects, including leaves, branches, and the ground. By measuring the time it takes for the pulses to return, LiDAR calculates the distance to each point, generating a “point cloud” of data.</p>
 <p>“Point clouds” can be used to create high-resolution maps depicting the vertical structure of vegetation, including tree heights, density, and ground cover. These maps are invaluable for understanding ecosystem health, biodiversity, carbon storage, and assisting in land management decisions such as forest monitoring, conservation planning, and urban development.</p>
 <p>In this lab you will use high resolution LiDAR data collected by the City of Vancouver to create a model of terrain and vegetation for a forest located on UBC campus.</p>
-<p><img src="images/05/05-river_pointcloud.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-river_pointcloud.png" width="100%" style="display: block; margin: auto;" /></p>
 <hr />
 <div id="learning-objectives-2" class="section level3 unnumbered hasAnchor">
 <h3>Learning Objectives<a href="lidar-forest-management.html#learning-objectives-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -214,7 +214,7 @@ Hana Travers-Smith</p>
 <li>Check the ‘Compute Statistics’ box.</li>
 <li>Surface Constraints can be left blank</li>
 </ul>
-<p><img src="images/05/05-lasd.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-lasd.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 3:</strong> Depending on the zoom extent, you may only see the red bounding box of the las file; this isn’t an error, you just need to zoom in to see the actual points.</p>
 <p>The points can be classified into the following categories:</p>
 <ul>
@@ -224,7 +224,7 @@ Hana Travers-Smith</p>
 </ul>
 <p>The default display is that no point cloud filters are applied. To quickly filter only ground points right click on the file in the Contents Pane, navigate to ‘LAS Filters’, and click ‘Ground’.</p>
 <p>There is also a more detailed classification system, which includes vegetation, water, noise, buildings etc. Right-click on the the file &gt; Properties &gt; LAS Filter. This menu gives you more control for which points you want to display from the dataset.</p>
-<p><img src="images/05/05-filter.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-filter.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 </div>
@@ -236,10 +236,10 @@ Hana Travers-Smith</p>
 <li>Digital Surface Model (DSM)</li>
 <li>Canopy Height Model (CHM)</li>
 </ul>
-<div id="q3-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="section level5 unnumbered hasAnchor">
-<h5>Q3: What does a DEM, DSM and CHM represent? How do you interpret the values in each one?<a href="lidar-forest-management.html#q3-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q3.-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="section level5 unnumbered hasAnchor">
+<h5>Q3. What does a DEM, DSM and CHM represent? How do you interpret the values in each one?<a href="lidar-forest-management.html#q3.-what-does-a-dem-dsm-and-chm-represent-how-do-you-interpret-the-values-in-each-one" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 1:</strong> First, we will create a DEM from the .lasd point cloud. <strong>Filter the point cloud so that only points labelled ‘02 Ground’ are displayed.</strong></p>
-<p>Analysis &gt; Tools &gt; Search for <strong>LAS Dataset to Raster</strong>. We will use the <strong>Binning</strong> method to interpolate elevation. This method works by dividing the point cloud into cells (pixels) and assigning a value to each cell based on the heights of all the points in the cell. For example, cell values could be assigned as the average height of all points within a 10x10m pixel.</p>
+<p>Analysis &gt; Tools &gt; Search for <strong>LAS Dataset to Raster</strong>. We will use the <strong>Binning</strong> method to interpolate elevation. This method works by dividing the point cloud into cells (pixels) and assigning a value to each cell based on the heights of all the points in the cell. For example, cell values could be assigned as the average height of all points within a 10 m x 10 m pixel.</p>
 <ul>
 <li>Input LAS Dataset: <strong>LAS Dataset.lasd</strong></li>
 <li>Output Raster: <strong>DEM</strong></li>
@@ -257,10 +257,10 @@ Hana Travers-Smith</p>
 </ul></li>
 </ul>
 </div>
-<div id="q4-what-is-the-minimum-and-maximum-value-of-the-dem" class="section level5 unnumbered hasAnchor">
-<h5>Q4: What is the minimum and maximum value of the DEM?<a href="lidar-forest-management.html#q4-what-is-the-minimum-and-maximum-value-of-the-dem" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q4.-what-is-the-minimum-and-maximum-value-of-the-dem" class="section level5 unnumbered hasAnchor">
+<h5>Q4. What is the minimum and maximum value of the DEM?<a href="lidar-forest-management.html#q4.-what-is-the-minimum-and-maximum-value-of-the-dem" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>You should now have something that looks like this:</p>
-<p><img src="images/05/05-dem.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-dem.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 2:</strong> Next, we will create a DSM. We need to ensure that all point labelled as ‘Noise’ are filtered out from the dataset, we will also filter out ‘Ground’ points and just retain points coming from vegetation/infrastructure. Navigate to the LAS Filter menu in the data Properties tab.</p>
 <p><strong>Uncheck the following codes:</strong></p>
 <ul>
@@ -271,20 +271,20 @@ Hana Travers-Smith</p>
 </ul>
 <p>Once you have correctly filtered the point cloud open the <strong>LAS Dataset to Raster</strong> tool. This time we will use the <strong>Maximum</strong> value as the Cell Assignment. Name the output raster <strong>DSM</strong>. All other settings can stay the same as the DEM. &gt; Run</p>
 </div>
-<div id="q5-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="section level5 unnumbered hasAnchor">
-<h5>Q5: Why might we want to use the Maximum value as the Cell Assignment method for a DSM?<a href="lidar-forest-management.html#q5-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q5.-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q5. Why might we want to use the Maximum value as the Cell Assignment method for a DSM?<a href="lidar-forest-management.html#q5.-why-might-we-want-to-use-the-maximum-value-as-the-cell-assignment-method-for-a-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q6-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="section level5 unnumbered hasAnchor">
-<h5>Q6: What features or land cover types can you idenify from the DSM?<a href="lidar-forest-management.html#q6-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q6.-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q6. What features or land cover types can you idenify from the DSM?<a href="lidar-forest-management.html#q6.-what-features-or-land-cover-types-can-you-idenify-from-the-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 3:</strong> Finally, we will create a CHM using the DEM and DSM. Navigate to Analysis &gt; Tools &gt; Raster Calculator (Image Analyst Tools).This tool allows you to create a new raster by combining multiple rasters using simple mathematical operators (adding, subtracting etc).</p>
 <p>Calculate the CHM as: DSM - DEM</p>
 </div>
-<div id="q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="section level5 unnumbered hasAnchor">
-<h5>Q7: Explain why we need to subtract the DEM from the DSM to calculate canopy height. Describe potential sources of error in deriving a CHM from this method.<a href="lidar-forest-management.html#q7-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/05/05-RasterCalc.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<div id="q7.-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="section level5 unnumbered hasAnchor">
+<h5>Q7. Explain why we need to subtract the DEM from the DSM to calculate canopy height. Describe potential sources of error in deriving a CHM from this method.<a href="lidar-forest-management.html#q7.-explain-why-we-need-to-subtract-the-dem-from-the-dsm-to-calculate-canopy-height.-describe-potential-sources-of-error-in-deriving-a-chm-from-this-method." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/03-RasterCalc.jpg" width="50%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="screenshot-1-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="section level5 unnumbered hasAnchor">
-<h5>Screenshot 1: Upload a screenshot of your final CHM. Change the default symbology to show unvegetated areas, medium vegetation &lt;30m and tall vegetation &gt;30m.<a href="lidar-forest-management.html#screenshot-1-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="screenshot-1.-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 1. Upload a screenshot of your final CHM. Change the default symbology to show unvegetated areas, medium vegetation &lt;30m and tall vegetation &gt;30m.<a href="lidar-forest-management.html#screenshot-1.-upload-a-screenshot-of-your-final-chm.-change-the-default-symbology-to-show-unvegetated-areas-medium-vegetation-30m-and-tall-vegetation-30m." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
@@ -300,8 +300,8 @@ Hana Travers-Smith</p>
 </ul>
 <p><strong>Step 2:</strong> Next, produce a DEM <strong>DEM_1m</strong> at the same spatial resolution of 1m using what you learned in the last task.</p>
 <p><strong>Step 3:</strong> Again following what you learned in the last task, subtract the 1m DEM from the 1m DSM and name the output file <strong>TreeTops</strong>.</p>
-<div id="q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="section level5 unnumbered hasAnchor">
-<h5>Q8: What features are now visible in the 1m DSM that were not visible in the 10m DSM?<a href="lidar-forest-management.html#q8-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q8.-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="section level5 unnumbered hasAnchor">
+<h5>Q8. What features are now visible in the 1m DSM that were not visible in the 10m DSM?<a href="lidar-forest-management.html#q8.-what-features-are-now-visible-in-the-1m-dsm-that-were-not-visible-in-the-10m-dsm" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p><strong>Step 4:</strong> Next we will use the <strong>Focal Statistics</strong> Tool to identify the maximum height of tree crowns across the forest. We will use a Circular Neighborhood with a Radius of 5. This will calculate the maximum elevation observed within a 11m circular moving window (5m is the radius, 10m is the diameter, plus one more cell for the focal cell = 11m). Use the following parameters:</p>
 <ul>
 <li>Input raster: <strong>TreeTops</strong></li>
@@ -314,8 +314,8 @@ Hana Travers-Smith</p>
 <li>Statistic Type: Maximum</li>
 <li>Ignore no data in calculations: Checked</li>
 </ul>
-<div id="q9-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="section level6 unnumbered hasAnchor">
-<h6>Q9: What is a moving window? If you are using a focal maximum, explain how cell values assigned in the final output.<a href="lidar-forest-management.html#q9-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="anchor-section" aria-label="Anchor link to header"></a></h6>
+<div id="q9.-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="section level6 unnumbered hasAnchor">
+<h6>Q9. What is a moving window? If you are using a focal maximum, explain how cell values assigned in the final output.<a href="lidar-forest-management.html#q9.-what-is-a-moving-window-if-you-are-using-a-focal-maximum-explain-how-cell-values-assigned-in-the-final-output." class="anchor-section" aria-label="Anchor link to header"></a></h6>
 <p><strong>Step 3:</strong> Open the <strong>Raster Calculator</strong> tool. We will use this tool to find the pixels in the <strong>TreeTops</strong> raster that match the maximum focal height in the <strong>TreeTops_max</strong>. To do this, we will use a True/False conditional statement using the <code>Con</code> syntax:</p>
 <p><code>Con(statement, iftrue, if false)</code> - Essentially for each pixel the statement is evaulated and if it is true an action is taken, and if it is false a different action is taken.</p>
 <p>Enter the following statement in the <strong>Raster Calculator</strong> tool:</p>
@@ -323,9 +323,9 @@ Hana Travers-Smith</p>
 <p>Basically, this is a calculation that evaluates the statement “where is the
 <strong>TreeTops</strong> raster equal to the maximum elevation value identified from the focal statistics?” Where these pixels match, write the maximum value to the output. Otherwise, write a value of NoData to the output. Save the output as <strong>tree_with_height</strong>.</p>
 <p>Refer to the screenshot below for writing this statement correctly.</p>
-<p><img src="images/05/CalcJPG.JPG" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-Calc.jpg" width="50%" style="display: block; margin: auto;" /></p>
 <p>Inspect the output. Zooming in reveals what we have done. Pixels that represent the maximum height in each focal window are assigned a value equal to the maximum height, while all other pixels have a NoData value.</p>
-<p><img src="images/05/treetops_rast.JPG" width="602" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-treetops_rast.jpg" width="100%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 4:</strong> Open the ‘Raster to Point’ tool. The input raster is the
 raster that you just made. Field is Value, and the output name should be ‘tree_with_height’.</p>
 <ul>
@@ -335,8 +335,8 @@ raster that you just made. Field is Value, and the output name should be ‘tree
 </ul>
 </div>
 </div>
-<div id="q10-how-many-tree-tops-are-in-the-final-output" class="section level5 unnumbered hasAnchor">
-<h5>Q10: How many tree tops are in the final output?<a href="lidar-forest-management.html#q10-how-many-tree-tops-are-in-the-final-output" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q10.-how-many-tree-tops-are-in-the-final-output" class="section level5 unnumbered hasAnchor">
+<h5>Q10. How many tree tops are in the final output?<a href="lidar-forest-management.html#q10.-how-many-tree-tops-are-in-the-final-output" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
@@ -345,20 +345,18 @@ raster that you just made. Field is Value, and the output name should be ‘tree
 <p>So far we have worked with the point cloud data in flat, 2-dimensional space. In this task, you will explore the point cloud in 3-dimensions in a Scene.</p>
 <p>On the top ribbon Insert &gt; New Map &gt; New Local Scene.</p>
 <p><strong>Step 1:</strong> Practice using the On Screen Navigator to manipulate the scene. The first toggle let’s you navigate in the normal directions and the second toggle (the person) let’s you rotate the scene in 3D.</p>
-<p><img src="images/05/05-nav1.jpg" width="20%" style="display: block; margin: auto;" />
-<img src="images/05/05-nav2.jpg" width="20%" style="display: block; margin: auto;" /></p>
+<p><img src="images/03-nav1.jpg" width="20%" style="display: block; margin: auto;" />
+<img src="images/03-nav2.jpg" width="20%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 2:</strong> Navigate to the UBC campus study area and change the Basemap to <strong>Imagery</strong> in the Map tab located on the top ribbon. In the Contents pane, right-click Ground, located below the Elevation Surfaces group layer. Click ‘Add Elevation Source’. Browse to the location of your 10m DSM and select it. You can now start to see how the surface features have been incorporated into the surface. Make sure to zoom in to look at areas with high relief and roads.</p>
 <p>Add the <strong>TreeTops_Final</strong> point shapefile to the Scene.</p>
 <p><strong>Step 3:</strong> Click on ‘Ground’ underneath the Elevation Surfaces tab. On the top ribbon click ’Elevation Surface Layer. Set the Vertical Exaggeration to 2 - this will increase the contrast between high/low elevation in the scene. Finally, turn off the WOrldElevation3D/Terrain3d layer to better see how the DSM.</p>
-<div id="screenshot-2-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="section level5 unnumbered hasAnchor">
-<h5>Screenshot 2: Upload a screenshot of the final Scene. Add the tree tops points to the visualization. (See example below, note that yours will also include the tree tops points).<a href="lidar-forest-management.html#screenshot-2-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="screenshot-2.-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="section level5 unnumbered hasAnchor">
+<h5>Screenshot 2. Upload a screenshot of the final Scene. Add the tree tops points to the visualization. (See example below, note that yours will also include the tree tops points).<a href="lidar-forest-management.html#screenshot-2.-upload-a-screenshot-of-the-final-scene.-add-the-tree-tops-points-to-the-visualization.-see-example-below-note-that-yours-will-also-include-the-tree-tops-points." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
-<div id="q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="section level5 unnumbered hasAnchor">
-<h5>Q11: Experiment with the 10m and 1m DSM. How does the DSM resolution impact the 3D visualization? Which visualization is more realistic?<a href="lidar-forest-management.html#q11-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><img src="images/05/05-example.jpg" width="808" style="display: block; margin: auto;" /></p>
+<div id="q11.-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="section level5 unnumbered hasAnchor">
+<h5>Q11. Experiment with the 10m and 1m DSM. How does the DSM resolution impact the 3D visualization? Which visualization is more realistic?<a href="lidar-forest-management.html#q11.-experiment-with-the-10m-and-1m-dsm.-how-does-the-dsm-resolution-impact-the-3d-visualization-which-visualization-is-more-realistic" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p><img src="images/03-example.jpg" width="100%" style="display: block; margin: auto;" /></p>
 
-<pre><code>## Warning in readLines(file, warn = readLines.warn): incomplete final line found
-## on &#39;chapterauthors.yml&#39;</code></pre>
 </div>
 </div>
 </div>
@@ -382,42 +380,42 @@ raster that you just made. Field is Value, and the output name should be ‘tree
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["open-geomatics-community-of-practice.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>

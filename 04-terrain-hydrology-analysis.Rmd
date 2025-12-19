@@ -16,7 +16,7 @@ A Digital Elevation Model (DEM) is a digital representation of the Earth's terra
 In this lab you will use a DEM and the Hydrology toolset in ArcGIS Pro to map stream networks and watersheds within critical salmon spawning habitat in Nahmint, BC.
 
 ``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics('images/04/04-terrain.jpg')
+knitr::include_graphics('images/04-terrain.jpg')
 ```
 
 ------------------------------------------------------------------------
@@ -49,20 +49,20 @@ knitr::include_graphics('images/04/04-terrain.jpg')
 
 **Step 1:** Create a new ArcGIS Project name it Lab4 and save it to the default directory. Import the **Nahmint_DTM.tif** and examine the Source information (right-click on the layer in the Catalog pane). 
 
-``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics('images/04/04-nahmint.jpg')
+``` {r, echo=FALSE, fig.align = 'center', out.width = "100%"}
+knitr::include_graphics('images/04-nahmint.jpg')
 ```
 
-##### Q1: What is the Projected Coordinate System and spatial resolution of the data? {.unnumbered}
+##### Q1. What is the Projected Coordinate System and spatial resolution of the data? {.unnumbered}
 
-##### Q2: What is the Pixel Type and Pixel Depth? How many possible values can be represented by this data? (Report answer as an exponent.) {.unnumbered}
+##### Q2. What is the Pixel Type and Pixel Depth? How many possible values can be represented by this data? (Report answer as an exponent.) {.unnumbered}
 
-##### Q3: What is the difference between a signed and unsigned integer? Which would represent elevation best and why? {.unnumbered}
+##### Q3. What is the difference between a signed and unsigned integer? Which would represent elevation best and why? {.unnumbered}
 
 **Step 2:** First, we will use the **Fill** tool to remove any sinks from the DEM. Sinks are small imperfections in the DEM that create areas where water cannot flow out of. The image below shows the side profile of sink and how its gets filled by the Fill tool. If sinks are not eliminated, water flow can get trapped within these depressions, leading to unrealistic pooling of water and incorrect delineation of watershed boundaries. 
 
 ``` {r, echo=FALSE, fig.align = 'center', out.width = "40%"}
-knitr::include_graphics('images/04/04-sink.jpg')
+knitr::include_graphics('images/04-sink.jpg')
 ```
 
 Navigate to Analysis > Tools > Fill (Spatial Analyst). 
@@ -75,7 +75,7 @@ Save the output to the default file path (in your ArcMap project).
 
 The Z-limit represents the minimum depth of sinks that will be filled. For example, if it is set to 10m then only sinks deeper than 10m will be filled. For now leave this field blank, this will fill all sinks in the data. 
 
-##### Q4: Why might you want to set a specific z-value? {.unnumbered} 
+##### Q4. Why might you want to set a specific z-value? {.unnumbered} 
 
 ------------------------------------------------------------------------
 
@@ -85,15 +85,15 @@ The Z-limit represents the minimum depth of sinks that will be filled. For examp
 
 There are three flow modelling algorithms, but we will use the simplest: **D8**. In this model water will flow from one cell its **steepest downslope neighbour**. The cell will then be assigned a value based on which of its 8 neightbours water will flow into.
 
-##### Q5: The following raster shows elevation above sea level. What is the flow direction from the centre cell?  Report your answer in terms of cardinal direction (North, South, Northwest etc) {.unnumbered}
+##### Q5. The following raster shows elevation above sea level. What is the flow direction from the centre cell?  Report your answer in terms of cardinal direction (North, South, Northwest etc) {.unnumbered}
 
 ``` {r, echo=FALSE, fig.align = 'center', out.width = "40%"}
-knitr::include_graphics("images/04/04-flowDirJPG.JPG")
+knitr::include_graphics("images/04-flowDir.jpg")
 ```
 
 Use the ArcGis help page to answer to following question: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/flow-direction.htm
 
-##### Q6: If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell? {.unnumbered} 
+##### Q6. If a cell is assigned a Flow Direction value of 32, what cardinal direction is water flowing out of the cell? {.unnumbered} 
 
 Navigate to Tools > Search **Flow Direction**
 
@@ -104,10 +104,10 @@ Navigate to Tools > Search **Flow Direction**
 
 Click Run. You should now have something like the following:
 
-##### Q7: For the areas marked A and B, approximately what direction is water flowing? {.unnumbered} 
+##### Q7. For the areas marked A and B, approximately what direction is water flowing? {.unnumbered} 
 
-``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics("images/04/04-flowDir2.JPG")
+``` {r, echo=FALSE, fig.align = 'center', out.width = "100%",}
+knitr::include_graphics("images/04-flowDir2.jpg")
 ```
 
 **Step 2:** We will use the flow direction raster calculated in the last step to calculate **flow accumulation**, which counts the total number of cells that will flow into each cell. For example, a cell located at the bottom of the hill will have high flow accumulation and a cell at the top of a hill will not have any flow accumulation. 
@@ -125,8 +125,8 @@ Leave all other fields blank. > Run.
 
 To see how different thresholds impact stream identification, change the **Symbology** of the flow accumulation raster and use the **Manual Interval**  symbology to set two classes. See the example below for a stream network with  a flow accumulation threshold of 100 (cells with flow accumulation < 100 are set to no color). 
 
-``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics("images/04/04-streams.JPG")
+``` {r, echo=FALSE, fig.align = 'center', out.width = "100%",}
+knitr::include_graphics("images/04-streams.jpg")
 ```
 
 ##### Q8: How does the stream network change if you change the threshold from 10, 1000 or 3000? Include a screenshot of each stream network using the different thresholds. {.unnumbered} 
@@ -137,8 +137,8 @@ Once you have selected a threshold, navigate to the **Reclassify (Spatial Analys
 
 Save the new raster as **StreamNetwork**
 
-``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics("images/04/04-reclassify.JPG")
+``` {r, echo=FALSE, fig.align = 'center', out.width = "50%",}
+knitr::include_graphics("images/04-reclassify.jpg")
 ```
 
 **Step 5:** Finally, we will use the **Stream to Feature (Spatial Analyst Tools)** tool to create polyline features representing our stream network. THis tool uses the stream network and the flow direction layers. See this ArcGIS help page for more information: https://pro.arcgis.com/en/pro-app/latest/tool-reference/spatial-analyst/stream-to-feature.htm
@@ -168,8 +168,8 @@ The watershed tool uses flow direction and **stream links** to delineate watersh
 
 The output will be a new raster where the cell values correspond to each unique watershed catchment.
 
-``` {r, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics("images/04/04-maplayers.JPG")
+``` {r, echo=FALSE, fig.align = 'center', out.width = "100%"}
+knitr::include_graphics("images/04-maplayers.jpg")
 ```
 
 ##### Q10: How many unique watersheds did you define? What is the area of the largest watershed area? Report your answer in km2 and round to 2 decimal places. HINT: Examine the raster attribute table to estiamte watershed area. {.unnumbered} 
