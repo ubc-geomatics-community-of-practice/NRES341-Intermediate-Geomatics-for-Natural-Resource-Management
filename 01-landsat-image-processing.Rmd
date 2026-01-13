@@ -69,7 +69,7 @@ knitr::include_graphics('images/01-wrs.jpg')
 
 Use the USGS resource to answer the following questions: 'https://www.usgs.gov/faqs/what-naming-convention-landsat-collections-level-1-scenes'
 
-##### Q1. For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acquired and what Landsat Collection number are they found in? {.unnumbered} 
+##### Q1. For the Landsat scenes you are given, what Landsat sensor and satellite do the images come from? When were the images acquired? {.unnumbered} 
 
 ##### Q2. Data in Landsat Collections 1 & 2 have been pre-processed so that images across time are geometrically and radiometrically consistent. In 2-4 sentences explain what this means and why it is important for detecting environmental changes. {.unnumbered}
 
@@ -78,7 +78,6 @@ Use the USGS resource to answer the following questions: 'https://www.usgs.gov/f
 ``` {r, echo=FALSE, out.width = "50%", fig.align = 'center'}
 knitr::include_graphics('images/01-nocorr.jpg')
 ```
-
 
 ``` {r, echo=FALSE, out.width = "50%", fig.align = 'center'}
 knitr::include_graphics('images/01-corr.jpg')
