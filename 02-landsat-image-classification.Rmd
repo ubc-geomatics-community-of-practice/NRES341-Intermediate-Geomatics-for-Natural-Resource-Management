@@ -72,9 +72,7 @@ ArcGIS Pro contains several ways to calculate common indices like NDVI. In this 
     knitr::include_graphics("images/02-arcgispro-band-arithmetic.png")
 ```
 
-The "Band Arithmetic Properties" dialogue should appear. Under "Raster" use the drop down menu and select the **sr_composite.tif** layer. If it is not currently in your map view and can use the folder button and navigate to your lab data folder and select the file. Under "Method" select "User Defined".
-
-Using your knowledge of spectral indices, fill in the NDVI calculation for your data.
+The "Band Arithmetic Properties" dialogue should appear. Under "Raster" use the drop down menu and select the **sr_composite.tif** layer. If it is not currently in your map view and can use the folder button and navigate to your lab data folder and select the file. Under "Method" select "User Defined". Using your knowledge of spectral indices, fill in the NDVI calculation for your data. Save the layer to your ArcGIS Pro project geodatabase.
 
 ##### Screenshot 1. Upload a screenshot of your NDVI image. {.unnumbered}
 
@@ -92,7 +90,7 @@ Next, we will use a technique called thresholding to extract highly vegetated ar
     knitr::include_graphics("images/02-arcgispro-reclassify.png")
 ```
 
-**Step 6:** Select the NDVI band arithmetic raster layer that you produced from Task 1. Reclassify the NDVI values so that values greater than or equal to 0.3 have a new value of 1 and all others have a value of NODATA. Under "Output Raster" save the file as "ndvi_threshold.tif" and run the tool.
+**Step 6:** Select the NDVI band arithmetic raster layer that you saved from Step 4. Reclassify the NDVI values so that values greater than or equal to 0.3 have a new value of 1 and all others have a value of NODATA. Under "Output Raster" save the file as "ndvi_threshold.tif" and run the tool.
 
 ```{r 02-arcgispro-reclassify-ndvi, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-reclassify-ndvi.png")
@@ -184,19 +182,19 @@ Before we can actually place testing points on our map, we need to change the EO
     knitr::include_graphics("images/02-arcgispro-set-null.png")
 ```
 
-**Step 7:** From the Geoprocessing pane, search for the "Create Accuracy Assessment Points" tool. Add the **CA_forest_VLCE2_2022_clip_null.tif** (or **CA_forest_VLCE2_2022_clip_null** if you saved inside your geodatabase) as the Input Raster (this is the classified EOSD land cover). Save the Output Accuracy Assessment Points as "eosd_accuracy_assessment_points" in your project geodatabase. Change the Target Filed to "Ground Truth", leave the other parameters as default and then run the tool. This will generate 500 points randomly stratified across the classes in the official EOSD land cover classification. Open the attribute table to inspect the output.
+We have generated a randomly stratified set of points that can be used for generating the accuracy assessment in ArcGIS Pro.
 
 ```{r 02-arcgispro-accuracy-assessment-points-attributes, out.width= "75%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-accuracy-assessment-points-attributes.png")
 ```
 
-**Step 8:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool. This time, we are going to select our "EOSD_Classified" image that we classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified", leave "Dimension Field for Test points" blank, and then run the tool.
+**Step 7:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool. Select the "EOSD_Classified" image that you classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified", leave "Dimension Field for Test points" blank, and then run the tool.
 
 ```{r 02-arcgispro-update-accuracy-assessment-points, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-update-accuracy-assessment-points.png")
 ```
 
-**Step 9:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
+**Step 8:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
 
 ```{r 02-arcgispro-confusion-matrix, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-confusion-matrix.png")
