@@ -23,7 +23,7 @@
 <meta name="author" content="Paul D. Pickell" />
 
 
-<meta name="date" content="2026-01-20" />
+<meta name="date" content="2026-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -197,14 +197,14 @@ Hana Travers-Smith</p>
 <div id="task-1-load-and-understand-lidar-data-in-a-map-project" class="section level2 unnumbered hasAnchor">
 <h2>Task 1: Load and understand LiDAR data in a Map Project<a href="lidar-forest-management.html#task-1-load-and-understand-lidar-data-in-a-map-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Step 1</strong>: Download the LiDAR data from the following link: <a href="https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/" class="uri">https://opendata.vancouver.ca/explore/dataset/lidar-2018/information/</a></p>
-<p>THe data is split up into a tiled grid system. You will download one tile covering a section of UBC. Use the <strong>Table</strong> view and search for the following tile and download it: <strong>4840E_54550N</strong> by clicking on the .zip link.</p>
+<p>THe data is split up into a tiled grid system. You will download one tile covering a section of UBC. Use the <strong>Table</strong> view and search for the following tile and download it: <strong>4840E_54550N</strong> by clicking on the .zip link. You can select the “Map” and then look at the tiles that cover Pacific Spirit Park.</p>
 <p>Use the metadata from the City of Vancouver data portal to answer the following questions:</p>
-<div id="q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="section level5 unnumbered hasAnchor">
-<h5>Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horiziantal AND vertical datums?<a href="lidar-forest-management.html#q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horiziantal-and-vertical-datums" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<div id="q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horizontal-and-vertical-datums" class="section level5 unnumbered hasAnchor">
+<h5>Q1. What is the horizontal and vertical datum of the LAS dataset? Why is it important for Lidar data to have both horizontal AND vertical datums?<a href="lidar-forest-management.html#q1.-what-is-the-horizontal-and-vertical-datum-of-the-las-dataset-why-is-it-important-for-lidar-data-to-have-both-horizontal-and-vertical-datums" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
 <div id="q2-what-is-the-point-density-of-the-dataset-points-per-m2" class="section level5 unnumbered hasAnchor">
 <h5>Q2: What is the point density of the dataset (points per m<sup>2</sup>)?<a href="lidar-forest-management.html#q2-what-is-the-point-density-of-the-dataset-points-per-m2" class="anchor-section" aria-label="Anchor link to header"></a></h5>
-<p><strong>Step 2:</strong> Create a new ArcGIS <strong>Map Project</strong> name it Lab5 and save it to the default directory.</p>
+<p><strong>Step 2:</strong> Create a new ArcGIS <strong>Map Project</strong> and save it to the default directory.</p>
 <p>ArcGIS Pro has several tools that we can use to view and analyse LiDAR point clouds. In order to view the dataset, we need to import it as a LAS Dataset. Analysis &gt; Tools &gt; type ‘Create LAS dataset’ in the search box.</p>
 <ul>
 <li>Input File: <strong>4840E_54550N.las</strong></li>
