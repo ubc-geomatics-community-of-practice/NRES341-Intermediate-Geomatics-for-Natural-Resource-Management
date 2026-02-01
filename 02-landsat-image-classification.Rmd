@@ -188,13 +188,13 @@ We have generated a randomly stratified set of points that can be used for gener
     knitr::include_graphics("images/02-arcgispro-accuracy-assessment-points-attributes.png")
 ```
 
-**Step 7:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool. Select the "EOSD_Classified" image that you classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified", leave "Dimension Field for Test points" blank, and then run the tool.
+**Step 7:** From the Geoprocessing pane, search for the "Update Accuracy Assessment Points" tool (Spatial Analyst). Select the "EOSD_Classified" image that you classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the "Target Field" to "Classified", leave "Dimension Field for Test points" blank, and then run the tool.
 
 ```{r 02-arcgispro-update-accuracy-assessment-points, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-update-accuracy-assessment-points.png")
 ```
 
-**Step 8:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool. Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
+**Step 8:** From the Geoprocessing pane, search for the "Compute Confusion Matrix" tool (Spatial Analyst). Use the "eosd_accuracy_assessment_points" as the Input Accuracy Assessment Points and save the output as "confusion_matrix" in your geodatabase then run the tool.
 
 ```{r 02-arcgispro-confusion-matrix, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/02-arcgispro-confusion-matrix.png")
