@@ -23,7 +23,7 @@
 <meta name="author" content="Paul D. Pickell" />
 
 
-<meta name="date" content="2026-02-01" />
+<meta name="date" content="2026-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,7 +191,7 @@ Paul Pickell</p>
 </div>
 <div id="data-1" class="section level2 unnumbered hasAnchor">
 <h2>Data<a href="landsat-image-classification.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral image and other metadata that are distributed with this product. You can download these data from Canvas.</p>
+<p>We will be using a Landsat 9 Operational Land Imager 2 (OLI-2) multispectral image and other metadata that are distributed with this product. Additionally, there is a point dataset that contains a stratified random sample of accuracy assessment points that we will use to generate a confusion matrix in ArcGIS Pro. You can download these data from the course management system.</p>
 <hr />
 </div>
 <div id="task-1-prepare-data-for-analysis" class="section level2 unnumbered hasAnchor">
@@ -308,16 +308,11 @@ Paul Pickell</p>
 <p><img src="images/02-arcgispro-eosd.png" width="40%" /></p>
 <p><strong>Step 4:</strong> Left-click on any class in the schema in order to make the digitizing tools available at the top. Once a class is selected, you can choose to digitize a training sample for that class using a rectangle, polygon, circle or free-hand by selecting one of those tools at the top. Then, you can digitize directly onto the map. You will want to have the 6-5-4 false colour image displayed and you will want to digitize training samples that are relatively small and homogenous, so be careful with how you draw your lines. Repeat this process until you have about 5-8 training samples per class. This will take a great deal of interpretation and you may not be able to distinguish between “Wetland” and “Wetland-Treed”, but do your best. If you cannot find any samples for a class, skip it. Feel free to consult other information to help you create the training samples. When you are finished creating training samples, save them into your project geodatabase as “EOSD_training_samples”.</p>
 <p><img src="images/02-arcgispro-digitize-training-samples.png" width="100%" /></p>
-<p><strong>Step 5:</strong> Left-click on the <strong>sr_composite.tif</strong> layer in the Contents pane and then from the ribbon select “Imagery”, “Classification Tools”, and “Classify”. Change the “Classifier” to “Maximum Likelihood” and navigate to the “EOSD_training_samples” that you saved in your geodatabase for the Training Samples. Save the “Output Classified Dataset” as “EOSD_Classified”, then run the tool.</p>
-<p><img src="images/02-arcgispro-create-accuracy-assessment-points.png" width="100%" /></p>
-<p>Before we can actually place testing points on our map, we need to change the EOSD classification raster by replacing 0 with NoData/Null. Zero is a valid value to ArcGIS Pro, but it is not an actual class, so setting these zeros to NoData/Null ensures that we will not sample in those areas.</p>
-<p><strong>Step 6:</strong> From the Geoprocessing pane, search for the “Set Null” tool (Image Analyst). Add the <strong>CA_forest_VLCE2_2022_clip.tif</strong> as the Input Conditional Raster (this is the classified EOSD land cover). Change the expression so that it reads “WHERE VALUE is equal to 0”, this is the conditional statement that we are going to test. If the tool finds any values of 0 in the raster (grey coloured in the screenshot above), then those will be set to NoData/Null. Under “Input false raster or constant value”, you will select <strong>CA_forest_VLCE2_2022_clip.tif</strong> again. This is because if the value is not 0 (false), then we want to keep the existing value in the EOSD classification. Name the output <strong>CA_forest_VLCE2_2022_clip_null.tif</strong> (or <strong>CA_forest_VLCE2_2022_clip_null</strong> if you save it inside your geodatabase) and then run the tool.</p>
-<p><img src="images/02-arcgispro-set-null.png" width="40%" /></p>
-<p>We have generated a randomly stratified set of points that can be used for generating the accuracy assessment in ArcGIS Pro.</p>
+<p>From the course management system, download the <strong>eosd_accuracy_assessment_points</strong> layer. This is a randomly stratified set of points that can be used for generating the accuracy assessment in ArcGIS Pro.</p>
 <p><img src="images/02-arcgispro-accuracy-assessment-points-attributes.png" width="75%" /></p>
-<p><strong>Step 7:</strong> From the Geoprocessing pane, search for the “Update Accuracy Assessment Points” tool (Spatial Analyst). Select the “EOSD_Classified” image that you classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the “Target Field” to “Classified”, leave “Dimension Field for Test points” blank, and then run the tool.</p>
+<p><strong>Step 5:</strong> From the Geoprocessing pane, search for the “Update Accuracy Assessment Points” tool (Spatial Analyst). Select the “EOSD_Classified” image that you classified earlier as the Input Raster. The Input and Output Accuracy Assessment Points can be the same points that you created in the last step. Change the “Target Field” to “Classified”, leave “Dimension Field for Test points” blank, and then run the tool.</p>
 <p><img src="images/02-arcgispro-update-accuracy-assessment-points.png" width="40%" /></p>
-<p><strong>Step 8:</strong> From the Geoprocessing pane, search for the “Compute Confusion Matrix” tool (Spatial Analyst). Use the “eosd_accuracy_assessment_points” as the Input Accuracy Assessment Points and save the output as “confusion_matrix” in your geodatabase then run the tool.</p>
+<p><strong>Step 6:</strong> From the Geoprocessing pane, search for the “Compute Confusion Matrix” tool (Spatial Analyst). Use the “eosd_accuracy_assessment_points” as the Input Accuracy Assessment Points and save the output as “confusion_matrix” in your geodatabase then run the tool.</p>
 <p><img src="images/02-arcgispro-confusion-matrix.png" width="100%" /></p>
 <div id="screenshot-3.-upload-a-screenshot-of-your-confusion-matrix." class="section level5 unnumbered hasAnchor">
 <h5>Screenshot 3. Upload a screenshot of your confusion matrix.<a href="landsat-image-classification.html#screenshot-3.-upload-a-screenshot-of-your-confusion-matrix." class="anchor-section" aria-label="Anchor link to header"></a></h5>
