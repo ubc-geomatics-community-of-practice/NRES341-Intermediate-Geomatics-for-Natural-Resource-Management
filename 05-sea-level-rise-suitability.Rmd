@@ -100,7 +100,7 @@ knitr::include_graphics('images/05-delete.jpg')
 
 Open **Coastline.shp**. Navigate to **Map \> Select by Location**. Set the Input Features to the **flooded areas polygons** and the Selecting Features to the **coastline layer**. Set the Relationship to **Within a distance**. Set the distance to 30m. **Make sure the Invert spatial relationship box is checked.** This will select polygons that are further than 30m from the coast. Click Apply.
 
-Delete the selected features.
+Delete the selected features. Select the "Edit" tab at the top and then select "Save" to save the edits.x
 
 ##### Q4. Describe how you would change the selection parameters (Relationship & Distance) if you wanted to select flooded areas that are within 100m from the coastline? {.unnumbered}
 
@@ -168,11 +168,11 @@ knitr::include_graphics('images/05-newfield.jpg')
 
 You will now have a blank field in the attribute table.
 
-In the attribute table, right click on the Int_Area field \> Calculate Geometry. In the Property drop-down select **Area** and select **Square meters** as the Area Unit. Click OK.
+In the attribute table, right-click on the "Int_Area" field \> Calculate Geometry. In the Property drop-down select "Area" and select "Square meters" as the Area Unit. Click OK. Right-click on the "Int_Area" field from the attribute table and select "Explore statistics".
 
-##### Q8. What is the total area of agricultural land is impacted by flooding? Report the final answer in **km2** and round to two decimal places. {.unnumbered}
+##### Q8. What is the total area of agricultural land is impacted by flooding? Report the final answer in km^2^ and round to two decimal places. {.unnumbered}
 
-##### Q9. For the feature with LRPLD = 5118996, what **percentage** of the polygon is flooded? Round to two decimal places. {.unnumbered}
+##### Q9. For the feature with LRPLD = 5118996, what percentage of the polygon is flooded? Round to two decimal places. {.unnumbered}
 
 ------------------------------------------------------------------------
 

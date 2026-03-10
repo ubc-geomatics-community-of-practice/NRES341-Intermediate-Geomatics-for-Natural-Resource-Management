@@ -23,7 +23,7 @@
 <meta name="author" content="Paul D. Pickell" />
 
 
-<meta name="date" content="2026-02-02" />
+<meta name="date" content="2026-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -225,7 +225,7 @@ Hana Travers-Smith</p>
 <p><img src="images/05-delete.jpg" width="75%" style="display: block; margin: auto;" /></p>
 <p><strong>Step 4:</strong> Examine the resulting polygon shapefile. You will notice that there are lots of small isolated polygons, not adjacent to the coastline. We will remove these by intersecting the flooded areas features with a polyline representing the coastline.</p>
 <p>Open <strong>Coastline.shp</strong>. Navigate to <strong>Map &gt; Select by Location</strong>. Set the Input Features to the <strong>flooded areas polygons</strong> and the Selecting Features to the <strong>coastline layer</strong>. Set the Relationship to <strong>Within a distance</strong>. Set the distance to 30m. <strong>Make sure the Invert spatial relationship box is checked.</strong> This will select polygons that are further than 30m from the coast. Click Apply.</p>
-<p>Delete the selected features.</p>
+<p>Delete the selected features. Select the “Edit” tab at the top and then select “Save” to save the edits.x</p>
 </div>
 <div id="q4.-describe-how-you-would-change-the-selection-parameters-relationship-distance-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="section level5 unnumbered hasAnchor">
 <h5>Q4. Describe how you would change the selection parameters (Relationship &amp; Distance) if you wanted to select flooded areas that are within 100m from the coastline?<a href="sea-level-rise-suitability.html#q4.-describe-how-you-would-change-the-selection-parameters-relationship-distance-if-you-wanted-to-select-flooded-areas-that-are-within-100m-from-the-coastline" class="anchor-section" aria-label="Anchor link to header"></a></h5>
@@ -266,13 +266,13 @@ Hana Travers-Smith</p>
 <p>In the Fields table name the new field <strong>FloodedArea</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
 <p><img src="images/05-newfield.jpg" width="100%" style="display: block; margin: auto;" /></p>
 <p>You will now have a blank field in the attribute table.</p>
-<p>In the attribute table, right click on the Int_Area field &gt; Calculate Geometry. In the Property drop-down select <strong>Area</strong> and select <strong>Square meters</strong> as the Area Unit. Click OK.</p>
+<p>In the attribute table, right-click on the “Int_Area” field &gt; Calculate Geometry. In the Property drop-down select “Area” and select “Square meters” as the Area Unit. Click OK. Right-click on the “Int_Area” field from the attribute table and select “Explore statistics”.</p>
 </div>
 <div id="q8.-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answer-in-km2-and-round-to-two-decimal-places." class="section level5 unnumbered hasAnchor">
-<h5>Q8. What is the total area of agricultural land is impacted by flooding? Report the final answer in <strong>km2</strong> and round to two decimal places.<a href="sea-level-rise-suitability.html#q8.-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answer-in-km2-and-round-to-two-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<h5>Q8. What is the total area of agricultural land is impacted by flooding? Report the final answer in km<sup>2</sup> and round to two decimal places.<a href="sea-level-rise-suitability.html#q8.-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answer-in-km2-and-round-to-two-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 </div>
 <div id="q9.-for-the-feature-with-lrpld-5118996-what-percentage-of-the-polygon-is-flooded-round-to-two-decimal-places." class="section level5 unnumbered hasAnchor">
-<h5>Q9. For the feature with LRPLD = 5118996, what <strong>percentage</strong> of the polygon is flooded? Round to two decimal places.<a href="sea-level-rise-suitability.html#q9.-for-the-feature-with-lrpld-5118996-what-percentage-of-the-polygon-is-flooded-round-to-two-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<h5>Q9. For the feature with LRPLD = 5118996, what percentage of the polygon is flooded? Round to two decimal places.<a href="sea-level-rise-suitability.html#q9.-for-the-feature-with-lrpld-5118996-what-percentage-of-the-polygon-is-flooded-round-to-two-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <hr />
 </div>
 </div>
