@@ -263,9 +263,9 @@ Hana Travers-Smith</p>
 <p><strong>Step 3:</strong> Next, we will calculate the flooded area within each agricultural polygon.</p>
 <p>First, create a new attribute in <strong>flood_ag_intersect</strong>. Open the layer attribute table and click the Add button beside Field:</p>
 <p><img src="images/05-addField.jpg" width="100%" style="display: block; margin: auto;" /></p>
-<p>In the Fields table name the new field <strong>FloodedArea</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
+<p>In the Fields table name the new field <strong>Int_Area</strong>, set the data type to <strong>Double</strong> and then click Save (at the top of map window).</p>
 <p><img src="images/05-newfield.jpg" width="100%" style="display: block; margin: auto;" /></p>
-<p>You will now have a blank field in the attribute table.</p>
+<p>You will now have a empty field in the attribute table.</p>
 <p>In the attribute table, right-click on the “Int_Area” field &gt; Calculate Geometry. In the Property drop-down select “Area” and select “Square meters” as the Area Unit. Click OK. Right-click on the “Int_Area” field from the attribute table and select “Explore statistics”.</p>
 </div>
 <div id="q8.-what-is-the-total-area-of-agricultural-land-is-impacted-by-flooding-report-the-final-answer-in-km2-and-round-to-two-decimal-places." class="section level5 unnumbered hasAnchor">
@@ -300,9 +300,9 @@ Hana Travers-Smith</p>
 <p><strong>Step 5:</strong> Next, we will <strong>join</strong> the new attribures from the <strong>flood_ag_intersect</strong> layer to the original <strong>ag_polys</strong> shapefile so that we can visualize the Suitability Score within the agricultural polygons.</p>
 <p>Right click on the <strong>ag_polys</strong> layer in the Contents pane &gt; Joins and Relates &gt; Add Join.</p>
 <ul>
-<li>Join Features: flood_ag_intersect</li>
-<li>Join Attribute: LRPLD</li>
-<li><strong>Un-check</strong> Keep all target features</li>
+<li>Input Field: flood_ag_intersect</li>
+<li>Join Table: LRPLD</li>
+<li><strong>Un-check</strong> Keep all input records</li>
 </ul>
 <p><strong>Step 6:</strong> Change the Symbology of the <strong>ag_polys</strong> layer to reflect the <strong>Suitability Score</strong>. Finally, create a map with the following elements and include it in your final deliverables:</p>
 <ul>
