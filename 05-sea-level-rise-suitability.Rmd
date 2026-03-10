@@ -160,13 +160,13 @@ First, create a new attribute in **flood_ag_intersect**. Open the layer attribut
 knitr::include_graphics('images/05-addField.jpg')
 ```
 
-In the Fields table name the new field **FloodedArea**, set the data type to **Double** and then click Save (at the top of map window).
+In the Fields table name the new field **Int_Area**, set the data type to **Double** and then click Save (at the top of map window).
 
 ```{r, echo=FALSE, fig.align = 'center', out.width = "100%"}
 knitr::include_graphics('images/05-newfield.jpg')
 ```
 
-You will now have a blank field in the attribute table.
+You will now have a empty field in the attribute table.
 
 In the attribute table, right-click on the "Int_Area" field \> Calculate Geometry. In the Property drop-down select "Area" and select "Square meters" as the Area Unit. Click OK. Right-click on the "Int_Area" field from the attribute table and select "Explore statistics".
 
@@ -211,9 +211,9 @@ Use the equation below to create a Suitability Score based on the proportion of 
 
 Right click on the **ag_polys** layer in the Contents pane \> Joins and Relates \> Add Join.
 
--   Join Features: flood_ag_intersect
--   Join Attribute: LRPLD
--   **Un-check** Keep all target features
+-   Input Field: flood_ag_intersect
+-   Join Table: LRPLD
+-   **Un-check** Keep all input records
 
 **Step 6:** Change the Symbology of the **ag_polys** layer to reflect the **Suitability Score**. Finally, create a map with the following elements and include it in your final deliverables:
 

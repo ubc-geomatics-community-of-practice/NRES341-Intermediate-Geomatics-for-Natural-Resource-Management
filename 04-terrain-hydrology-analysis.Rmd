@@ -131,7 +131,7 @@ knitr::include_graphics("images/04-streams.jpg")
 
 ##### Q8: How does the stream network change if you change the threshold from 10, 1000 or 3000? Include a screenshot of each stream network using the different thresholds. {.unnumbered} 
 
-##### Q9: Compare your stream network to the streams visible in the ArcGIS sastellite basemaps. Experiment with different flow acculuation thresholds. Which one seems to represent **major streams** in the satellite basemaps best? What other land cover/infastructure in this region may make it difficult to verify smaller stream netowrks?  {.unnumbered} 
+##### Q9: Compare your stream network to the streams visible in the ArcGIS satellite basemaps. Experiment with different flow accumulation thresholds. Which one seems to represent **major streams** in the satellite basemaps best? What other land cover/infrastructure in this region may make it difficult to verify smaller stream networks?  {.unnumbered} 
 
 Once you have selected a threshold, navigate to the **Reclassify (Spatial Analyst Tools)** tool. Use the threshold you have selected as the start and end values. **Set the cells representing streams to a new value of 1 and all other cells to NO DATA**. 
 
@@ -172,7 +172,7 @@ The output will be a new raster where the cell values correspond to each unique 
 knitr::include_graphics("images/04-maplayers.jpg")
 ```
 
-##### Q10: How many unique watersheds did you define? What is the area of the largest watershed area? Report your answer in km2 and round to 2 decimal places. HINT: Examine the raster attribute table to estiamte watershed area. {.unnumbered} 
+##### Q10: How many unique watersheds did you define? What is the area of the largest watershed area? Report your answer in km2 and round to 2 decimal places. HINT: Examine the raster attribute table to estimate watershed area. {.unnumbered} 
 
 **Step 4:** Create a map and include it in the final deliverables. The map must have the following elements: 
 
